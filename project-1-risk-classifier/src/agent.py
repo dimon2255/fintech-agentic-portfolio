@@ -109,21 +109,21 @@ async def gather_signals(state: AgentState) -> dict:
         "messages": [
             HumanMessage(content=f"""Analyze this transaction:
 
-**Transaction:**
-{transaction.model_dump_json(indent=2)}
+        **Transaction:**
+        {transaction.model_dump_json(indent=2)}
 
-**Velocity Analysis:**
-{results['velocity'].model_dump_json(indent=2)}
+        **Velocity Analysis:**
+        {results['velocity'].model_dump_json(indent=2)}
 
-**Geolocation Analysis:**
-{results['geo'].model_dump_json(indent=2)}
+        **Geolocation Analysis:**
+        {results['geo'].model_dump_json(indent=2)}
 
-**Device Fingerprint Analysis:**
-{results['device'].model_dump_json(indent=2)}
+        **Device Fingerprint Analysis:**
+        {results['device'].model_dump_json(indent=2)}
 
-Produce your risk assessment as JSON.""")
-        ],
-    }
+        Produce your risk assessment as JSON.""")
+                ],
+            }
 
 
 async def assess_risk(state: AgentState) -> dict:
@@ -195,7 +195,7 @@ async def assess_risk(state: AgentState) -> dict:
     }
 
 
-# --- Build the Graph ---
+# --- Build the Agents Graph ---
 
 def build_risk_classifier_graph() -> StateGraph:
     """Construct the LangGraph workflow for risk classification.
