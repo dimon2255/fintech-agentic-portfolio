@@ -8,7 +8,7 @@ A 3-project fintech portfolio demonstrating agentic AI for fraud detection and c
 
 - **Project 1** (`project-1-risk-classifier/`): Single LangGraph agent — async parallel tool execution → LLM reasoning → explainable risk assessment
 - **Project 2** (`project-2-fraud-swarm/`): Multi-agent swarm — 3 specialist agents (velocity, identity, behavioral) fan-out in parallel → adjudicator debate/resolution → final verdict
-- **Project 3** (`project-3-kyc-platform/`): Planned — full KYC/AML compliance platform with supervisor architecture
+- **Project 3** (`project-3-kyc-platform/`): Supervisor hub-and-spoke — 4 specialist agents (document intake, identity, sanctions, risk) orchestrated by a supervisor with conditional routing, skip logic, and human-in-the-loop escalation
 
 ## Commands
 
@@ -23,9 +23,13 @@ cp project-1-risk-classifier/.env.example project-1-risk-classifier/.env
 python -m src.main                    # from project-1-risk-classifier/
 # Run Project 2 swarm
 python -m src.main                    # from project-2-fraud-swarm/
+# Run Project 3 KYC platform
+python -m src.main                    # from project-3-kyc-platform/
 
-# Streamlit demo (Project 1 only so far)
+# Streamlit demos
 streamlit run project-1-risk-classifier/app.py
+streamlit run project-2-fraud-swarm/app.py
+streamlit run project-3-kyc-platform/app.py
 
 # Tests
 pytest                                # from repo root
@@ -47,8 +51,11 @@ Two-node linear graph: `gather_signals` → `assess_risk` → END. State is `Age
 ### Project 2 Graph
 Fan-out/fan-in topology in `graph.py`: `gather_all_signals` → [velocity_agent | identity_agent | behavioral_agent] (parallel) → `adjudicator` → END. State is `SwarmState` (TypedDict with separate verdict keys per specialist). Entry point: `analyze_transaction()` in `graph.py`. Each specialist agent lives in `src/agents/` and writes to its own state key to avoid merge conflicts.
 
+### Project 3 Graph
+Supervisor hub-and-spoke topology in `graph.py`: `supervisor` → [conditional routing to document_intake | identity_verification | sanctions_screening | risk_assessment | human_review | final_decision]. Uses `add_conditional_edges` for dynamic routing. State is `KYCState` (TypedDict with separate result keys per agent). Entry point: `run_kyc_application()` in `graph.py`. Supervisor returns to hub after each agent to decide the next step.
+
 ### Data Flow
-Each project's `tools.py` contains synthetic analysis functions (velocity, geo, device fingerprint; P2 adds identity and behavioral). `data_generator.py` creates synthetic transactions with different risk profiles (normal, suspicious, edge case; P2 adds disagreement triggers).
+Each project's `tools.py` contains synthetic analysis functions (velocity, geo, device fingerprint; P2 adds identity and behavioral; P3 adds document, sanctions, and risk tools). `data_generator.py` creates synthetic inputs with different risk profiles (P1/P2: transactions; P3: KYC applications with 5 profiles including sanctions hits and document issues).
 
 ## Key Conventions
 - Each project is self-contained with its own `src/`, `docs/`, `.env.example`, and models (P2 duplicates P1 models and extends them rather than importing cross-project)
