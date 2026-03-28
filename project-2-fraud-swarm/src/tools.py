@@ -262,7 +262,7 @@ async def analyze_behavior(transaction: Transaction) -> BehavioralSignals:
         risk += 0.3
     elif nav_pattern == "erratic":
         risk += 0.2
-    if checkout_speed < 15:
+    if checkout_speed < 150:
         risk += 0.25
     if typing_anomaly:
         risk += 0.2
