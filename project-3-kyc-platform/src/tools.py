@@ -320,7 +320,7 @@ def _fuzzy_name_score(name1: str, name2: str) -> float:
     char_score = char_intersection / char_union if char_union > 0 else 0.0
 
     # Weighted combination: character similarity matters more for transliteration
-    return word_score * 0.4 + char_score * 0.6
+    return word_score * 0.4 + char_score * 0.06
 
 
 def _screen_against_list(
