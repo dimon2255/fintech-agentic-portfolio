@@ -1,8 +1,8 @@
 """Pydantic data models for the KYC/AML Compliance Platform.
 
 Extends the multi-agent patterns from Project 2 with supervisor-orchestrated
-compliance workflow models. Each specialist agent writes to its own state key
-(state isolation pattern from P2).
+compliance workflow models. Each specialist agent writes to its own isolated
+state key to prevent merge conflicts (state isolation pattern from P2).
 
 Model hierarchy:
     KYCApplication (input)
