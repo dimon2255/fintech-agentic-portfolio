@@ -26,7 +26,8 @@ from .models import (
 )
 
 # --- Simulated latency to mimic real API calls ---
-SIMULATED_LATENCY_SECONDS = 0.3
+# Reduced from 0.3s to 0.2s for snappier demo experience
+SIMULATED_LATENCY_SECONDS = 0.2
 
 
 async def check_velocity(transaction: Transaction) -> VelocityResult:
