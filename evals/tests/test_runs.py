@@ -43,9 +43,23 @@ def test_summary_counts_and_flags(tmp_path):
     assert p3["majority_correct"] == 1
     assert summary["totals"]["calls"] == 30
 
+    # Stability compares scored verdicts only: correct, error, fallback is stable.
+    assert rows["P3-03"]["stable"]
+    assert p3["unscorable"] == 0
+
     for i, r in enumerate(runs):
         (tmp_path / f"claude-run-{i + 1}.json").write_text(json.dumps(r), encoding="utf-8")
     md, js = write_summary(tmp_path)
     text = md.read_text(encoding="utf-8")
     assert "(unstable)" in text and "P3-02" in text
+    assert "50% (1 of 2) to 100% (2 of 2)" in text  # range carries counts
     assert json.loads(js.read_text(encoding="utf-8"))["runs"] == ["claude-run-1", "claude-run-2", "claude-run-3"]
+
+
+def test_scenario_that_never_scored_is_not_never_correct():
+    runs = [
+        _run([_scenario("P3-01"), _scenario("P3-05", status="fallback", fallbacks={"supervisor": 1})]),
+        _run([_scenario("P3-01"), _scenario("P3-05", status="error")]),
+    ]
+    p3 = summarize_runs([(f"claude-run-{i + 1}", r) for i, r in enumerate(runs)])["projects"]["p3"]
+    assert p3["unscorable"] == 1 and p3["never"] == 0 and p3["always"] == 1

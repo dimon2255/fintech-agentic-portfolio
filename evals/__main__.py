@@ -17,7 +17,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-from . import BASELINE_PATH, DEFAULT_LLM_MODEL, DOCS_EVALS_DIR, PROJECTS, REPO_ROOT
+from . import BASELINE_PATH, DEFAULT_LLM_MODEL, DOCS_EVALS_DIR, PRICING_PER_MTOK, PROJECTS, REPO_ROOT
 from .report import write_scorecard
 from .runner import run_projects
 from .scenario import load_project
@@ -111,9 +111,19 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--budget-usd", type=float, default=2.0, help="LLM-tier spending cap for this run")
     parser.add_argument("--timeout", type=float, default=600, help="per-scenario timeout in seconds")
     parser.add_argument("--summarize-runs", action="store_true")
+    parser.add_argument("--rerender-runs", action="store_true", help="rebuild claude-run-*.md/json from saved JSON, then summarize")
     parser.add_argument("--verbose", action="store_true", help="print each scenario's output and LLM usage")
     parser.add_argument("--stub-llm", type=Path, help=argparse.SUPPRESS)
     args = parser.parse_args(argv)
+
+    if args.rerender_runs:
+        from .report import rerender
+        from .runs import RUN_PREFIX
+
+        for path in sorted(args.out_dir.glob(f"{RUN_PREFIX}*.json")):
+            md, _ = rerender(path)
+            print(f"re-rendered {md.name} from {path.name}")
+        args.summarize_runs = True
 
     if args.summarize_runs:
         from .runs import write_summary
@@ -121,6 +131,13 @@ def main(argv: list[str] | None = None) -> int:
         md, js = write_summary(args.out_dir)
         print(f"wrote {md} and {js}")
         return 0
+
+    if (args.check or args.write_baseline) and (args.only or args.tier != "rules"):
+        parser.error("--check and --write-baseline run the full rules tier; do not combine them with --only or --tier llm")
+    if args.check and not args.baseline.exists():
+        parser.error(f"--check needs a baseline file; {args.baseline} does not exist")
+    if args.tier == "llm" and args.model not in PRICING_PER_MTOK and args.stub_llm is None:
+        parser.error(f"no price recorded for {args.model} in evals.PRICING_PER_MTOK; the budget cap cannot work without one")
 
     scores, summaries, versions, keys = evaluate(args)
     print_summary(scores, summaries, verbose=args.verbose)
@@ -133,13 +150,20 @@ def main(argv: list[str] | None = None) -> int:
         baseline = json.loads(args.baseline.read_text(encoding="utf-8")) if args.baseline.exists() else {}
         scoped = {sid: v for sid, v in baseline.items() if sid.split("-")[0].lower() in keys}
         regressions, improvements = compare(scoped, flat)
+        unscored = [f"{s.id}: {s.status}: {s.error or ''}".rstrip() for s in flat if not s.scored]
         for line in improvements:
             print(f"IMPROVED   {line}")
         for line in regressions:
             print(f"REGRESSED  {line}")
+        for line in unscored:
+            print(f"NOT SCORED {line}")
         if args.write_baseline:
-            if any(not s.scored for s in flat):
+            if unscored:
                 print("refusing to write a baseline from a run with unscored scenarios", file=sys.stderr)
+                return 1
+            if regressions:
+                print("refusing to write a baseline that records regressions; fix them or edit baseline.json by hand "
+                      "with a justification in the commit message", file=sys.stderr)
                 return 1
             merged = dict(baseline)
             merged.update({s.id: baseline_entry(s) for s in flat})
@@ -151,8 +175,12 @@ def main(argv: list[str] | None = None) -> int:
                 versions=versions, product_label=_product_label(args.product_root),
             )
             print(f"wrote {md} and {js}")
-        if args.check and regressions:
-            print(f"{len(regressions)} check(s) regressed against {args.baseline}", file=sys.stderr)
+        if args.check and (regressions or unscored):
+            print(
+                f"gate failed: {len(regressions)} check(s) regressed against {args.baseline}, "
+                f"{len(unscored)} scenario(s) not scored",
+                file=sys.stderr,
+            )
             return 1
         if args.check:
             print(f"gate passed: no regressions against {args.baseline.name}")

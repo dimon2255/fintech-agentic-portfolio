@@ -149,15 +149,21 @@ def project_section(project: str, summary: ProjectSummary, scores: list[Scenario
 
 def headline_table(summaries: dict[str, ProjectSummary]) -> list[str]:
     lines = [
-        "| Project | Headline check | Result | All graded checks pass | Not scored |",
-        "|---|---|---|---|---|",
+        "| Project | Headline check | Result | All graded checks pass | Legitimate cases approved | Should-stop cases approved | Not scored |",
+        "|---|---|---|---|---|---|---|",
     ]
     for key, summary in summaries.items():
         p = PROJECTS[key]
         lines.append(
             f"| {key.upper()} {p.name} | {p.headline_label} | {summary.headline.display()} "
-            f"| {summary.all_checks.display()} | {summary.scenarios - summary.scored} |"
+            f"| {summary.all_checks.display()} | {summary.legit_approved.hits} of {summary.legit_approved.total} "
+            f"| {summary.wrongly_approved.hits} of {summary.wrongly_approved.total} | {summary.scenarios - summary.scored} |"
         )
+    lines += [
+        "",
+        "Legitimate cases are scenarios whose label requires approval (a false-positive check: higher is better). "
+        "Should-stop cases are scenarios whose label does not accept approval (lower is better).",
+    ]
     return lines
 
 
@@ -249,3 +255,31 @@ def write_scorecard(
     json_path = out_dir / f"{stem}.json"
     json_path.write_text(json.dumps(doc, indent=2, default=str) + "\n", encoding="utf-8")
     return md_path, json_path
+
+
+def rerender(json_path: Path) -> tuple[Path, Path]:
+    """Rebuild a scorecard's Markdown and JSON from its saved JSON (no pipeline run).
+
+    Used after a report-format change, so already-paid-for LLM runs are not
+    repeated. Rationale text comes from the golden files.
+    """
+    from .scenario import load_project
+    from .score import summarize
+
+    doc = json.loads(json_path.read_text(encoding="utf-8"))
+    scores: dict[str, list[ScenarioScore]] = {}
+    for key, items in doc["projects"].items():
+        rationale = {s["id"]: s["rationale"] for s in load_project(key)}
+        scores[key] = [
+            ScenarioScore(
+                id=i["id"], title=i["title"], category=i["category"], status=i["status"], checks=i["checks"],
+                expected=i["expected"], output=i["output"], error=i["error"], fallbacks=i["fallbacks"],
+                llm=i["llm"], llm_cost_usd=i["llm_cost_usd"], rationale=rationale.get(i["id"], ""),
+            )
+            for i in items
+        ]
+    summaries = {key: summarize(key, s) for key, s in scores.items()}
+    return write_scorecard(
+        json_path.parent, json_path.stem, scores, summaries, tier=doc["tier"], model=doc.get("model"),
+        versions=doc.get("versions", {}), product_label=doc.get("product", "this checkout"),
+    )

@@ -6,11 +6,13 @@ Each scenario runs the project's real entrypoint (P1 `classify_transaction`, P2 
 
 ## Headline
 
-| Project | Headline check | Result | All graded checks pass | Not scored |
-|---|---|---|---|---|
-| P1 Transaction Risk Classifier | Recommended action correct | 91% (10 of 11) | 91% (10 of 11) | 0 |
-| P2 Fraud Detection Swarm | Recommended action correct | 80% (8 of 10) | 70% (7 of 10) | 0 |
-| P3 KYC/AML Compliance Platform | Compliance decision correct | 50% (7 of 14) | 14% (2 of 14) | 0 |
+| Project | Headline check | Result | All graded checks pass | Legitimate cases approved | Should-stop cases approved | Not scored |
+|---|---|---|---|---|---|---|
+| P1 Transaction Risk Classifier | Recommended action correct | 91% (10 of 11) | 91% (10 of 11) | 3 of 3 | 1 of 6 | 0 |
+| P2 Fraud Detection Swarm | Recommended action correct | 80% (8 of 10) | 70% (7 of 10) | 3 of 3 | 1 of 5 | 0 |
+| P3 KYC/AML Compliance Platform | Compliance decision correct | 50% (7 of 14) | 14% (2 of 14) | 4 of 4 | 7 of 9 | 0 |
+
+Legitimate cases are scenarios whose label requires approval (a false-positive check: higher is better). Should-stop cases are scenarios whose label does not accept approval (lower is better).
 
 ## P1: Transaction Risk Classifier
 

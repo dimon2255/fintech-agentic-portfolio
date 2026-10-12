@@ -283,6 +283,7 @@ async def run_pipeline(project: str, mods: dict, scenario: dict) -> dict:
             )
         },
         "route": [d.next_step for d in decision.supervisor_decisions],
+        "supervisor_reasoning": [f"{d.next_step}: {d.reasoning[:400]}" for d in decision.supervisor_decisions],
         "sanctions": None
         if sanctions is None
         else {"any_hits": sanctions.any_hits, "highest_match_score": sanctions.highest_match_score},
@@ -331,6 +332,8 @@ async def main_async(request: dict, stub: StubLLM | None) -> dict:
     else:
         if not os.environ.get("ANTHROPIC_API_KEY"):
             raise SystemExit("LLM tier needs ANTHROPIC_API_KEY in the environment")
+        if model not in PRICING_PER_MTOK:
+            raise SystemExit(f"no price recorded for {model}; the budget cap cannot work without one")
         os.environ["OPENAI_API_KEY"] = ""
         os.environ["DEFAULT_MODEL"] = model
     os.environ["LANGSMITH_TRACING"] = "false"
