@@ -42,14 +42,16 @@ This document maps the platform's capabilities to real-world compliance requirem
 | Risk tier | Low or Medium | High |
 | Country | FATF member, low-risk | FATF monitored/blacklisted |
 | PEP status | Not PEP | PEP or PEP associate |
-| Sanctions | Clear | Hits below threshold |
+| Sanctions | Clear | Not yet a trigger: hits below 0.8 add no EDD conditions (see note below) |
 | Industry | Low/medium AML exposure | High AML exposure (crypto, gambling) |
 | Volume | Under thresholds | Above thresholds |
 
 The platform automatically applies EDD conditions when:
 - `risk_tier` = HIGH and `edd_recommended` = True
 - PEP flag is set (any tier)
-- Sanctions hits exist but are below the 0.8 threshold (potential false positive)
+
+Sanctions hits between the 0.4 alert threshold and 0.8 do not add EDD conditions: the rules approve them with a
+higher risk score and no review (golden-set scenario P3-05; a known gap that Claude mode escalates).
 
 ## Sanctions List Coverage
 

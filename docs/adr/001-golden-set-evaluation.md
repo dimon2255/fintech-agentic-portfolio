@@ -89,11 +89,12 @@ scored against what a competent fraud or compliance analyst would decide.
   its effect on the scorecard. Demonstrated on 2026-10-11: run against the unmerged `fix/tune-risk-thresholds`
   branch, the gate failed eight checks, including an exact OFAC and UN sanctions match that the branch approves.
 - The first run measures the projects as they stand. Low scores are findings about the projects, not defects in
-  the evaluation. The analysis is in `docs/evals/golden-set-report.md`.
+  the evaluation. The analysis is in `docs/evals-baseline-2026-10-11/golden-set-report.md`; results after the
+  2026-10-12 sanctions fix are in `docs/evals/golden-set-report.md`.
 - **One labeler.** Every label was written by one author. A second fraud or compliance reviewer should review
   them before the numbers drive decisions.
-- **Small sample.** 11, 10 and 14 scenarios: one scenario moves a percentage by seven to ten points. Counts are
-  always shown.
+- **Small sample.** 11, 10 and 14 scenarios at first, 12, 10 and 16 since 2026-10-12: one scenario moves a
+  percentage by six to ten points. Counts are always shown.
 - **Hand-authored scenarios on simulated sources.** The evidence is synthetic, and the simulated sources limit
   what a scenario can express. For example, the P1 and P2 velocity source draws a customer's 30-day average from
   $50 to $500, so a customer who habitually makes large purchases cannot be represented.
