@@ -69,7 +69,7 @@ Label rationale: An unrecognized device combined with an anonymizing proxy is th
 | P2-07 | Tor exit node and a new device on an established account, everything else clean | review or decline / medium or high | approve / low (agreement 1.00) | **miss** | **miss** | low / low (0.10) pass | medium or high / low (0.05) **miss** | low / low (0.00) pass |
 | P2-08 | Moderate anomalies in every dimension at once | review / medium | review / medium (agreement 1.00) | pass | pass | medium / medium (0.36) pass | medium / medium (0.40) pass | medium / medium (0.30) pass |
 | P2-09 | First purchase by a new customer with an established email and verified details | approve / low | approve / low (agreement 1.00) | pass | pass | low / low (0.10) pass | low or medium / low (0.23) pass | low / low (0.00) pass |
-| P2-10 | Customer with two or three past chargebacks makes an ordinary purchase | approve or review / low or medium | approve / low (agreement 1.00) | pass | pass | low / low (0.10) pass | medium or high / low (0.30) **miss** | low / low (0.00) pass |
+| P2-10 | Customer with two past chargebacks makes an ordinary purchase | approve or review / low or medium | approve / low (agreement 1.00) | pass | pass | low / low (0.10) pass | medium or high / low (0.30) **miss** | low / low (0.00) pass |
 
 ### Misses and unscored runs
 
@@ -89,7 +89,7 @@ Got approve / low; specialists: velocity low (0.10), identity low (0.05), behavi
 
 Label rationale: Legitimate customers rarely shop through Tor, and Tor plus an unrecognized device on an established account is how account takeovers look when the attacker is careful about everything else. The identity specialist, which is given the geolocation and device data for exactly this purpose, should flag it, and the swarm should not approve without a review.
 
-#### P2-10: Customer with two or three past chargebacks makes an ordinary purchase
+#### P2-10: Customer with two past chargebacks makes an ordinary purchase
 
 Missed: Identity specialist level.
 
@@ -157,7 +157,7 @@ Label rationale: A screening alert above the matching threshold must be disposit
 
 Missed: Decision, Sanctions screening ran when required.
 
-Got approved / low / escalated no. Route: document_intake > identity_verification > risk_assessment > final_decision. Sanctions: not run. Identity confirmed: yes. Composite risk: 0.1. Conditions: none. Document issues: ['Low extraction confidence on document 1: 69%', 'Document 1 (passport) is expired']. Reasoning: Low risk — standard onboarding.
+Got approved / low / escalated no. Route: document_intake > identity_verification > risk_assessment > final_decision. Sanctions: not run. Identity confirmed: yes. Composite risk: 0.1. Conditions: none. Document issues: ['Low extraction confidence on document 1: 44%', 'Document 1 (passport) is expired']. Reasoning: Low risk — standard onboarding.
 
 Label rationale: An expired document cannot verify identity (the project's own document agent says so in its reasoning). The application must not be approved: it is held while a valid document is requested (escalated) or declined pending reapplication (rejected). Tier and escalation flag are not graded because either outcome is acceptable.
 

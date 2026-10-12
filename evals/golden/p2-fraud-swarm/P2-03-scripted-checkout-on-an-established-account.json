@@ -10,8 +10,8 @@
       "currency": "USD",
       "merchant_category": "electronics",
       "customer_id": "cust_10009",
-      "customer_email": "jordan.lee3@gmail.com",
-      "ip_address": "73.1.1.1",
+      "customer_email": "jordan.lee26@gmail.com",
+      "ip_address": "73.1.1.33",
       "device_id": "dev_002b6c3d",
       "timestamp": "2026-10-10T18:42:00",
       "card_last_four": "4821",
@@ -63,7 +63,13 @@
         14
       ],
       "behavioral.mouse_movement_anomaly": true,
-      "behavioral.navigation_pattern": "direct_to_checkout"
+      "behavioral.navigation_pattern": "direct_to_checkout",
+      "geo.ip_country": "US",
+      "geo.ip_city": "New York",
+      "identity.name_email_match_score": [
+        0.7,
+        1.0
+      ]
     }
   },
   "expected": {

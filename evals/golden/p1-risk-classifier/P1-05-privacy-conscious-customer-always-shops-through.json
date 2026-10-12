@@ -11,7 +11,7 @@
       "merchant_category": "online_retail",
       "customer_id": "cust_10026",
       "customer_email": "p1-05.customer@example.com",
-      "ip_address": "73.1.1.39",
+      "ip_address": "73.1.1.204",
       "device_id": "dev_00001004",
       "timestamp": "2026-10-10T18:42:00",
       "card_last_four": "4821",
@@ -38,7 +38,9 @@
         365
       ],
       "device.multiple_accounts_on_device": false,
-      "device.os_fingerprint_changed": false
+      "device.os_fingerprint_changed": false,
+      "geo.ip_country": "US",
+      "geo.ip_city": "New York"
     }
   },
   "expected": {

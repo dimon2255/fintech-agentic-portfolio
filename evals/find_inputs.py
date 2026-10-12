@@ -3,7 +3,9 @@
 The projects' simulated data sources derive their observations from MD5
 hashes of input IDs (customer, IP, device, email, document number). A scenario
 is authored as narrative, evidence constraints and labels first, with the ID
-fields set to ``"SEARCH"`` (optionally ``"SEARCH:<prefix>"``). This tool then
+fields set to ``"SEARCH"`` (optionally ``"SEARCH:<hint>"``: an IP's first octet,
+an email's ``local@domain`` stem, or a document-number pattern such as
+``"K#8"``, meaning K followed by eight pseudo-random digits). This tool then
 searches candidate IDs, calling the project's own tool functions, until every
 evidence constraint holds, and writes the chosen IDs into the golden file.
 Labels and constraints are never touched.
@@ -21,6 +23,7 @@ from __future__ import annotations
 import argparse
 import asyncio
 import copy
+import hashlib
 import importlib
 import json
 import os
@@ -83,10 +86,14 @@ def _devices():
         n += 1
 
 
-def _doc_numbers(prefix: str):
+def _doc_numbers(pattern: str):
+    """Realistic-looking numbers: ``"K#8"`` yields K plus 8 pseudo-random digits."""
+    prefix, _, count = pattern.partition("#")
+    width = int(count) if count.isdigit() else 5
     n = 0
     while True:
-        yield f"{prefix}{n:05d}"
+        digits = str(int(hashlib.md5(f"{pattern}:{n}".encode()).hexdigest(), 16))[:width]
+        yield f"{prefix}{digits}"
         n += 1
 
 
@@ -162,7 +169,7 @@ async def search_application(scenario: dict) -> dict:
             return not check(evidence, group)
 
         doc["document_number"] = await _first(
-            _doc_numbers(_hint(doc["document_number"], "DOC-")), doc_holds, f"document {i}"
+            _doc_numbers(_hint(doc["document_number"], "DOC-#8")), doc_holds, f"document {i}"
         )
     return {"application": app}
 

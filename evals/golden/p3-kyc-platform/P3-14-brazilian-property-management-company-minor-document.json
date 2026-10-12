@@ -20,7 +20,7 @@
       "documents_submitted": [
         {
           "document_type": "national_id",
-          "document_number": "BR-CPF-33200000",
+          "document_number": "27383883251",
           "issuing_country": "BR",
           "expiry_date": "2031-12-31",
           "holder_name": "Carlos Eduardo Silva",
@@ -29,7 +29,7 @@
         },
         {
           "document_type": "utility_bill",
-          "document_number": "CPFL-2026-SP-00000",
+          "document_number": "CPFL-2026-SP-12325",
           "issuing_country": "BR",
           "expiry_date": null,
           "holder_name": "Carlos E. Silva",

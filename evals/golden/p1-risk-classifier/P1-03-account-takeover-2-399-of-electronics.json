@@ -11,7 +11,7 @@
       "merchant_category": "electronics",
       "customer_id": "cust_10061",
       "customer_email": "p1-03.customer@example.com",
-      "ip_address": "73.1.1.2",
+      "ip_address": "73.1.2.98",
       "device_id": "dev_00001010",
       "timestamp": "2026-10-10T18:42:00",
       "card_last_four": "4821",
@@ -34,7 +34,13 @@
       "geo.billing_geo_match": false,
       "device.device_known": false,
       "device.multiple_accounts_on_device": false,
-      "device.os_fingerprint_changed": false
+      "device.os_fingerprint_changed": false,
+      "geo.ip_country": "NG",
+      "geo.ip_city": "Lagos",
+      "geo.distance_from_usual_km": [
+        3000,
+        5000
+      ]
     }
   },
   "expected": {

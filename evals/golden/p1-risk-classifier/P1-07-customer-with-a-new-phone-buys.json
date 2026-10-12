@@ -11,7 +11,7 @@
       "merchant_category": "restaurant",
       "customer_id": "cust_10016",
       "customer_email": "p1-07.customer@example.com",
-      "ip_address": "73.1.1.1",
+      "ip_address": "73.1.1.33",
       "device_id": "dev_00001010",
       "timestamp": "2026-10-10T18:42:00",
       "card_last_four": "4821",
@@ -34,7 +34,9 @@
       "geo.billing_geo_match": true,
       "device.device_known": false,
       "device.multiple_accounts_on_device": false,
-      "device.os_fingerprint_changed": false
+      "device.os_fingerprint_changed": false,
+      "geo.ip_country": "US",
+      "geo.ip_city": "New York"
     }
   },
   "expected": {

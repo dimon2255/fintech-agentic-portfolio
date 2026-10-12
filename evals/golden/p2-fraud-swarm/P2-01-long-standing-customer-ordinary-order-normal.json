@@ -10,8 +10,8 @@
       "currency": "USD",
       "merchant_category": "online_retail",
       "customer_id": "cust_10277",
-      "customer_email": "alex.morgan4@gmail.com",
-      "ip_address": "73.1.1.1",
+      "customer_email": "alex.morgan19@gmail.com",
+      "ip_address": "73.1.1.33",
       "device_id": "dev_00001008",
       "timestamp": "2026-10-10T18:42:00",
       "card_last_four": "4821",
@@ -73,7 +73,13 @@
       "behavioral.typing_pattern_anomaly": false,
       "behavioral.mouse_movement_anomaly": false,
       "behavioral.time_of_day_unusual": false,
-      "behavioral.navigation_pattern": "normal"
+      "behavioral.navigation_pattern": "normal",
+      "geo.ip_country": "US",
+      "geo.ip_city": "New York",
+      "identity.name_email_match_score": [
+        0.7,
+        1.0
+      ]
     }
   },
   "expected": {

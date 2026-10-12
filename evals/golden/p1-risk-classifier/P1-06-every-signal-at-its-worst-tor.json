@@ -11,7 +11,7 @@
       "merchant_category": "gift_cards",
       "customer_id": "cust_10000",
       "customer_email": "p1-06.customer@example.com",
-      "ip_address": "73.1.1.104",
+      "ip_address": "73.1.6.158",
       "device_id": "dev_00001122",
       "timestamp": "2026-10-10T18:42:00",
       "card_last_four": "4821",
@@ -30,7 +30,13 @@
       "geo.billing_geo_match": false,
       "device.device_known": false,
       "device.multiple_accounts_on_device": true,
-      "device.os_fingerprint_changed": true
+      "device.os_fingerprint_changed": true,
+      "geo.ip_country": "RU",
+      "geo.ip_city": "Moscow",
+      "geo.distance_from_usual_km": [
+        3000,
+        5000
+      ]
     }
   },
   "expected": {
