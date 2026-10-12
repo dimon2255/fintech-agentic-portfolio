@@ -11,7 +11,7 @@ This document maps the platform's capabilities to real-world compliance requirem
 | Enhanced Due Diligence (EDD) | PEP screening, high-risk triggers, conditional EDD flag | Identity + Risk Assessment |
 | Sanctions screening (OFAC SDN) | OFAC list screening with fuzzy matching | Sanctions Screening |
 | Suspicious Activity Reporting (SAR) triggers | Risk flags, escalation to human review | Supervisor + Risk Assessment |
-| Recordkeeping / audit trail | Immutable ComplianceDecision with full audit trail | All (via supervisor) |
+| Recordkeeping / audit trail | ComplianceDecision with a timestamped audit trail (in memory; persistence and tamper evidence not implemented) | All (via supervisor) |
 
 ## EU Anti-Money Laundering Directive (AMLD6)
 
@@ -23,7 +23,7 @@ This document maps the platform's capabilities to real-world compliance requirem
 | Beneficial ownership identification | Business type analysis (placeholder for UBO lookup) | Risk Assessment |
 | Politically Exposed Persons (PEP) | PEP database screening with tier classification | Identity Verification |
 | Third-country screening | Country risk lookup with FATF status | Risk Assessment |
-| Record retention | Full JSON audit trail per application | Final Decision |
+| Record retention | Full JSON audit trail per application, returned with the decision (retention storage not implemented) | Final Decision |
 
 ## FATF Recommendations
 

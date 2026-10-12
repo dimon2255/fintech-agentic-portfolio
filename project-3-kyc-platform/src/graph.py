@@ -12,8 +12,8 @@ Project 3 topology — supervisor hub-and-spoke with conditional routing:
 Key architectural feature: add_conditional_edges
     Unlike P1 (static linear) and P2 (static fan-out), P3 uses LangGraph's
     conditional routing. The supervisor runs after each agent, examines the
-    state, and dynamically decides the next step — enabling skip logic,
-    escalation, and dependency-ordered execution.
+    state, and dynamically decides the next step — enabling escalation
+    and dependency-ordered execution. Sanctions screening is never skipped.
 """
 
 from __future__ import annotations
@@ -313,7 +313,7 @@ def build_kyc_graph():
 
     Uses add_conditional_edges — the key LangGraph feature that
     P1 and P2 never use. This enables dynamic routing based on
-    runtime state (skip logic, escalation, dependency ordering).
+    runtime state (escalation, dependency ordering).
     """
     graph = StateGraph(KYCState)
 

@@ -33,11 +33,10 @@ stateDiagram-v2
     Supervisor --> DocumentIntake : First step
     DocumentIntake --> Supervisor : Done
     Supervisor --> IdentityVerification : Docs OK
-    Supervisor --> HumanReview : Doc quality < 0.3
+    Supervisor --> HumanReview : Doc quality < 0.3 (after sanctions screening)
     IdentityVerification --> Supervisor : Done
     Supervisor --> SanctionsScreening : Identity confirmed
-    Supervisor --> HumanReview : Identity NOT confirmed
-    Supervisor --> RiskAssessment : Skip sanctions (low-risk domestic)
+    Supervisor --> HumanReview : Identity NOT confirmed (after sanctions screening)
     SanctionsScreening --> Supervisor : Done
     Supervisor --> HumanReview : Strong sanctions hit (> 0.8)
     Supervisor --> RiskAssessment : Sanctions clear
@@ -70,15 +69,10 @@ sequenceDiagram
     I-->>I: name + address + DOB + PEP (parallel)
     I->>S: IdentityVerificationResult
 
-    alt Low-risk domestic individual
-        S->>S: Skip sanctions (checklist: skipped)
-        S->>R: Assess risk
-    else Standard flow
-        S->>Sc: Screen sanctions
-        Sc-->>Sc: OFAC + EU + UN + media (parallel)
-        Sc->>S: SanctionsScreeningResult
-        S->>R: Assess risk
-    end
+    S->>Sc: Screen sanctions (every applicant)
+    Sc-->>Sc: OFAC + EU + UN + media (parallel)
+    Sc->>S: SanctionsScreeningResult
+    S->>R: Assess risk
 
     R-->>R: country + industry + pattern + overall
     R->>S: RiskAssessmentResult
@@ -93,9 +87,9 @@ sequenceDiagram
 | **Graph topology** | Supervisor hub-and-spoke | Compliance workflows have dependencies between stages; fan-out is wrong here |
 | **Routing mechanism** | `add_conditional_edges` | LangGraph's native conditional routing — cleaner than manual state checks |
 | **State management** | State isolation per agent | Each agent writes to its own key (pattern from P2, prevents merge conflicts) |
-| **Skip logic** | Supervisor-driven | Low-risk domestic individuals skip sanctions — reduces cost by ~15-25% |
+| **Mandatory screening** | Enforced in the supervisor node | Every applicant is screened; an escalation requested before screening waits until it has run, so the reviewer gets the sanctions result |
 | **Escalation** | 3 triggers → human_review | Document failure, identity failure, strong sanctions match |
-| **Checklist tracking** | Pydantic model in state | Immutable audit of which steps ran, which were skipped, and when |
+| **Checklist tracking** | Pydantic model in state | Record of which steps ran, were skipped or are pending, and when (in memory with the decision) |
 | **LLM fallback** | `_has_api_key()` check | Zero-cost development with deterministic mocks; real LLM when key is present |
 
 ## Data Flow
@@ -109,7 +103,7 @@ KYCApplication (input)
     ├── Identity Verification: 4 tools (parallel)
     │   └── IdentityVerificationResult → state.identity_verification_result
     │
-    ├── Sanctions Screening: 4 tools (parallel)  [may be SKIPPED]
+    ├── Sanctions Screening: 4 tools (parallel)  [always runs]
     │   └── SanctionsScreeningResult → state.sanctions_screening_result
     │
     ├── Risk Assessment: 4 tools (3 parallel + 1 sequential aggregation)
@@ -128,6 +122,6 @@ KYCApplication (input)
 | LangGraph API | `add_edge` | `add_edge` fan-out | **`add_conditional_edges`** |
 | Agents | 1 | 3 specialists + adjudicator | **4 specialists + supervisor** |
 | Tools | 3 | 5 | **15** |
-| Skip logic | None | None | **Supervisor-driven** |
+| Sanctions screening | None | None | **Mandatory, enforced in code** |
 | Escalation | None | Mentioned | **Implemented (3 triggers)** |
 | Domain | Transaction scoring | Fraud detection | **KYC/AML compliance** |

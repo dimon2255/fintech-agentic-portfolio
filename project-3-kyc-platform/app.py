@@ -95,7 +95,7 @@ def run_async(coro):
 st.title("🛡️ KYC/AML Compliance Platform")
 st.markdown(
     "Supervisor-orchestrated KYC/AML compliance pipeline with **conditional routing**, "
-    "skip logic, and human-in-the-loop escalation. Four specialist agents coordinate "
+    "mandatory sanctions screening, and human-in-the-loop escalation. Four specialist agents coordinate "
     "through a dynamic supervisor — the capstone of the agentic AI portfolio."
 )
 
