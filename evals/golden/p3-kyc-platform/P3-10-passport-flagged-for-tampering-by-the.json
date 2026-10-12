@@ -1,0 +1,63 @@
+{
+  "id": "P3-10",
+  "title": "Passport flagged for tampering by the authenticity check",
+  "category": "documents",
+  "narrative": "A US resident applies for a personal account: salary income, $2,500 a month. The application details match the passport, but the document authenticity check detects tampering on the passport. The utility bill is unremarkable.",
+  "inputs": {
+    "application": {
+      "application_id": "P3-10-app",
+      "applicant_name": "Kevin Walsh",
+      "date_of_birth": "1985-07-19",
+      "nationality": "US",
+      "country_of_residence": "US",
+      "address": "301 Lakeview Drive, Columbus, OH 43215",
+      "email": "kevin.walsh@gmail.com",
+      "phone": "+1-614-555-0163",
+      "business_type": null,
+      "industry": null,
+      "expected_monthly_volume": 2500.0,
+      "source_of_funds": "Employment salary",
+      "documents_submitted": [
+        {
+          "document_type": "passport",
+          "document_number": "588671293",
+          "issuing_country": "US",
+          "expiry_date": "2031-09-30",
+          "holder_name": "Kevin Walsh",
+          "holder_dob": "1985-07-19",
+          "holder_address": null
+        },
+        {
+          "document_type": "utility_bill",
+          "document_number": "AEP-2026-195217",
+          "issuing_country": "US",
+          "expiry_date": null,
+          "holder_name": "Kevin Walsh",
+          "holder_dob": null,
+          "holder_address": "301 Lakeview Drive, Columbus, OH 43215"
+        }
+      ],
+      "submitted_at": "2026-10-05T10:00:00"
+    }
+  },
+  "fixtures": {
+    "evidence": {
+      "documents.0.tampering_detected": true,
+      "documents.0.format_valid": true,
+      "documents.0.security_features_present": true,
+      "documents.0.is_correct_type": true,
+      "documents.1.format_valid": true,
+      "documents.1.security_features_present": true,
+      "documents.1.tampering_detected": false,
+      "documents.1.is_correct_type": true,
+      "identity.is_pep": false
+    }
+  },
+  "expected": {
+    "decision": "rejected|escalated",
+    "risk_tier": null,
+    "was_escalated": true,
+    "sanctions_screening_required": true
+  },
+  "rationale": "A suspected forged identity document is a fraud indicator: the application is declined or held, and a human (the fraud or financial-crime team) must review it, including whether a suspicious activity report is warranted. It must never be approved automatically."
+}

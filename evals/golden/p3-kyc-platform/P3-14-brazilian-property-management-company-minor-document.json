@@ -1,0 +1,63 @@
+{
+  "id": "P3-14",
+  "title": "Brazilian property-management company, minor document variations",
+  "category": "risk-tiering",
+  "narrative": "A Brazilian property-management company (Ltd, real estate) expects $45,000 a month of rental revenue. The director's national ID matches; its address adds an apartment number, and the utility bill abbreviates his middle name. No list or PEP matches. (Demo profile 5, the borderline case, from data_generator.py.)",
+  "inputs": {
+    "application": {
+      "application_id": "P3-14-app",
+      "applicant_name": "Carlos Eduardo Silva",
+      "date_of_birth": "1979-09-14",
+      "nationality": "BR",
+      "country_of_residence": "BR",
+      "address": "Rua Augusta 1200, Sao Paulo, SP 01304-001",
+      "email": "carlos.silva@empresa.com.br",
+      "phone": "+55-11-9876-5432",
+      "business_type": "Ltd",
+      "industry": "real_estate",
+      "expected_monthly_volume": 45000.0,
+      "source_of_funds": "Property management revenue",
+      "documents_submitted": [
+        {
+          "document_type": "national_id",
+          "document_number": "27383883251",
+          "issuing_country": "BR",
+          "expiry_date": "2031-12-31",
+          "holder_name": "Carlos Eduardo Silva",
+          "holder_dob": "1979-09-14",
+          "holder_address": "Rua Augusta 1200, Apt 42, Sao Paulo"
+        },
+        {
+          "document_type": "utility_bill",
+          "document_number": "CPFL-2026-SP-12325",
+          "issuing_country": "BR",
+          "expiry_date": null,
+          "holder_name": "Carlos E. Silva",
+          "holder_dob": null,
+          "holder_address": "Rua Augusta 1200, Sao Paulo, SP 01304-001"
+        }
+      ],
+      "submitted_at": "2026-10-05T10:00:00"
+    }
+  },
+  "fixtures": {
+    "evidence": {
+      "documents.0.format_valid": true,
+      "documents.0.security_features_present": true,
+      "documents.0.tampering_detected": false,
+      "documents.0.is_correct_type": true,
+      "documents.1.format_valid": true,
+      "documents.1.security_features_present": true,
+      "documents.1.tampering_detected": false,
+      "documents.1.is_correct_type": true,
+      "identity.is_pep": false
+    }
+  },
+  "expected": {
+    "decision": "approved",
+    "risk_tier": "medium|high",
+    "was_escalated": null,
+    "sanctions_screening_required": true
+  },
+  "rationale": "The document variations are ordinary and explainable. But real estate is a sector FATF singles out for money-laundering risk, and Brazil is a medium-risk jurisdiction, so a business account here is at least medium risk. Approve with monitoring proportionate to medium or high risk; a low rating is under-rated."
+}

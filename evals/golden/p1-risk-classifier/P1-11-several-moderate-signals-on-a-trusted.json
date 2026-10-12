@@ -1,0 +1,55 @@
+{
+  "id": "P1-11",
+  "title": "Several moderate signals on a trusted device: foreign VPN, a burst of purchases, a larger amount",
+  "category": "boundary",
+  "narrative": "A $640 electronics order from the customer's trusted device. It is the third to fifth purchase in the past hour, the amount is about one and a half times their 30-day average, and the IP is a VPN exit in a different country from the billing address.",
+  "inputs": {
+    "transaction": {
+      "transaction_id": "p1-11-txn",
+      "amount": 640.0,
+      "currency": "USD",
+      "merchant_category": "electronics",
+      "customer_id": "cust_10013",
+      "customer_email": "p1-11.customer@example.com",
+      "ip_address": "73.1.1.217",
+      "device_id": "dev_00001004",
+      "timestamp": "2026-10-10T18:42:00",
+      "card_last_four": "4821",
+      "billing_country": "US",
+      "shipping_country": "US"
+    }
+  },
+  "fixtures": {
+    "evidence": {
+      "velocity.transactions_last_hour": [
+        3,
+        5
+      ],
+      "velocity.amount_deviation_factor": [
+        1.5,
+        3.0
+      ],
+      "geo.is_vpn": true,
+      "geo.is_tor": false,
+      "geo.billing_geo_match": false,
+      "device.device_known": true,
+      "device.device_age_days": [
+        60,
+        365
+      ],
+      "device.multiple_accounts_on_device": false,
+      "device.os_fingerprint_changed": false,
+      "geo.ip_country": "GB",
+      "geo.ip_city": "London",
+      "geo.distance_from_usual_km": [
+        3000,
+        5000
+      ]
+    }
+  },
+  "expected": {
+    "risk_level": "medium",
+    "recommended_action": "review"
+  },
+  "rationale": "Three independent moderate signals call for a human look. The trusted device argues against an automatic decline; the combination argues against an automatic approval."
+}

@@ -1,0 +1,74 @@
+{
+  "id": "P2-05",
+  "title": "Fraud ring: chargeback history, linked accounts, burst velocity, VPN, rushed checkout",
+  "category": "fraud",
+  "narrative": "A $1,250 electronics order. The card has six to eight transactions in the past hour. The email is at a lesser-known provider and under a month old, the phone is unverified, the address fails verification, and the identity is linked to five to eight accounts with two to five past chargebacks. The device is new and shared with other accounts, the IP is a foreign VPN, and checkout took under fifteen seconds from one or two pages.",
+  "inputs": {
+    "transaction": {
+      "transaction_id": "p2-05-txn",
+      "amount": 1250.0,
+      "currency": "USD",
+      "merchant_category": "electronics",
+      "customer_id": "cust_10000",
+      "customer_email": "fastbuy397@mailbox.org",
+      "ip_address": "185.1.6.102",
+      "device_id": "dev_00003a3d",
+      "timestamp": "2026-10-10T18:42:00",
+      "card_last_four": "4821",
+      "billing_country": "US",
+      "shipping_country": "US"
+    }
+  },
+  "fixtures": {
+    "evidence": {
+      "velocity.transactions_last_hour": [
+        6,
+        8
+      ],
+      "geo.is_vpn": true,
+      "geo.billing_geo_match": false,
+      "device.device_known": false,
+      "device.multiple_accounts_on_device": true,
+      "identity.email_domain_reputation": "suspicious",
+      "identity.email_age_days": [
+        1,
+        30
+      ],
+      "identity.phone_verified": false,
+      "identity.address_verification_status": "mismatch",
+      "identity.linked_accounts_count": [
+        5,
+        8
+      ],
+      "identity.previous_chargebacks": [
+        2,
+        5
+      ],
+      "behavioral.pages_visited": [
+        1,
+        2
+      ],
+      "behavioral.checkout_speed_seconds": [
+        5,
+        14
+      ],
+      "behavioral.navigation_pattern": "direct_to_checkout",
+      "geo.ip_country": "NG",
+      "geo.ip_city": "Lagos",
+      "geo.distance_from_usual_km": [
+        3000,
+        5000
+      ]
+    }
+  },
+  "expected": {
+    "risk_level": "high|critical",
+    "recommended_action": "decline",
+    "specialists": {
+      "velocity": "high|critical",
+      "identity": "high|critical",
+      "behavioral": "high|critical"
+    }
+  },
+  "rationale": "Every specialist dimension shows strong, independent fraud indicators. Unanimous decline."
+}

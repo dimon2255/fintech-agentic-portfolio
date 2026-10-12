@@ -1,0 +1,64 @@
+{
+  "id": "P3-01",
+  "title": "Clean domestic individual with matching passport and utility bill",
+  "category": "clean",
+  "narrative": "A US citizen living in the US applies for a personal account: salary income, about $5,000 a month of expected activity. Her valid passport matches her name and date of birth, and a utility bill in her name confirms her address. She is not on any list and not politically exposed. (Demo profile 1 from data_generator.py.)",
+  "inputs": {
+    "application": {
+      "application_id": "P3-01-app",
+      "applicant_name": "Sarah Johnson",
+      "date_of_birth": "1988-07-22",
+      "nationality": "US",
+      "country_of_residence": "US",
+      "address": "742 Evergreen Terrace, Springfield, IL 62704",
+      "email": "sarah.johnson@gmail.com",
+      "phone": "+1-555-0123",
+      "business_type": null,
+      "industry": null,
+      "expected_monthly_volume": 5000.0,
+      "source_of_funds": "Employment salary",
+      "documents_submitted": [
+        {
+          "document_type": "passport",
+          "document_number": "727041221",
+          "issuing_country": "US",
+          "expiry_date": "2029-11-15",
+          "holder_name": "Sarah Johnson",
+          "holder_dob": "1988-07-22",
+          "holder_address": null
+        },
+        {
+          "document_type": "utility_bill",
+          "document_number": "UB-2025-24641",
+          "issuing_country": "US",
+          "expiry_date": null,
+          "holder_name": "Sarah Johnson",
+          "holder_dob": null,
+          "holder_address": "742 Evergreen Terrace, Springfield, IL 62704"
+        }
+      ],
+      "submitted_at": "2026-10-05T10:00:00"
+    }
+  },
+  "fixtures": {
+    "evidence": {
+      "documents.0.format_valid": true,
+      "documents.0.security_features_present": true,
+      "documents.0.tampering_detected": false,
+      "documents.0.is_correct_type": true,
+      "documents.1.format_valid": true,
+      "documents.1.security_features_present": true,
+      "documents.1.tampering_detected": false,
+      "documents.1.is_correct_type": true,
+      "identity.is_pep": false
+    }
+  },
+  "expected": {
+    "decision": "approved",
+    "risk_tier": "low",
+    "was_escalated": false,
+    "sanctions_screening_required": true,
+    "edd_required": false
+  },
+  "rationale": "Verified identity, verified address, low-risk profile: approve at low risk with standard due diligence. Sanctions screening is still required. It is a list check that applies to every customer at onboarding; a risk-based approach changes how much due diligence is done, not whether the customer is screened."
+}

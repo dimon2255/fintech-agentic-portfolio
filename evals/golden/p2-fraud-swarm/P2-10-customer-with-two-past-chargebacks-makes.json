@@ -1,0 +1,91 @@
+{
+  "id": "P2-10",
+  "title": "Customer with two past chargebacks makes an ordinary purchase",
+  "category": "disagreement",
+  "narrative": "An established customer (years-old Gmail, verified phone, matching address) with two chargebacks on record buys $72 of goods on their usual phone from home, in a normal session, at normal frequency.",
+  "inputs": {
+    "transaction": {
+      "transaction_id": "p2-10-txn",
+      "amount": 72.0,
+      "currency": "USD",
+      "merchant_category": "online_retail",
+      "customer_id": "cust_10015",
+      "customer_email": "casey.nguyen847@gmail.com",
+      "ip_address": "73.1.1.33",
+      "device_id": "dev_0000101d",
+      "timestamp": "2026-10-10T18:42:00",
+      "card_last_four": "4821",
+      "billing_country": "US",
+      "shipping_country": "US"
+    }
+  },
+  "fixtures": {
+    "evidence": {
+      "velocity.transactions_last_hour": [
+        0,
+        1
+      ],
+      "velocity.amount_deviation_factor": [
+        0,
+        1.0
+      ],
+      "geo.is_vpn": false,
+      "geo.is_tor": false,
+      "geo.billing_geo_match": true,
+      "device.device_known": true,
+      "device.device_age_days": [
+        180,
+        365
+      ],
+      "device.multiple_accounts_on_device": false,
+      "device.os_fingerprint_changed": false,
+      "identity.email_age_days": [
+        730,
+        3650
+      ],
+      "identity.phone_verified": true,
+      "identity.address_verification_status": "match",
+      "identity.linked_accounts_count": [
+        1,
+        3
+      ],
+      "identity.previous_chargebacks": 2,
+      "identity.account_age_days": [
+        700,
+        1825
+      ],
+      "behavioral.session_duration_seconds": [
+        300,
+        1500
+      ],
+      "behavioral.pages_visited": [
+        4,
+        15
+      ],
+      "behavioral.checkout_speed_seconds": [
+        45,
+        240
+      ],
+      "behavioral.typing_pattern_anomaly": false,
+      "behavioral.mouse_movement_anomaly": false,
+      "behavioral.time_of_day_unusual": false,
+      "behavioral.navigation_pattern": "normal",
+      "geo.ip_country": "US",
+      "geo.ip_city": "New York",
+      "identity.name_email_match_score": [
+        0.7,
+        1.0
+      ]
+    }
+  },
+  "expected": {
+    "risk_level": "low|medium",
+    "recommended_action": "approve|review",
+    "specialists": {
+      "velocity": "low",
+      "identity": "medium|high",
+      "behavioral": "low"
+    }
+  },
+  "rationale": "Repeated chargebacks are the strongest predictor of further chargebacks (the identity mock's own reasoning says so), so the identity specialist should rate this at least medium. For a small ordinary order on a trusted device, approving or reviewing are both reasonable final outcomes."
+}

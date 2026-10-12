@@ -1,0 +1,41 @@
+name: evals
+
+# Golden-set evaluation gate (docs/adr/001-golden-set-evaluation.md).
+# Runs the deterministic rules tier of all three projects against
+# evals/baseline.json and the harness unit tests. No secrets: both API keys are
+# empty, so no LLM is called (the harness fails the run if one is). The LLM tier
+# is opt-in and run by hand: python -m evals --tier llm.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  golden-set:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      ANTHROPIC_API_KEY: ""
+      OPENAI_API_KEY: ""
+      LANGSMITH_TRACING: "false"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: evals/requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r evals/requirements.txt
+
+      - name: Harness unit tests and ratchet gate
+        run: python -m pytest -v
+
+      - name: Rules-tier scorecard (summary)
+        run: python -m evals --check

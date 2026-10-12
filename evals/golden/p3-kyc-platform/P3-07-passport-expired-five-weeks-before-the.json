@@ -1,0 +1,63 @@
+{
+  "id": "P3-07",
+  "title": "Passport expired five weeks before the application date",
+  "category": "documents",
+  "narrative": "A US resident applies on 2026-10-05 for a personal account: salary income, $4,500 a month. Everything matches, but his passport, his only identity document, expired on 2026-08-31.",
+  "inputs": {
+    "application": {
+      "application_id": "P3-07-app",
+      "applicant_name": "Daniel Reyes",
+      "date_of_birth": "1990-12-03",
+      "nationality": "US",
+      "country_of_residence": "US",
+      "address": "415 Maple Avenue, Austin, TX 78704",
+      "email": "daniel.reyes@yahoo.com",
+      "phone": "+1-512-555-0177",
+      "business_type": null,
+      "industry": null,
+      "expected_monthly_volume": 4500.0,
+      "source_of_funds": "Employment salary",
+      "documents_submitted": [
+        {
+          "document_type": "passport",
+          "document_number": "727041221",
+          "issuing_country": "US",
+          "expiry_date": "2026-08-31",
+          "holder_name": "Daniel Reyes",
+          "holder_dob": "1990-12-03",
+          "holder_address": null
+        },
+        {
+          "document_type": "utility_bill",
+          "document_number": "AE-2026-279769",
+          "issuing_country": "US",
+          "expiry_date": null,
+          "holder_name": "Daniel Reyes",
+          "holder_dob": null,
+          "holder_address": "415 Maple Avenue, Austin, TX 78704"
+        }
+      ],
+      "submitted_at": "2026-10-05T10:00:00"
+    }
+  },
+  "fixtures": {
+    "evidence": {
+      "documents.0.format_valid": true,
+      "documents.0.security_features_present": true,
+      "documents.0.tampering_detected": false,
+      "documents.0.is_correct_type": true,
+      "documents.1.format_valid": true,
+      "documents.1.security_features_present": true,
+      "documents.1.tampering_detected": false,
+      "documents.1.is_correct_type": true,
+      "identity.is_pep": false
+    }
+  },
+  "expected": {
+    "decision": "escalated|rejected",
+    "risk_tier": null,
+    "was_escalated": null,
+    "sanctions_screening_required": true
+  },
+  "rationale": "Same judgment as P3-06: the identity document was expired on the day the application was submitted, so it cannot be accepted. The scenario differs only in the expiry date, which falls after a fixed date in the document tool rather than before it."
+}

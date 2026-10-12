@@ -72,6 +72,10 @@ Document Issues:           ESCALATED | tier=high       | identity not confirmed
 Borderline:                APPROVED  | tier=low        | all steps completed
 ```
 
+**Measured decision quality:** the repository-level [golden-set evaluation](../docs/evals/golden-set-report.md)
+replays 14 labeled applications (built on the five profiles above plus nine new cases) through this pipeline and grades the decision,
+risk tier, escalation, sanctions screening and EDD conditions against compliance-analyst labels.
+
 ## Trade-offs
 
 ### Why supervisor hub-and-spoke over fan-out?

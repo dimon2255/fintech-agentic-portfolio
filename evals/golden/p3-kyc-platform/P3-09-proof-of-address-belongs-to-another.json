@@ -1,0 +1,63 @@
+{
+  "id": "P3-09",
+  "title": "Proof of address belongs to another person at another address",
+  "category": "identity",
+  "narrative": "A US resident applies for a personal account: salary income, $3,500 a month. Her passport matches the application. Her only proof of address, a utility bill, is in the name of Roberto Diaz at a different address from the one on her application.",
+  "inputs": {
+    "application": {
+      "application_id": "P3-09-app",
+      "applicant_name": "Maria Gonzalez",
+      "date_of_birth": "1987-03-09",
+      "nationality": "US",
+      "country_of_residence": "US",
+      "address": "88 Harbor Road, Miami, FL 33139",
+      "email": "maria.gonzalez@gmail.com",
+      "phone": "+1-305-555-0112",
+      "business_type": null,
+      "industry": null,
+      "expected_monthly_volume": 3500.0,
+      "source_of_funds": "Employment salary",
+      "documents_submitted": [
+        {
+          "document_type": "passport",
+          "document_number": "727041221",
+          "issuing_country": "US",
+          "expiry_date": "2030-07-31",
+          "holder_name": "Maria Gonzalez",
+          "holder_dob": "1987-03-09",
+          "holder_address": null
+        },
+        {
+          "document_type": "utility_bill",
+          "document_number": "FPL-2026-645665",
+          "issuing_country": "US",
+          "expiry_date": null,
+          "holder_name": "Roberto Diaz",
+          "holder_dob": null,
+          "holder_address": "1402 Coral Way, Miami, FL 33145"
+        }
+      ],
+      "submitted_at": "2026-10-05T10:00:00"
+    }
+  },
+  "fixtures": {
+    "evidence": {
+      "documents.0.format_valid": true,
+      "documents.0.security_features_present": true,
+      "documents.0.tampering_detected": false,
+      "documents.0.is_correct_type": true,
+      "documents.1.format_valid": true,
+      "documents.1.security_features_present": true,
+      "documents.1.tampering_detected": false,
+      "documents.1.is_correct_type": true,
+      "identity.is_pep": false
+    }
+  },
+  "expected": {
+    "decision": "escalated",
+    "risk_tier": null,
+    "was_escalated": true,
+    "sanctions_screening_required": true
+  },
+  "rationale": "The residential address is unverified: the document offered as proof belongs to someone else and shows a different address. An analyst asks for an explanation or another document before approving."
+}
