@@ -92,7 +92,7 @@ python -m src.main
 - **Add caching**: Repeat customers with known devices could skip the full LLM reasoning and use cached assessments with a TTL
 - **Hybrid approach**: Use a fast ML model (like Kount's) for the 80% of clearly safe/risky transactions, and route only ambiguous cases to the LLM agent. Best of both worlds
 - **Streaming**: Stream the reasoning chain as it's generated so human reviewers can see the agent "thinking" in real-time
-- **Evaluation framework**: Build a systematic eval pipeline with labeled transactions to measure precision/recall against known fraud patterns
+- **Evaluation framework**: Build a systematic eval pipeline with labeled transactions to measure precision/recall against known fraud patterns. A first version now exists: the repository-level [golden-set evaluation](../docs/evals/golden-set-report.md) replays 11 labeled transactions through this agent, in rules mode as a CI gate and on Claude Haiku 4.5 in three repeated runs
 
 ## Next: Project 2
 
