@@ -1,0 +1,64 @@
+{
+  "id": "P3-06",
+  "title": "Expired passport is the only problem",
+  "category": "documents",
+  "narrative": "A UK resident applies for a personal account: salary income, $3,000 a month. Name, date of birth and address all match, and a current utility bill confirms the address. But her passport expired on 2025-08-31, more than a year before she applied, and it is her only identity document.",
+  "inputs": {
+    "application": {
+      "application_id": "P3-06-app",
+      "applicant_name": "Emily Clarke",
+      "date_of_birth": "1992-05-14",
+      "nationality": "GB",
+      "country_of_residence": "GB",
+      "address": "9 Elm Grove, Manchester, M20 6RT",
+      "email": "emily.clarke@gmail.com",
+      "phone": "+44-161-555-0190",
+      "business_type": null,
+      "industry": null,
+      "expected_monthly_volume": 3000.0,
+      "source_of_funds": "Employment salary",
+      "documents_submitted": [
+        {
+          "document_type": "passport",
+          "document_number": "727041221",
+          "issuing_country": "GB",
+          "expiry_date": "2025-08-31",
+          "holder_name": "Emily Clarke",
+          "holder_dob": "1992-05-14",
+          "holder_address": null
+        },
+        {
+          "document_type": "utility_bill",
+          "document_number": "UU-2026-660560",
+          "issuing_country": "GB",
+          "expiry_date": null,
+          "holder_name": "Emily Clarke",
+          "holder_dob": null,
+          "holder_address": "9 Elm Grove, Manchester, M20 6RT"
+        }
+      ],
+      "submitted_at": "2026-10-05T10:00:00"
+    }
+  },
+  "fixtures": {
+    "evidence": {
+      "documents.0.is_expired": true,
+      "documents.0.format_valid": true,
+      "documents.0.security_features_present": true,
+      "documents.0.tampering_detected": false,
+      "documents.0.is_correct_type": true,
+      "documents.1.format_valid": true,
+      "documents.1.security_features_present": true,
+      "documents.1.tampering_detected": false,
+      "documents.1.is_correct_type": true,
+      "identity.is_pep": false
+    }
+  },
+  "expected": {
+    "decision": "escalated|rejected",
+    "risk_tier": null,
+    "was_escalated": null,
+    "sanctions_screening_required": true
+  },
+  "rationale": "An expired document cannot verify identity (the project's own document agent says so in its reasoning). The application must not be approved: it is held while a valid document is requested (escalated) or declined pending reapplication (rejected). Tier and escalation flag are not graded because either outcome is acceptable."
+}

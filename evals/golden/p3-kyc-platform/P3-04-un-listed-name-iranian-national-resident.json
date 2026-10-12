@@ -1,0 +1,63 @@
+{
+  "id": "P3-04",
+  "title": "UN-listed name, Iranian national resident in the US: screening skipped",
+  "category": "sanctions",
+  "narrative": "An Iranian national who lives in the US applies for a personal account: salary income, $6,500 a month. His name, Ahmad Rashidi, exactly matches an entry on the UN Consolidated List. His Iranian passport and a US utility bill are genuine and consistent with the application.",
+  "inputs": {
+    "application": {
+      "application_id": "P3-04-app",
+      "applicant_name": "Ahmad Rashidi",
+      "date_of_birth": "1979-04-18",
+      "nationality": "IR",
+      "country_of_residence": "US",
+      "address": "2210 Westwood Blvd, Los Angeles, CA 90064",
+      "email": "ahmad.rashidi@gmail.com",
+      "phone": "+1-310-555-0148",
+      "business_type": null,
+      "industry": null,
+      "expected_monthly_volume": 6500.0,
+      "source_of_funds": "Employment salary (logistics coordinator)",
+      "documents_submitted": [
+        {
+          "document_type": "passport",
+          "document_number": "K18085626",
+          "issuing_country": "IR",
+          "expiry_date": "2030-01-31",
+          "holder_name": "Ahmad Rashidi",
+          "holder_dob": "1979-04-18",
+          "holder_address": null
+        },
+        {
+          "document_type": "utility_bill",
+          "document_number": "LADWP-6861416360",
+          "issuing_country": "US",
+          "expiry_date": null,
+          "holder_name": "Ahmad Rashidi",
+          "holder_dob": null,
+          "holder_address": "2210 Westwood Blvd, Los Angeles, CA 90064"
+        }
+      ],
+      "submitted_at": "2026-10-05T10:00:00"
+    }
+  },
+  "fixtures": {
+    "evidence": {
+      "documents.0.format_valid": true,
+      "documents.0.security_features_present": true,
+      "documents.0.tampering_detected": false,
+      "documents.0.is_correct_type": true,
+      "documents.1.format_valid": true,
+      "documents.1.security_features_present": true,
+      "documents.1.tampering_detected": false,
+      "documents.1.is_correct_type": true,
+      "identity.is_pep": false
+    }
+  },
+  "expected": {
+    "decision": "rejected|escalated",
+    "risk_tier": "high|prohibited",
+    "was_escalated": true,
+    "sanctions_screening_required": true
+  },
+  "rationale": "Residence does not exempt anyone from sanctions screening, and a national of a comprehensively sanctioned country is precisely who must be screened. Screening would return an exact match on the UN list. With a name-only match the analyst either confirms and rejects or holds the case pending disposition; both are acceptable. Approval is not."
+}

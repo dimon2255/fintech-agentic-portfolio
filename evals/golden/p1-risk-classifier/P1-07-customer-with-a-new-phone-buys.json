@@ -1,0 +1,47 @@
+{
+  "id": "P1-07",
+  "title": "Customer with a new phone buys lunch from home",
+  "category": "clean",
+  "narrative": "A $74.50 restaurant order, in line with the customer's usual spend, from their home IP in the billing country. The device has not been seen before: the customer replaced their phone. Nothing else is unusual.",
+  "inputs": {
+    "transaction": {
+      "transaction_id": "p1-07-txn",
+      "amount": 74.5,
+      "currency": "USD",
+      "merchant_category": "restaurant",
+      "customer_id": "cust_10016",
+      "customer_email": "p1-07.customer@example.com",
+      "ip_address": "73.1.1.33",
+      "device_id": "dev_00001010",
+      "timestamp": "2026-10-10T18:42:00",
+      "card_last_four": "4821",
+      "billing_country": "US",
+      "shipping_country": "US"
+    }
+  },
+  "fixtures": {
+    "evidence": {
+      "velocity.transactions_last_hour": [
+        0,
+        1
+      ],
+      "velocity.amount_deviation_factor": [
+        0,
+        1.0
+      ],
+      "geo.is_vpn": false,
+      "geo.is_tor": false,
+      "geo.billing_geo_match": true,
+      "device.device_known": false,
+      "device.multiple_accounts_on_device": false,
+      "device.os_fingerprint_changed": false,
+      "geo.ip_country": "US",
+      "geo.ip_city": "New York"
+    }
+  },
+  "expected": {
+    "risk_level": "low|medium",
+    "recommended_action": "approve|review"
+  },
+  "rationale": "A new device alone, with a home IP and a normal amount, is usually a replaced phone. Approval is the expected outcome; a light review is acceptable. Decline would be a false positive."
+}

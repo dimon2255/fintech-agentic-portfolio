@@ -97,7 +97,7 @@ streamlit run app.py
 - **Conditional adjudication**: Skip the adjudicator when all three specialists agree unanimously — saves one LLM call on ~60% of transactions
 - **Dynamic specialist routing**: Not all transactions need all three specialists. Low-amount purchases from known customers could skip identity analysis entirely
 - **Streaming debate**: Stream the adjudicator's reasoning in real-time so reviewers can watch the debate unfold, building trust in the process
-- **Calibration framework**: Measure each specialist's precision/recall independently to identify which agents need tuning and on what fraud types
+- **Calibration framework**: Measure each specialist's precision/recall independently to identify which agents need tuning and on what fraud types. As a first step, the repository-level [golden-set evaluation](../docs/evals/golden-set-report.md) grades the swarm's final decision and each specialist's risk level on 10 labeled transactions
 
 ## Next: Project 3
 

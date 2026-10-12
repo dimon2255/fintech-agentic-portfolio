@@ -1,0 +1,14 @@
+# Pinned dependencies for the golden-set evaluation in CI (rules tier and
+# harness tests). Versions match the local environment the baseline was
+# recorded with. The projects themselves only declare lower bounds in
+# pyproject.toml; pinning here keeps the CI gate reproducible.
+langgraph==1.1.3
+langchain-core==1.2.20
+langchain-anthropic==1.4.0
+langchain-openai==1.1.11
+anthropic==0.86.0
+openai==2.29.0
+pydantic==2.12.5
+python-dotenv==1.2.2
+httpx==0.28.1
+pytest==9.0.2

@@ -1,0 +1,63 @@
+{
+  "id": "P3-05",
+  "title": "Transliteration variant of an OFAC-listed name (potential match)",
+  "category": "sanctions",
+  "narrative": "A Jordanian petroleum engineer living in Dubai applies for a personal account expecting $20,000 a month from salary. His name, Ahmed Al Rasheed, is a common transliteration variant of an OFAC SDN entry (Ahmed Al-Rashidi, Iran program). The list entry has no date of birth to compare against. Documents are genuine and consistent.",
+  "inputs": {
+    "application": {
+      "application_id": "P3-05-app",
+      "applicant_name": "Ahmed Al Rasheed",
+      "date_of_birth": "1986-09-02",
+      "nationality": "JO",
+      "country_of_residence": "AE",
+      "address": "Villa 12, Street 4, Al Barsha, Dubai",
+      "email": "ahmed.rasheed@outlook.com",
+      "phone": "+971-50-555-0136",
+      "business_type": null,
+      "industry": null,
+      "expected_monthly_volume": 20000.0,
+      "source_of_funds": "Employment salary (petroleum engineer)",
+      "documents_submitted": [
+        {
+          "document_type": "passport",
+          "document_number": "N1210113",
+          "issuing_country": "JO",
+          "expiry_date": "2031-05-30",
+          "holder_name": "Ahmed Al Rasheed",
+          "holder_dob": "1986-09-02",
+          "holder_address": null
+        },
+        {
+          "document_type": "bank_statement",
+          "document_number": "ENBD-2026-136541",
+          "issuing_country": "AE",
+          "expiry_date": null,
+          "holder_name": "Ahmed Al Rasheed",
+          "holder_dob": null,
+          "holder_address": "Villa 12, Street 4, Al Barsha, Dubai"
+        }
+      ],
+      "submitted_at": "2026-10-05T10:00:00"
+    }
+  },
+  "fixtures": {
+    "evidence": {
+      "documents.0.format_valid": true,
+      "documents.0.security_features_present": true,
+      "documents.0.tampering_detected": false,
+      "documents.0.is_correct_type": true,
+      "documents.1.format_valid": true,
+      "documents.1.security_features_present": true,
+      "documents.1.tampering_detected": false,
+      "documents.1.is_correct_type": true,
+      "identity.is_pep": false
+    }
+  },
+  "expected": {
+    "decision": "escalated",
+    "risk_tier": "medium|high",
+    "was_escalated": true,
+    "sanctions_screening_required": true
+  },
+  "rationale": "A screening alert above the matching threshold must be dispositioned by an analyst before the relationship starts; software cannot clear a potential match on name similarity alone. Most such alerts turn out to be false positives, which is why the right outcome is a hold for review, not a rejection and not an approval."
+}
