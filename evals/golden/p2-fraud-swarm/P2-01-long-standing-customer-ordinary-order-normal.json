@@ -1,0 +1,89 @@
+{
+  "id": "P2-01",
+  "title": "Long-standing customer, ordinary order, normal browsing session",
+  "category": "clean",
+  "narrative": "A customer with a years-old Gmail address, verified phone, matching billing address and no chargebacks buys $89.90 of household goods on their usual phone from home. They browsed several pages for five to twenty-five minutes and took under four minutes to check out.",
+  "inputs": {
+    "transaction": {
+      "transaction_id": "p2-01-txn",
+      "amount": 89.9,
+      "currency": "USD",
+      "merchant_category": "online_retail",
+      "customer_id": "cust_10277",
+      "customer_email": "alex.morgan4@gmail.com",
+      "ip_address": "73.1.1.1",
+      "device_id": "dev_00001008",
+      "timestamp": "2026-10-10T18:42:00",
+      "card_last_four": "4821",
+      "billing_country": "US",
+      "shipping_country": "US"
+    }
+  },
+  "fixtures": {
+    "evidence": {
+      "velocity.transactions_last_hour": [
+        0,
+        1
+      ],
+      "velocity.transactions_last_24h": [
+        0,
+        4
+      ],
+      "velocity.amount_deviation_factor": [
+        0,
+        1.0
+      ],
+      "geo.is_vpn": false,
+      "geo.is_tor": false,
+      "geo.billing_geo_match": true,
+      "device.device_known": true,
+      "device.device_age_days": [
+        180,
+        365
+      ],
+      "device.multiple_accounts_on_device": false,
+      "device.os_fingerprint_changed": false,
+      "identity.email_age_days": [
+        730,
+        3650
+      ],
+      "identity.phone_verified": true,
+      "identity.address_verification_status": "match",
+      "identity.linked_accounts_count": [
+        1,
+        2
+      ],
+      "identity.previous_chargebacks": 0,
+      "identity.account_age_days": [
+        700,
+        1825
+      ],
+      "behavioral.session_duration_seconds": [
+        300,
+        1500
+      ],
+      "behavioral.pages_visited": [
+        4,
+        15
+      ],
+      "behavioral.checkout_speed_seconds": [
+        45,
+        240
+      ],
+      "behavioral.typing_pattern_anomaly": false,
+      "behavioral.mouse_movement_anomaly": false,
+      "behavioral.time_of_day_unusual": false,
+      "behavioral.navigation_pattern": "normal"
+    }
+  },
+  "expected": {
+    "risk_level": "low",
+    "recommended_action": "approve",
+    "specialists": {
+      "velocity": "low",
+      "identity": "low",
+      "behavioral": "low"
+    }
+  },
+  "rationale": "Nothing is anomalous in any dimension. Approve; every specialist should see low risk."
+}

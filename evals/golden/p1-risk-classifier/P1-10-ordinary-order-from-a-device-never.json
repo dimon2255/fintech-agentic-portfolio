@@ -1,0 +1,45 @@
+{
+  "id": "P1-10",
+  "title": "Ordinary order from a device never seen before, behind a VPN",
+  "category": "boundary",
+  "narrative": "A $110 online order, in line with the customer's usual spend and frequency. The device has never been seen on the account and the IP is a VPN exit, in the billing country.",
+  "inputs": {
+    "transaction": {
+      "transaction_id": "p1-10-txn",
+      "amount": 110.0,
+      "currency": "USD",
+      "merchant_category": "online_retail",
+      "customer_id": "cust_10031",
+      "customer_email": "p1-10.customer@example.com",
+      "ip_address": "73.1.1.39",
+      "device_id": "dev_00001010",
+      "timestamp": "2026-10-10T18:42:00",
+      "card_last_four": "4821",
+      "billing_country": "US",
+      "shipping_country": "US"
+    }
+  },
+  "fixtures": {
+    "evidence": {
+      "velocity.transactions_last_hour": [
+        0,
+        1
+      ],
+      "velocity.amount_deviation_factor": [
+        0,
+        1.0
+      ],
+      "geo.is_vpn": true,
+      "geo.is_tor": false,
+      "geo.billing_geo_match": true,
+      "device.device_known": false,
+      "device.multiple_accounts_on_device": false,
+      "device.os_fingerprint_changed": false
+    }
+  },
+  "expected": {
+    "risk_level": "medium",
+    "recommended_action": "review"
+  },
+  "rationale": "An unrecognized device combined with an anonymizing proxy is the core account-takeover pattern, even at a normal amount; fraudsters often test a taken-over account with an ordinary order. Each signal alone would pass, together they warrant verification. The project's own prompt asks for exactly this: weigh how signals combine, and treat uncertainty as review, not approve."
+}

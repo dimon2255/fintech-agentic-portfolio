@@ -1,0 +1,66 @@
+{
+  "id": "P3-13",
+  "title": "Domestic PEP with an otherwise low-risk personal account",
+  "category": "pep",
+  "narrative": "A sitting US state senator applies for a personal account: legislative salary and rental income, $7,000 a month. The PEP database returns a senior-official match. Documents match and there are no sanctions hits. (The synthetic PEP source identifies officials by the title in the name field.)",
+  "inputs": {
+    "application": {
+      "application_id": "P3-13-app",
+      "applicant_name": "Senator Grace Holloway",
+      "date_of_birth": "1968-06-21",
+      "nationality": "US",
+      "country_of_residence": "US",
+      "address": "1200 J Street, Sacramento, CA 95814",
+      "email": "grace.holloway@gmail.com",
+      "phone": "+1-916-555-0181",
+      "business_type": null,
+      "industry": null,
+      "expected_monthly_volume": 7000.0,
+      "source_of_funds": "Legislative salary and rental income",
+      "documents_submitted": [
+        {
+          "document_type": "passport",
+          "document_number": "P441000001",
+          "issuing_country": "US",
+          "expiry_date": "2033-01-31",
+          "holder_name": "Senator Grace Holloway",
+          "holder_dob": "1968-06-21",
+          "holder_address": null
+        },
+        {
+          "document_type": "utility_bill",
+          "document_number": "SMUD-2026-00000",
+          "issuing_country": "US",
+          "expiry_date": null,
+          "holder_name": "Senator Grace Holloway",
+          "holder_dob": null,
+          "holder_address": "1200 J Street, Sacramento, CA 95814"
+        }
+      ],
+      "submitted_at": "2026-10-05T10:00:00"
+    }
+  },
+  "fixtures": {
+    "evidence": {
+      "documents.0.format_valid": true,
+      "documents.0.security_features_present": true,
+      "documents.0.tampering_detected": false,
+      "documents.0.is_correct_type": true,
+      "documents.1.format_valid": true,
+      "documents.1.security_features_present": true,
+      "documents.1.tampering_detected": false,
+      "documents.1.is_correct_type": true,
+      "identity.is_pep": true,
+      "identity.pep_tier": "senior_official"
+    }
+  },
+  "expected": {
+    "decision": "approved|escalated",
+    "risk_tier": "medium|high",
+    "was_escalated": null,
+    "sanctions_screening_required": true,
+    "edd_required": true,
+    "pep_monitoring_required": true
+  },
+  "rationale": "For a domestic PEP, FATF applies enhanced measures on a risk basis. With a low-risk profile otherwise, approval with enhanced due diligence and ongoing PEP monitoring is acceptable, and so is referral for senior sign-off, which many institutions require for every PEP. If approved, both conditions must be attached. Risk is at least medium."
+}

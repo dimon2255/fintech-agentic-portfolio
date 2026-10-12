@@ -1,0 +1,62 @@
+{
+  "id": "P3-03",
+  "title": "Exact sanctions match: Iranian national on the OFAC and UN lists",
+  "category": "sanctions",
+  "narrative": "An Iranian national resident in Turkey applies for an import/export account expecting $75,000 a month. His name exactly matches an OFAC SDN entry and a UN Consolidated List entry, both under the Iran program, and adverse media links the name to sanctions evasion. (Demo profile 3 from data_generator.py, whose docstring says ESCALATED while the code and README say REJECTED.)",
+  "inputs": {
+    "application": {
+      "application_id": "P3-03-app",
+      "applicant_name": "Ahmad Al-Rashidi",
+      "date_of_birth": "1982-11-05",
+      "nationality": "IR",
+      "country_of_residence": "TR",
+      "address": "Ataturk Caddesi 55, Ankara, Turkey",
+      "email": "a.rashidi@protonmail.com",
+      "phone": "+90-312-555-0177",
+      "business_type": null,
+      "industry": "import_export",
+      "expected_monthly_volume": 75000.0,
+      "source_of_funds": "International trade profits",
+      "documents_submitted": [
+        {
+          "document_type": "passport",
+          "document_number": "IR-7700001",
+          "issuing_country": "IR",
+          "expiry_date": "2028-08-20",
+          "holder_name": "Ahmad Al-Rashidi",
+          "holder_dob": "1982-11-05",
+          "holder_address": null
+        },
+        {
+          "document_type": "utility_bill",
+          "document_number": "TR-UTIL-00001",
+          "issuing_country": "TR",
+          "expiry_date": null,
+          "holder_name": "Ahmad Al-Rashidi",
+          "holder_dob": null,
+          "holder_address": "Ataturk Caddesi 55, Ankara, Turkey"
+        }
+      ],
+      "submitted_at": "2026-10-05T10:00:00"
+    }
+  },
+  "fixtures": {
+    "evidence": {
+      "documents.0.format_valid": true,
+      "documents.0.security_features_present": true,
+      "documents.0.tampering_detected": false,
+      "documents.0.is_correct_type": true,
+      "documents.1.format_valid": true,
+      "documents.1.security_features_present": true,
+      "documents.1.tampering_detected": false,
+      "documents.1.is_correct_type": true
+    }
+  },
+  "expected": {
+    "decision": "rejected",
+    "risk_tier": "prohibited",
+    "was_escalated": true,
+    "sanctions_screening_required": true
+  },
+  "rationale": "An exact name match on two lists, corroborated by nationality matching the listed program, is treated as a confirmed match. Compliance practice is to refuse the relationship (rejected, prohibited) and escalate to the compliance officer, who files the required report (for OFAC, a rejected-transaction report within ten business days). So the ground truth is rejected with was_escalated true. The docstring's ESCALATED describes the escalation, not the outcome."
+}

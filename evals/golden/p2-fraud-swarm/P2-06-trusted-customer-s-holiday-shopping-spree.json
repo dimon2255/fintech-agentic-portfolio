@@ -1,0 +1,89 @@
+{
+  "id": "P2-06",
+  "title": "Trusted customer's holiday shopping spree: several normal-sized purchases in an hour",
+  "category": "boundary",
+  "narrative": "On a holiday sale day, an established customer makes five to seven purchases within an hour, each close to their usual spend; this one is $84 of apparel. Same phone, home IP, a long browsing session with many pages and an unhurried checkout.",
+  "inputs": {
+    "transaction": {
+      "transaction_id": "p2-06-txn",
+      "amount": 84.0,
+      "currency": "USD",
+      "merchant_category": "apparel",
+      "customer_id": "cust_10003",
+      "customer_email": "riley.chen35@gmail.com",
+      "ip_address": "73.1.1.1",
+      "device_id": "dev_00001004",
+      "timestamp": "2026-10-10T18:42:00",
+      "card_last_four": "4821",
+      "billing_country": "US",
+      "shipping_country": "US"
+    }
+  },
+  "fixtures": {
+    "evidence": {
+      "velocity.transactions_last_hour": [
+        5,
+        7
+      ],
+      "velocity.transactions_last_24h": [
+        8,
+        20
+      ],
+      "velocity.amount_deviation_factor": [
+        0,
+        1.0
+      ],
+      "geo.is_vpn": false,
+      "geo.is_tor": false,
+      "geo.billing_geo_match": true,
+      "device.device_known": true,
+      "device.device_age_days": [
+        180,
+        365
+      ],
+      "device.multiple_accounts_on_device": false,
+      "device.os_fingerprint_changed": false,
+      "identity.email_age_days": [
+        730,
+        3650
+      ],
+      "identity.phone_verified": true,
+      "identity.address_verification_status": "match",
+      "identity.linked_accounts_count": [
+        1,
+        2
+      ],
+      "identity.previous_chargebacks": 0,
+      "identity.account_age_days": [
+        700,
+        1825
+      ],
+      "behavioral.session_duration_seconds": [
+        600,
+        1800
+      ],
+      "behavioral.pages_visited": [
+        8,
+        20
+      ],
+      "behavioral.checkout_speed_seconds": [
+        40,
+        200
+      ],
+      "behavioral.typing_pattern_anomaly": false,
+      "behavioral.mouse_movement_anomaly": false,
+      "behavioral.time_of_day_unusual": false,
+      "behavioral.navigation_pattern": "normal"
+    }
+  },
+  "expected": {
+    "risk_level": "low|medium",
+    "recommended_action": "approve|review",
+    "specialists": {
+      "velocity": "medium|high",
+      "identity": "low",
+      "behavioral": "low"
+    }
+  },
+  "rationale": "The velocity specialist should flag the burst; that is its job. The other two dimensions explain it as legitimate shopping, so the swarm should approve, or at most review. A decline would be a false positive."
+}

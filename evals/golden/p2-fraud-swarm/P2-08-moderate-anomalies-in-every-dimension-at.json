@@ -1,0 +1,86 @@
+{
+  "id": "P2-08",
+  "title": "Moderate anomalies in every dimension at once",
+  "category": "boundary",
+  "narrative": "A $380 home-goods order, about twice the customer's usual spend, the third or fourth purchase in an hour. The email is at a lesser-known provider and one to three months old, the phone is unverified and the address only partially matches. The session is at an unusual hour for this customer and clicks through 16 to 20 pages in under two minutes.",
+  "inputs": {
+    "transaction": {
+      "transaction_id": "p2-08-txn",
+      "amount": 380.0,
+      "currency": "USD",
+      "merchant_category": "home_goods",
+      "customer_id": "cust_10116",
+      "customer_email": "k.morgan286@fastmail.com",
+      "ip_address": "73.1.1.1",
+      "device_id": "dev_000076df",
+      "timestamp": "2026-10-10T18:42:00",
+      "card_last_four": "4821",
+      "billing_country": "US",
+      "shipping_country": "US"
+    }
+  },
+  "fixtures": {
+    "evidence": {
+      "velocity.transactions_last_hour": [
+        3,
+        4
+      ],
+      "velocity.amount_deviation_factor": [
+        2.0,
+        2.5
+      ],
+      "geo.is_vpn": false,
+      "geo.is_tor": false,
+      "geo.billing_geo_match": true,
+      "device.device_known": true,
+      "device.device_age_days": [
+        30,
+        365
+      ],
+      "device.multiple_accounts_on_device": false,
+      "device.os_fingerprint_changed": false,
+      "identity.email_domain_reputation": "suspicious",
+      "identity.email_age_days": [
+        30,
+        90
+      ],
+      "identity.phone_verified": false,
+      "identity.address_verification_status": "partial",
+      "identity.linked_accounts_count": [
+        2,
+        4
+      ],
+      "identity.previous_chargebacks": 0,
+      "identity.account_age_days": [
+        60,
+        400
+      ],
+      "behavioral.session_duration_seconds": [
+        60,
+        119
+      ],
+      "behavioral.pages_visited": [
+        16,
+        20
+      ],
+      "behavioral.checkout_speed_seconds": [
+        30,
+        59
+      ],
+      "behavioral.typing_pattern_anomaly": false,
+      "behavioral.mouse_movement_anomaly": false,
+      "behavioral.time_of_day_unusual": true,
+      "behavioral.navigation_pattern": "erratic"
+    }
+  },
+  "expected": {
+    "risk_level": "medium",
+    "recommended_action": "review",
+    "specialists": {
+      "velocity": "medium",
+      "identity": "medium",
+      "behavioral": "medium"
+    }
+  },
+  "rationale": "No single signal is decisive, but every dimension is moderately off at the same time. That is the case a human reviewer exists for: review, neither approve nor decline. Each specialist should see medium risk."
+}

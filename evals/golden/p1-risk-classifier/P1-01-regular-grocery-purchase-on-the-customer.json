@@ -1,0 +1,53 @@
+{
+  "id": "P1-01",
+  "title": "Regular grocery purchase on the customer's own phone",
+  "category": "clean",
+  "narrative": "A long-standing customer buys $64.20 of groceries, close to their usual spend, on the phone they have used for months, from a home broadband IP in their billing country. No other purchases in the past hour and only a handful today.",
+  "inputs": {
+    "transaction": {
+      "transaction_id": "p1-01-txn",
+      "amount": 64.2,
+      "currency": "USD",
+      "merchant_category": "grocery",
+      "customer_id": "cust_10839",
+      "customer_email": "p1-01.customer@example.com",
+      "ip_address": "73.1.1.1",
+      "device_id": "dev_00001004",
+      "timestamp": "2026-10-10T18:42:00",
+      "card_last_four": "4821",
+      "billing_country": "US",
+      "shipping_country": "US"
+    }
+  },
+  "fixtures": {
+    "evidence": {
+      "velocity.transactions_last_hour": [
+        0,
+        1
+      ],
+      "velocity.transactions_last_24h": [
+        0,
+        4
+      ],
+      "velocity.amount_deviation_factor": [
+        0,
+        1.0
+      ],
+      "geo.is_vpn": false,
+      "geo.is_tor": false,
+      "geo.billing_geo_match": true,
+      "device.device_known": true,
+      "device.device_age_days": [
+        120,
+        365
+      ],
+      "device.multiple_accounts_on_device": false,
+      "device.os_fingerprint_changed": false
+    }
+  },
+  "expected": {
+    "risk_level": "low",
+    "recommended_action": "approve"
+  },
+  "rationale": "Every signal is consistent with the customer's established behavior: normal amount, normal frequency, trusted device, home location. Any outcome other than approve is a false positive."
+}

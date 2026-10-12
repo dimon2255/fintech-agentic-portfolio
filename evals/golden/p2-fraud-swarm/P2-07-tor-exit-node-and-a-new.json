@@ -1,0 +1,80 @@
+{
+  "id": "P2-07",
+  "title": "Tor exit node and a new device on an established account, everything else clean",
+  "category": "data-gap",
+  "narrative": "An established customer account places a $245 electronics order, normal for them in amount and frequency, with a normal browsing session. But the IP is a Tor exit node in a different country from the billing address, and the device has never been seen on the account.",
+  "inputs": {
+    "transaction": {
+      "transaction_id": "p2-07-txn",
+      "amount": 245.0,
+      "currency": "USD",
+      "merchant_category": "electronics",
+      "customer_id": "cust_10008",
+      "customer_email": "taylor.brooks3@gmail.com",
+      "ip_address": "73.1.1.83",
+      "device_id": "dev_00001010",
+      "timestamp": "2026-10-10T18:42:00",
+      "card_last_four": "4821",
+      "billing_country": "US",
+      "shipping_country": "US"
+    }
+  },
+  "fixtures": {
+    "evidence": {
+      "velocity.transactions_last_hour": [
+        0,
+        1
+      ],
+      "velocity.amount_deviation_factor": [
+        0,
+        1.0
+      ],
+      "geo.is_tor": true,
+      "geo.billing_geo_match": false,
+      "device.device_known": false,
+      "device.multiple_accounts_on_device": false,
+      "device.os_fingerprint_changed": false,
+      "identity.email_age_days": [
+        730,
+        3650
+      ],
+      "identity.phone_verified": true,
+      "identity.address_verification_status": "match",
+      "identity.linked_accounts_count": [
+        1,
+        2
+      ],
+      "identity.previous_chargebacks": 0,
+      "identity.account_age_days": [
+        700,
+        1825
+      ],
+      "behavioral.session_duration_seconds": [
+        300,
+        1500
+      ],
+      "behavioral.pages_visited": [
+        4,
+        15
+      ],
+      "behavioral.checkout_speed_seconds": [
+        45,
+        240
+      ],
+      "behavioral.typing_pattern_anomaly": false,
+      "behavioral.mouse_movement_anomaly": false,
+      "behavioral.time_of_day_unusual": false,
+      "behavioral.navigation_pattern": "normal"
+    }
+  },
+  "expected": {
+    "risk_level": "medium|high",
+    "recommended_action": "review|decline",
+    "specialists": {
+      "velocity": "low",
+      "identity": "medium|high",
+      "behavioral": "low"
+    }
+  },
+  "rationale": "Legitimate customers rarely shop through Tor, and Tor plus an unrecognized device on an established account is how account takeovers look when the attacker is careful about everything else. The identity specialist, which is given the geolocation and device data for exactly this purpose, should flag it, and the swarm should not approve without a review."
+}
