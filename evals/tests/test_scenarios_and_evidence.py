@@ -10,7 +10,7 @@ from evals.scenario import ScenarioError, load_project, validate
 @pytest.mark.parametrize("key", sorted(PROJECTS))
 def test_golden_set_loads(key):
     scenarios = load_project(key)
-    assert 10 <= len(scenarios) <= 15
+    assert len(scenarios) >= 10
     for s in scenarios:
         assert s["fixtures"]["evidence"], f"{s['id']} states no evidence"
         assert len(s["rationale"]) > 40

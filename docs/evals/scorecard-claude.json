@@ -1,73 +1,61 @@
 {
   "runs": [
-    "claude-run-1",
-    "claude-run-2",
-    "claude-run-3"
+    "claude-run-4"
   ],
   "model": "claude-haiku-4-5-20251001",
-  "majority_threshold": 2,
+  "majority_threshold": 1,
   "projects": {
     "p1": {
       "per_run": [
         {
-          "hits": 9,
-          "total": 11,
-          "pct": 81.81818181818181
-        },
-        {
-          "hits": 9,
-          "total": 11,
-          "pct": 81.81818181818181
-        },
-        {
-          "hits": 9,
-          "total": 11,
-          "pct": 81.81818181818181
+          "hits": 10,
+          "total": 12,
+          "pct": 83.33333333333333
         }
       ],
       "pooled": {
-        "hits": 27,
-        "total": 33,
-        "pct": 81.81818181818181
+        "hits": 10,
+        "total": 12,
+        "pct": 83.33333333333333
       },
       "range": [
         {
-          "hits": 9,
-          "total": 11,
-          "pct": 81.81818181818181
+          "hits": 10,
+          "total": 12,
+          "pct": 83.33333333333333
         },
         {
-          "hits": 9,
-          "total": 11,
-          "pct": 81.81818181818181
+          "hits": 10,
+          "total": 12,
+          "pct": 83.33333333333333
         }
       ],
-      "majority_correct": 9,
-      "always": 9,
+      "majority_correct": 10,
+      "always": 10,
       "never": 2,
       "mixed": 0,
       "unscorable": 0,
-      "scenarios": 11,
+      "scenarios": 12,
       "checks_pooled": {
         "action": {
-          "hits": 27,
-          "total": 33,
-          "pct": 81.81818181818181
+          "hits": 10,
+          "total": 12,
+          "pct": 83.33333333333333
         },
         "risk_level": {
-          "hits": 27,
-          "total": 33,
-          "pct": 81.81818181818181
+          "hits": 10,
+          "total": 12,
+          "pct": 83.33333333333333
         }
       },
       "legit_approved": {
-        "hits": 3,
-        "total": 9,
+        "hits": 1,
+        "total": 3,
         "pct": 33.333333333333336
       },
       "wrongly_approved": {
         "hits": 0,
-        "total": 18,
+        "total": 6,
         "pct": 0.0
       },
       "counts": {
@@ -82,132 +70,120 @@
           "id": "P1-01",
           "title": "Regular grocery purchase on the customer's own phone",
           "verdicts": [
-            "correct",
-            "correct",
             "correct"
           ],
-          "correct": 3,
-          "graded": 3,
+          "correct": 1,
+          "graded": 1,
           "stable": true
         },
         {
           "id": "P1-02",
           "title": "Card-testing burst of tiny charges from a shared device behind a foreign VPN",
           "verdicts": [
-            "correct",
-            "correct",
             "correct"
           ],
-          "correct": 3,
-          "graded": 3,
+          "correct": 1,
+          "graded": 1,
           "stable": true
         },
         {
           "id": "P1-03",
           "title": "Account takeover: $2,399 of electronics from a new device on a foreign VPN",
           "verdicts": [
-            "correct",
-            "correct",
             "correct"
           ],
-          "correct": 3,
-          "graded": 3,
+          "correct": 1,
+          "graded": 1,
           "stable": true
         },
         {
           "id": "P1-04",
           "title": "Customer traveling abroad pays for dinner on their usual phone",
           "verdicts": [
-            "wrong",
-            "wrong",
             "wrong"
           ],
           "correct": 0,
-          "graded": 3,
+          "graded": 1,
           "stable": true
         },
         {
           "id": "P1-05",
           "title": "Privacy-conscious customer always shops through a VPN",
           "verdicts": [
-            "wrong",
-            "wrong",
             "wrong"
           ],
           "correct": 0,
-          "graded": 3,
+          "graded": 1,
           "stable": true
         },
         {
           "id": "P1-06",
           "title": "Every signal at its worst: Tor, burst velocity, spoofed shared device, $3,500 in gift cards",
           "verdicts": [
-            "correct",
-            "correct",
             "correct"
           ],
-          "correct": 3,
-          "graded": 3,
+          "correct": 1,
+          "graded": 1,
           "stable": true
         },
         {
           "id": "P1-07",
           "title": "Customer with a new phone buys lunch from home",
           "verdicts": [
-            "correct",
-            "correct",
             "correct"
           ],
-          "correct": 3,
-          "graded": 3,
+          "correct": 1,
+          "graded": 1,
           "stable": true
         },
         {
           "id": "P1-08",
           "title": "Large furniture purchase from the customer's trusted laptop at home",
           "verdicts": [
-            "correct",
-            "correct",
             "correct"
           ],
-          "correct": 3,
-          "graded": 3,
+          "correct": 1,
+          "graded": 1,
           "stable": true
         },
         {
           "id": "P1-09",
           "title": "Device farm: unrecognized device shared across accounts with a spoofed fingerprint",
           "verdicts": [
-            "correct",
-            "correct",
             "correct"
           ],
-          "correct": 3,
-          "graded": 3,
+          "correct": 1,
+          "graded": 1,
           "stable": true
         },
         {
           "id": "P1-10",
           "title": "Ordinary order from a device never seen before, behind a VPN",
           "verdicts": [
-            "correct",
-            "correct",
             "correct"
           ],
-          "correct": 3,
-          "graded": 3,
+          "correct": 1,
+          "graded": 1,
           "stable": true
         },
         {
           "id": "P1-11",
           "title": "Several moderate signals on a trusted device: foreign VPN, a burst of purchases, a larger amount",
           "verdicts": [
-            "correct",
-            "correct",
             "correct"
           ],
-          "correct": 3,
-          "graded": 3,
+          "correct": 1,
+          "graded": 1,
+          "stable": true
+        },
+        {
+          "id": "P1-12",
+          "title": "Four ordinary purchases in an hour on the customer's trusted phone (velocity flag boundary)",
+          "verdicts": [
+            "correct"
+          ],
+          "correct": 1,
+          "graded": 1,
           "stable": true
         }
       ]
@@ -218,21 +194,11 @@
           "hits": 8,
           "total": 10,
           "pct": 80.0
-        },
-        {
-          "hits": 8,
-          "total": 10,
-          "pct": 80.0
-        },
-        {
-          "hits": 8,
-          "total": 10,
-          "pct": 80.0
         }
       ],
       "pooled": {
-        "hits": 24,
-        "total": 30,
+        "hits": 8,
+        "total": 10,
         "pct": 80.0
       },
       "range": [
@@ -255,39 +221,39 @@
       "scenarios": 10,
       "checks_pooled": {
         "action": {
-          "hits": 24,
-          "total": 30,
+          "hits": 8,
+          "total": 10,
           "pct": 80.0
         },
         "risk_level": {
-          "hits": 24,
-          "total": 30,
+          "hits": 8,
+          "total": 10,
           "pct": 80.0
         },
         "specialist_velocity": {
-          "hits": 27,
-          "total": 27,
+          "hits": 9,
+          "total": 9,
           "pct": 100.0
         },
         "specialist_identity": {
-          "hits": 24,
-          "total": 30,
+          "hits": 8,
+          "total": 10,
           "pct": 80.0
         },
         "specialist_behavioral": {
-          "hits": 27,
-          "total": 30,
+          "hits": 9,
+          "total": 10,
           "pct": 90.0
         }
       },
       "legit_approved": {
-        "hits": 6,
-        "total": 9,
+        "hits": 2,
+        "total": 3,
         "pct": 66.66666666666667
       },
       "wrongly_approved": {
         "hits": 0,
-        "total": 15,
+        "total": 5,
         "pct": 0.0
       },
       "counts": {
@@ -302,120 +268,100 @@
           "id": "P2-01",
           "title": "Long-standing customer, ordinary order, normal browsing session",
           "verdicts": [
-            "correct",
-            "correct",
             "correct"
           ],
-          "correct": 3,
-          "graded": 3,
+          "correct": 1,
+          "graded": 1,
           "stable": true
         },
         {
           "id": "P2-02",
           "title": "Loyal customer reorders from a saved cart in under thirty seconds",
           "verdicts": [
-            "wrong",
-            "wrong",
             "wrong"
           ],
           "correct": 0,
-          "graded": 3,
+          "graded": 1,
           "stable": true
         },
         {
           "id": "P2-03",
           "title": "Scripted checkout on an established account (specialists disagree)",
           "verdicts": [
-            "correct",
-            "correct",
             "correct"
           ],
-          "correct": 3,
-          "graded": 3,
+          "correct": 1,
+          "graded": 1,
           "stable": true
         },
         {
           "id": "P2-04",
           "title": "Synthetic identity: disposable email, days-old account, address mismatch, human-paced session",
           "verdicts": [
-            "wrong",
-            "wrong",
             "wrong"
           ],
           "correct": 0,
-          "graded": 3,
+          "graded": 1,
           "stable": true
         },
         {
           "id": "P2-05",
           "title": "Fraud ring: chargeback history, linked accounts, burst velocity, VPN, rushed checkout",
           "verdicts": [
-            "correct",
-            "correct",
             "correct"
           ],
-          "correct": 3,
-          "graded": 3,
+          "correct": 1,
+          "graded": 1,
           "stable": true
         },
         {
           "id": "P2-06",
           "title": "Trusted customer's holiday shopping spree: several normal-sized purchases in an hour",
           "verdicts": [
-            "correct",
-            "correct",
             "correct"
           ],
-          "correct": 3,
-          "graded": 3,
+          "correct": 1,
+          "graded": 1,
           "stable": true
         },
         {
           "id": "P2-07",
           "title": "Tor exit node and a new device on an established account, everything else clean",
           "verdicts": [
-            "correct",
-            "correct",
             "correct"
           ],
-          "correct": 3,
-          "graded": 3,
+          "correct": 1,
+          "graded": 1,
           "stable": true
         },
         {
           "id": "P2-08",
           "title": "Moderate anomalies in every dimension at once",
           "verdicts": [
-            "correct",
-            "correct",
             "correct"
           ],
-          "correct": 3,
-          "graded": 3,
+          "correct": 1,
+          "graded": 1,
           "stable": true
         },
         {
           "id": "P2-09",
           "title": "First purchase by a new customer with an established email and verified details",
           "verdicts": [
-            "correct",
-            "correct",
             "correct"
           ],
-          "correct": 3,
-          "graded": 3,
+          "correct": 1,
+          "graded": 1,
           "stable": true
         },
         {
           "id": "P2-10",
           "title": "Customer with two past chargebacks makes an ordinary purchase",
           "verdicts": [
-            "correct",
-            "correct",
             "correct"
           ],
-          "correct": 3,
-          "graded": 3,
+          "correct": 1,
+          "graded": 1,
           "stable": true
         }
       ]
@@ -423,80 +369,70 @@
     "p3": {
       "per_run": [
         {
-          "hits": 12,
-          "total": 14,
-          "pct": 85.71428571428571
-        },
-        {
-          "hits": 12,
-          "total": 14,
-          "pct": 85.71428571428571
-        },
-        {
-          "hits": 12,
-          "total": 14,
-          "pct": 85.71428571428571
+          "hits": 15,
+          "total": 16,
+          "pct": 93.75
         }
       ],
       "pooled": {
-        "hits": 36,
-        "total": 42,
-        "pct": 85.71428571428571
+        "hits": 15,
+        "total": 16,
+        "pct": 93.75
       },
       "range": [
         {
-          "hits": 12,
-          "total": 14,
-          "pct": 85.71428571428571
+          "hits": 15,
+          "total": 16,
+          "pct": 93.75
         },
         {
-          "hits": 12,
-          "total": 14,
-          "pct": 85.71428571428571
+          "hits": 15,
+          "total": 16,
+          "pct": 93.75
         }
       ],
-      "majority_correct": 12,
-      "always": 12,
-      "never": 2,
+      "majority_correct": 15,
+      "always": 15,
+      "never": 1,
       "mixed": 0,
       "unscorable": 0,
-      "scenarios": 14,
+      "scenarios": 16,
       "checks_pooled": {
         "decision": {
-          "hits": 36,
-          "total": 42,
-          "pct": 85.71428571428571
+          "hits": 15,
+          "total": 16,
+          "pct": 93.75
         },
         "risk_tier": {
-          "hits": 18,
-          "total": 27,
-          "pct": 66.66666666666667
+          "hits": 9,
+          "total": 11,
+          "pct": 81.81818181818181
         },
         "escalation": {
-          "hits": 30,
-          "total": 30,
+          "hits": 12,
+          "total": 12,
           "pct": 100.0
         },
         "screening": {
-          "hits": 18,
-          "total": 42,
-          "pct": 42.857142857142854
+          "hits": 16,
+          "total": 16,
+          "pct": 100.0
         },
         "conditions": {
-          "hits": 6,
-          "total": 6,
+          "hits": 4,
+          "total": 4,
           "pct": 100.0
         }
       },
       "legit_approved": {
-        "hits": 12,
-        "total": 12,
+        "hits": 5,
+        "total": 5,
         "pct": 100.0
       },
       "wrongly_approved": {
-        "hits": 3,
-        "total": 27,
-        "pct": 11.11111111111111
+        "hits": 1,
+        "total": 10,
+        "pct": 10.0
       },
       "counts": {
         "errors": 0,
@@ -510,218 +446,184 @@
           "id": "P3-01",
           "title": "Clean domestic individual with matching passport and utility bill",
           "verdicts": [
-            "correct",
-            "correct",
             "correct"
           ],
-          "correct": 3,
-          "graded": 3,
+          "correct": 1,
+          "graded": 1,
           "stable": true
         },
         {
           "id": "P3-02",
           "title": "Low-risk UK software company with a clean director",
           "verdicts": [
-            "correct",
-            "correct",
             "correct"
           ],
-          "correct": 3,
-          "graded": 3,
+          "correct": 1,
+          "graded": 1,
           "stable": true
         },
         {
           "id": "P3-03",
           "title": "Exact sanctions match: Iranian national on the OFAC and UN lists",
           "verdicts": [
-            "wrong",
-            "wrong",
-            "wrong"
+            "correct"
           ],
-          "correct": 0,
-          "graded": 3,
+          "correct": 1,
+          "graded": 1,
           "stable": true
         },
         {
           "id": "P3-04",
           "title": "UN-listed name, Iranian national resident in the US: screening skipped",
           "verdicts": [
-            "correct",
-            "correct",
             "correct"
           ],
-          "correct": 3,
-          "graded": 3,
+          "correct": 1,
+          "graded": 1,
           "stable": true
         },
         {
           "id": "P3-05",
           "title": "Transliteration variant of an OFAC-listed name (potential match)",
           "verdicts": [
-            "correct",
-            "correct",
             "correct"
           ],
-          "correct": 3,
-          "graded": 3,
+          "correct": 1,
+          "graded": 1,
           "stable": true
         },
         {
           "id": "P3-06",
           "title": "Expired passport is the only problem",
           "verdicts": [
-            "correct",
-            "correct",
             "correct"
           ],
-          "correct": 3,
-          "graded": 3,
+          "correct": 1,
+          "graded": 1,
           "stable": true
         },
         {
           "id": "P3-07",
           "title": "Passport expired five weeks before the application date",
           "verdicts": [
-            "wrong",
-            "wrong",
             "wrong"
           ],
           "correct": 0,
-          "graded": 3,
+          "graded": 1,
           "stable": true
         },
         {
           "id": "P3-08",
           "title": "Passport name does not match the application name",
           "verdicts": [
-            "correct",
-            "correct",
             "correct"
           ],
-          "correct": 3,
-          "graded": 3,
+          "correct": 1,
+          "graded": 1,
           "stable": true
         },
         {
           "id": "P3-09",
           "title": "Proof of address belongs to another person at another address",
           "verdicts": [
-            "correct",
-            "correct",
             "correct"
           ],
-          "correct": 3,
-          "graded": 3,
+          "correct": 1,
+          "graded": 1,
           "stable": true
         },
         {
           "id": "P3-10",
           "title": "Passport flagged for tampering by the authenticity check",
           "verdicts": [
-            "correct",
-            "correct",
             "correct"
           ],
-          "correct": 3,
-          "graded": 3,
+          "correct": 1,
+          "graded": 1,
           "stable": true
         },
         {
           "id": "P3-11",
           "title": "Cash-intensive self-employment income declared just under $10,000 a month",
           "verdicts": [
-            "correct",
-            "correct",
             "correct"
           ],
-          "correct": 3,
-          "graded": 3,
+          "correct": 1,
+          "graded": 1,
           "stable": true
         },
         {
           "id": "P3-12",
           "title": "Foreign PEP (senior official) running a crypto exchange in Nigeria",
           "verdicts": [
-            "correct",
-            "correct",
             "correct"
           ],
-          "correct": 3,
-          "graded": 3,
+          "correct": 1,
+          "graded": 1,
           "stable": true
         },
         {
           "id": "P3-13",
           "title": "Domestic PEP with an otherwise low-risk personal account",
           "verdicts": [
-            "correct",
-            "correct",
             "correct"
           ],
-          "correct": 3,
-          "graded": 3,
+          "correct": 1,
+          "graded": 1,
           "stable": true
         },
         {
           "id": "P3-14",
           "title": "Brazilian property-management company, minor document variations",
           "verdicts": [
-            "correct",
-            "correct",
             "correct"
           ],
-          "correct": 3,
-          "graded": 3,
+          "correct": 1,
+          "graded": 1,
+          "stable": true
+        },
+        {
+          "id": "P3-15",
+          "title": "Exact EU-list name, Russian national resident in the UK, volume just under the old skip threshold",
+          "verdicts": [
+            "correct"
+          ],
+          "correct": 1,
+          "graded": 1,
+          "stable": true
+        },
+        {
+          "id": "P3-16",
+          "title": "Common Arabic name with no list entry: false-positive control",
+          "verdicts": [
+            "correct"
+          ],
+          "correct": 1,
+          "graded": 1,
           "stable": true
         }
       ]
     }
   },
   "totals": {
-    "calls": 381,
+    "calls": 166,
     "api_errors": 0,
-    "input_tokens": 267885,
-    "output_tokens": 175625,
-    "cost_usd": 1.1461
+    "input_tokens": 110853,
+    "output_tokens": 72321,
+    "cost_usd": 0.4725
   },
   "per_run_totals": {
-    "claude-run-1": {
-      "calls": 127,
+    "claude-run-4": {
+      "calls": 166,
       "api_errors": 0,
-      "input_tokens": 89295,
-      "output_tokens": 58592,
-      "cost_usd": 0.3823,
+      "input_tokens": 110853,
+      "output_tokens": 72321,
+      "cost_usd": 0.4725,
       "models": {
-        "claude-haiku-4-5-20251001": 127
+        "claude-haiku-4-5-20251001": 166
       },
       "stop_reasons": {
-        "end_turn": 127
-      }
-    },
-    "claude-run-2": {
-      "calls": 127,
-      "api_errors": 0,
-      "input_tokens": 89295,
-      "output_tokens": 58540,
-      "cost_usd": 0.382,
-      "models": {
-        "claude-haiku-4-5-20251001": 127
-      },
-      "stop_reasons": {
-        "end_turn": 127
-      }
-    },
-    "claude-run-3": {
-      "calls": 127,
-      "api_errors": 0,
-      "input_tokens": 89295,
-      "output_tokens": 58493,
-      "cost_usd": 0.3818,
-      "models": {
-        "claude-haiku-4-5-20251001": 127
-      },
-      "stop_reasons": {
-        "end_turn": 127
+        "end_turn": 166
       }
     }
   }
