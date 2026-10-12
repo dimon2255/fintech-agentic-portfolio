@@ -78,8 +78,9 @@ sanctions list was approved without being screened
 
 The supervisor keeps its role as a cyclic orchestrator with one new invariant, enforced in code in
 `src/supervisor.py` for both the rules and the LLM mode: it never marks sanctions screening skipped and never routes to
-human review or the final decision while screening is pending. An escalation requested before screening is recorded
-as deferred and taken once screening completes, so the reviewer receives the sanctions result with the case. Early
+risk assessment, human review or the final decision while screening is pending. An escalation requested before screening is recorded
+as deferred and taken once screening completes, with its original reason, so the reviewer receives the sanctions
+result with the case. Early
 escalation still saves cost: in the measured Claude run an escalated application cost 31% less than a full pipeline
 ([costs](../costs.md)).
 

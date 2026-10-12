@@ -1431,7 +1431,7 @@
           "supervisor_reasoning": [
             "document_intake: Proceeding to document intake.",
             "identity_verification: Proceeding to identity verification.",
-            "sanctions_screening: Identity verification failed. Applicant identity could not be confirmed. [Guard: sanctions screening is mandatory; routed to sanctions_screening.]",
+            "sanctions_screening: Identity verification failed. Applicant identity could not be confirmed. [Guard: sanctions screening is mandatory and runs first.]",
             "human_review: Identity verification failed. Applicant identity could not be confirmed."
           ],
           "sanctions": {
