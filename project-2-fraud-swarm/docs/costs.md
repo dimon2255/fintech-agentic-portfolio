@@ -1,44 +1,46 @@
 # Token Usage & Cost Analysis
 
-## Per-Transaction Cost Breakdown
+## Per-Transaction Cost (measured)
 
-| Component | Input Tokens | Output Tokens | Cost (GPT-4o-mini) |
-|-----------|-------------|---------------|---------------------|
-| Velocity Agent (prompt + data) | ~350 | ~300 | $0.0002 |
-| Identity Agent (prompt + data) | ~650 | ~350 | $0.0003 |
-| Behavioral Agent (prompt + data) | ~400 | ~300 | $0.0002 |
-| Adjudicator (prompt + 3 verdicts) | ~1,250 | ~400 | $0.0004 |
-| **Total per transaction** | **~2,650** | **~1,350** | **~$0.004** |
+| Measure | Value |
+|---------|-------|
+| LLM calls | 4 (3 specialists + 1 adjudicator) |
+| Input tokens | 3,993 (mean) |
+| Output tokens | 2,728 (mean) |
+| **Cost per transaction** | **$0.0176** |
 
-*Prices based on GPT-4o-mini ($0.15/1M input, $0.60/1M output) as of 2026.*
+*Measured with Claude Haiku 4.5 (`claude-haiku-4-5-20251001`, the default model) over the 10 golden-set transactions
+in [`docs/evals/claude-run-4.json`](../../docs/evals/claude-run-4.json), at list price ($1 per million input tokens,
+$5 per million output tokens).*
 
-The adjudicator is the most expensive component because it ingests all three specialist verdicts as input context.
+The adjudicator's prompt includes all three specialist verdicts as input context; the split of cost between the four
+calls is not measured.
 
 ## Project 2 vs Project 1 Cost Comparison
 
 | Metric | P1 (Single Agent) | P2 (Swarm) | Multiplier |
 |--------|-------------------|------------|------------|
 | LLM invocations | 1 | 4 | 4x |
-| Input tokens | ~1,000 | ~2,650 | 2.7x |
-| Output tokens | ~400 | ~1,350 | 3.4x |
-| Cost per transaction | ~$0.001 | ~$0.004 | 4x |
+| Input tokens | 845 | 3,993 | 4.7x |
+| Output tokens | 637 | 2,728 | 4.3x |
+| Cost per transaction | $0.0040 | $0.0176 | 4.4x |
 | Unique signals | 3 tools | 5 tools + 3 perspectives | — |
-| Audit depth | 1 reasoning chain | 3 chains + debate | — |
+| Audit depth | 1 reasoning chain | 3 chains + agreement analysis | — |
 
-The cost multiplier is not simply 3x (for 3 agents) because the adjudicator consumes all three verdicts, adding significant input context.
+The cost multiplier is above 3x (for 3 agents) because the adjudicator's call adds a fourth prompt that carries all three verdicts.
 
 ## Scaling Projections
 
-| Volume | Daily Cost | Monthly Cost | vs P1 Monthly | Notes |
+| Volume | Daily Cost | Monthly Cost (30 days) | vs P1 Monthly | Notes |
 |--------|-----------|-------------|---------------|-------|
-| 100 txn/day | $0.40 | $12 | $3 | Development/testing |
-| 10K txn/day | $40 | $1,200 | $300 | Small fintech |
-| 100K txn/day | $400 | $12,000 | $3,000 | Mid-size processor |
-| 1M txn/day | $4,000 | $120,000 | $30,000 | Enterprise scale |
+| 100 txn/day | $1.76 | $53 | $12 | Development/testing |
+| 10K txn/day | $176 | $5,290 | $1,209 | Small fintech |
+| 100K txn/day | $1,763 | $52,897 | $12,091 | Mid-size processor |
+| 1M txn/day | $17,632 | $528,969 | $120,908 | Enterprise scale |
 
 ## Cost Optimization Strategies
 
-1. **Unanimous shortcut**: Skip the adjudicator when all 3 specialists agree on risk level. Expected hit rate: ~60% of transactions. Saves 25% of LLM costs ($0.003 instead of $0.004).
+1. **Unanimous shortcut**: Skip the adjudicator when all 3 specialists agree on risk level. Expected hit rate: ~60% of transactions. Saves one of the four LLM calls on those transactions.
 
 2. **Hybrid routing**: Use a fast ML classifier for clear-cut cases (80% of transactions). Only route ambiguous cases to the full swarm. Reduces effective cost by 5x.
 
@@ -46,7 +48,7 @@ The cost multiplier is not simply 3x (for 3 agents) because the adjudicator cons
 
 4. **Caching**: Cache specialist verdicts for repeat patterns (same customer, similar amount, same device). TTL: 30 minutes. Expected cache hit rate: 25-35%.
 
-5. **Model tiering**: Use GPT-4o-mini for specialists (narrow focus, simpler reasoning) but GPT-4o or Claude Sonnet for the adjudicator (complex multi-verdict synthesis). Targets highest reasoning quality where it matters most.
+5. **Model tiering**: Keep a small model (the default Claude Haiku 4.5) for the specialists (narrow focus, simpler reasoning) and use a larger model for the adjudicator. Targets the highest reasoning quality where it matters most.
 
 ## Comparison with Traditional Approaches
 
@@ -54,7 +56,7 @@ The cost multiplier is not simply 3x (for 3 agents) because the adjudicator cons
 |----------|-------------|---------|----------|----------------|
 | Rule engine | ~$0.00001 | <10ms | Rules only | Rules-based |
 | ML scoring (Kount-style) | ~$0.0001 | <50ms | Trained patterns | Feature importance |
-| P1 Single Agent | ~$0.001 | 1-2s | 3 signals, 1 view | One reasoning chain |
-| **P2 Swarm** | **~$0.004** | **2-4s** | **5 signals, 3 views** | **Full debate trail** |
+| P1 Single Agent | $0.0040 (measured) | 1-2s | 3 signals, 1 view | One reasoning chain |
+| **P2 Swarm** | **$0.0176 (measured)** | **2-4s** | **5 signals, 3 views** | **Three reasoning chains + agreement analysis** |
 
-The swarm costs 4x more than the single agent but provides 3 independent perspectives plus documented disagreement resolution. The right architecture layers all four: rule engine for volume, ML for speed, single agent for explainability, swarm for high-stakes ambiguous cases.
+The swarm costs about 4.4 times more than the single agent but provides 3 independent perspectives plus a recorded analysis of where they agree and disagree. The right architecture layers all four: rule engine for volume, ML for speed, single agent for explainability, swarm for high-stakes ambiguous cases.

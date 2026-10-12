@@ -9,7 +9,8 @@ This is the key architectural advancement over Project 2's adjudicator:
 
 Routing logic:
     1. Default sequential flow: doc_intake -> identity -> sanctions -> risk -> final
-    2. Skip logic: low-risk domestic individuals skip sanctions screening
+    2. Mandatory sanctions screening: never skipped, and always run before
+       human review or the final decision (an earlier escalation is deferred)
     3. Escalation: document failures, identity failures, strong sanctions hits
     4. Auto-reject: PROHIBITED risk tier
 """

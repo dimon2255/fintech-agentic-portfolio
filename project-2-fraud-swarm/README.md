@@ -1,6 +1,6 @@
 # Project 2: Fraud Detection Swarm
 
-**A multi-agent fraud detection system with specialist debate and adjudicator resolution, built with LangGraph**
+**A multi-agent fraud detection system with parallel specialist agents and an adjudicator, built with LangGraph**
 
 ## Problem
 
@@ -14,8 +14,8 @@ This project builds a 3-agent swarm with an adjudicator:
 
 1. **Five analysis tools** run in parallel — velocity, geo, device, identity graph, behavioral anomaly
 2. **Three specialist agents** independently reason about the signals from their area of expertise
-3. **An adjudicator** receives all three verdicts, identifies agreement/disagreement, and weights expertise by context
-4. **A synthesized verdict** captures the full debate trail — not just the decision, but how disagreements were resolved
+3. **An adjudicator** receives all three verdicts and records where they agree and disagree (an LLM analysis in LLM mode)
+4. **The final verdict** is the unweighted mean of the three specialists' risk scores; when agreement is low, an approval becomes a manual review. The record keeps all three reasoning chains and the agreement analysis
 
 ### Why Multi-Agent > Single Agent
 
@@ -42,7 +42,7 @@ Transaction ──▶ [Gather Signals] ──▶ [Velocity Agent ] ──┐
 **Key design decisions:**
 - Fan-out/fan-in topology — 3 specialists execute in parallel via LangGraph edges
 - Each specialist writes to its own state key — no merge conflicts
-- Adjudicator debate pattern — context-dependent weighting, not simple majority vote
+- Adjudicator — unweighted mean of the three specialist risk scores; the LLM adjudicator's agreement score is used, its own verdict is not
 - Conservative disagreement handling — low agreement bumps toward human review
 
 ## Quick Start
@@ -88,7 +88,7 @@ streamlit run app.py
 
 ## Trade-offs
 
-- **Cost**: 4 LLM invocations per transaction (3 specialists + 1 adjudicator) vs Project 1's 1. Roughly 4x the token cost. At scale, this premium is offset by fewer false positives reaching human review. See [costs.md](docs/costs.md).
+- **Cost**: 4 LLM invocations per transaction (3 specialists + 1 adjudicator) vs Project 1's 1. Measured with Claude Haiku 4.5: $0.0176 per transaction vs Project 1's $0.0040, about 4.4x. At scale, this premium is offset by fewer false positives reaching human review. See [costs.md](docs/costs.md).
 - **Latency**: Specialists run in parallel, but the adjudicator adds a sequential step. Total ~2-4s vs P1's ~1-2s. Still suited for secondary review, not inline authorization.
 - **Complexity**: More moving parts means more failure modes. Each specialist has independent mock fallback to degrade gracefully. The state isolation pattern prevents merge conflicts but adds 12 state fields vs P1's 4.
 

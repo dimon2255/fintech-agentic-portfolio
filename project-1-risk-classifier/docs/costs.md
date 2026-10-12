@@ -1,25 +1,26 @@
 # Token Usage & Cost Analysis
 
-## Per-Transaction Cost Breakdown
+## Per-Transaction Cost (measured)
 
-| Component | Input Tokens | Output Tokens | Cost (GPT-4o-mini) |
-|-----------|-------------|---------------|---------------------|
-| System prompt | ~350 | — | $0.0001 |
-| Transaction data | ~200 | — | $0.0001 |
-| Tool results (3 tools) | ~450 | — | $0.0001 |
-| Risk assessment output | — | ~400 | $0.0006 |
-| **Total per transaction** | **~1,000** | **~400** | **~$0.001** |
+| Measure | Value |
+|---------|-------|
+| LLM calls | 1 |
+| Input tokens | 845 (mean) |
+| Output tokens | 637 (mean) |
+| **Cost per transaction** | **$0.0040** |
 
-*Prices based on GPT-4o-mini ($0.15/1M input, $0.60/1M output) as of 2026.*
+*Measured with Claude Haiku 4.5 (`claude-haiku-4-5-20251001`, the default model) over the 12 golden-set transactions
+in [`docs/evals/claude-run-4.json`](../../docs/evals/claude-run-4.json), at list price ($1 per million input tokens,
+$5 per million output tokens). The split between system prompt, transaction data and tool results is not measured.*
 
 ## Scaling Projections
 
-| Volume | Daily Cost | Monthly Cost | Notes |
+| Volume | Daily Cost | Monthly Cost (30 days) | Notes |
 |--------|-----------|-------------|-------|
-| 100 txn/day | $0.10 | $3.00 | Development/testing |
-| 10K txn/day | $10.00 | $300.00 | Small fintech |
-| 100K txn/day | $100.00 | $3,000.00 | Mid-size processor |
-| 1M txn/day | $1,000.00 | $30,000.00 | Enterprise scale |
+| 100 txn/day | $0.40 | $12 | Development/testing |
+| 10K txn/day | $40 | $1,209 | Small fintech |
+| 100K txn/day | $403 | $12,091 | Mid-size processor |
+| 1M txn/day | $4,031 | $120,908 | Enterprise scale |
 
 ## Cost Optimization Strategies
 
@@ -27,7 +28,7 @@
 
 2. **Caching**: Repeat customers on known devices with typical amounts can reuse cached assessments (TTL: 1 hour). Expected cache hit rate: 30-40%.
 
-3. **Model selection**: GPT-4o-mini is used for cost efficiency. For complex edge cases only, route to GPT-4o or Claude Sonnet for deeper reasoning at ~10x cost.
+3. **Model selection**: Claude Haiku 4.5 is the default for cost efficiency. For complex edge cases only, a larger model could be used for deeper reasoning at a higher cost per transaction.
 
 4. **Batch processing**: For non-real-time use cases (compliance review, daily audit), batch transactions to reduce per-request overhead.
 
@@ -37,6 +38,6 @@
 |----------|---------------------|---------|----------------|
 | Rule engine | ~$0.00001 | <10ms | Rules-based |
 | ML scoring (Kount-style) | ~$0.0001 | <50ms | Feature importance |
-| **This LLM agent** | **~$0.001** | **1-2s** | **Full reasoning chain** |
+| **This LLM agent** | **$0.0040 (measured)** | **1-2s** | **Full reasoning chain** |
 
-The LLM agent costs 10x more than ML scoring but provides 10x more explainability. The right architecture uses both — fast scoring for volume, agent reasoning for depth.
+At these estimates the LLM agent costs about 40 times more per transaction than ML scoring, in exchange for a full reasoning chain. The right architecture uses both — fast scoring for volume, agent reasoning for depth.

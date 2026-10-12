@@ -167,7 +167,7 @@ SwarmState (TypedDict)
 |----------|--------|-----------|
 | Topology | Fan-out/fan-in | Parallel specialist execution, single adjudication point |
 | State isolation | Separate verdict keys per agent | Avoids LangGraph merge conflicts in parallel nodes |
-| Debate resolution | Adjudicator + weighted synthesis | Context-dependent weighting beats simple majority vote |
+| Verdict synthesis | Adjudicator: unweighted mean of the three specialist risk scores | Simple and auditable; the LLM adjudicator's agreement score is used, its own verdict is not |
 | Disagreement handling | Conservative — bump toward "review" | Matches fintech risk tolerance; false positives < false negatives |
 | Mock fallback | Per-agent mock functions | Each specialist has independent fallback; real/mock can mix |
 | Model architecture | Same LLM for all agents (configurable) | Simplicity; could tier models per specialist for cost optimization |

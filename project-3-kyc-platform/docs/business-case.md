@@ -37,18 +37,18 @@ An AI-assisted compliance pipeline that automates the structured assessment step
 
 | Cost Component | Monthly | Annual |
 |---------------|---------|--------|
-| LLM API costs (Haiku, 10K apps) | $13 | $156 |
+| LLM API costs (Haiku 4.5, 10K apps at a measured $0.0188 each) | $188 | $2,256 |
 | Analyst salaries (5 analysts for escalations/oversight) | $30,000 | $360,000 |
 | Infrastructure (hosting, monitoring) | $2,000 | $24,000 |
 | Screening tool licenses (same) | $5,000 | $60,000 |
-| **Total** | **$37,013** | **$444,156** |
+| **Total** | **$37,188** | **$446,256** |
 
 ### Savings
 
 | Metric | Value |
 |--------|-------|
-| Monthly savings | $90,987 |
-| Annual savings | $1,091,844 |
+| Monthly savings | $90,812 |
+| Annual savings | $1,089,744 |
 | **Cost reduction** | **71%** |
 | **Payback period** | ~2 months (development + deployment costs) |
 
@@ -57,9 +57,9 @@ An AI-assisted compliance pipeline that automates the structured assessment step
 | Volume (apps/month) | Annual Manual Cost | Annual AI-Assisted | Annual Savings | ROI |
 |---------------------|-------------------|--------------------|---------------|-----|
 | 1,000 | $154K | $60K | $94K | 157% |
-| 5,000 | $768K | $180K | $588K | 327% |
-| 10,000 | $1,536K | $444K | $1,092K | 246% |
-| 50,000 | $7,680K | $1,860K | $5,820K | 313% |
+| 5,000 | $768K | $181K | $587K | 324% |
+| 10,000 | $1,536K | $446K | $1,090K | 244% |
+| 50,000 | $7,680K | $1,870K | $5,810K | 311% |
 
 ## Qualitative Benefits
 
@@ -71,10 +71,10 @@ An AI-assisted compliance pipeline that automates the structured assessment step
 ### Consistency
 - Deterministic application of compliance rules (no analyst variability)
 - Every decision includes reasoning chain for auditor review
-- Compliance checklist ensures no steps are missed
+- Compliance checklist records which steps ran, were skipped or are pending; sanctions screening always runs
 
 ### Audit Trail
-- Immutable, timestamped record of every decision and routing choice
+- Timestamped record of every decision and routing choice, returned with the decision (kept in memory; this demo does not persist it or make it tamper-evident)
 - Full reasoning chain per agent (explainable AI requirement)
 - Supervisor routing decisions logged with reasoning
 
@@ -87,10 +87,10 @@ An AI-assisted compliance pipeline that automates the structured assessment step
 
 | Risk | Mitigation |
 |------|-----------|
-| False negatives (missed sanctions) | Conservative threshold (0.4 fuzzy match), human review for any hits |
+| False negatives (missed sanctions) | Every applicant is screened. Hits at or above the 0.4 fuzzy-match alert threshold are reported; matches above 0.8 go to human review and are rejected. A potential match between 0.4 and 0.8 is approved at a higher risk score by the rules (a known gap that Claude mode escalates) |
 | Model hallucination | Mock LLM fallback, structured JSON output, Pydantic validation |
 | Regulatory acceptance | Full audit trail, explainable reasoning, human-in-the-loop for all escalations |
-| Vendor lock-in | Model-agnostic design (Anthropic, OpenAI, or any LLM via env var) |
+| Vendor lock-in | Provider switch between Anthropic and OpenAI models via env var (only Anthropic has been evaluated) |
 
 ## Implementation Timeline
 
