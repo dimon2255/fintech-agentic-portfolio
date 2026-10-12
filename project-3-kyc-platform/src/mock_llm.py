@@ -128,11 +128,7 @@ def mock_supervisor_route(state: KYCState) -> SupervisorDecision:
         risk_flags.append(f"Sanctions hits found (highest score: {sanctions_result.highest_match_score})")
 
     # Skip logic: low-risk domestic individual can skip sanctions
-    should_skip_sanctions = (
-        application.country_of_residence in LOW_RISK_COUNTRIES
-        and application.business_type is None
-        and (application.expected_monthly_volume or 0) < 10_000
-    )
+    should_skip_sanctions = False  # screening is mandatory for every applicant
 
     # Find next pending step
     for step in step_order:
