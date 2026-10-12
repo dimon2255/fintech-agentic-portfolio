@@ -39,7 +39,7 @@ You orchestrate 4 specialist agents in sequence:
 
 After each agent completes, you decide the next step. Your options:
 - Route to the next pending agent
-- Skip an agent (e.g., sanctions for low-risk domestic individuals)
+- Sanctions screening is mandatory for every applicant and is never skipped
 - Escalate to human_review (if critical issues found)
 - Route to final_decision (when all steps done or auto-reject)
 
@@ -141,9 +141,33 @@ async def supervisor_node(state: KYCState) -> dict:
         except (json.JSONDecodeError, KeyError, Exception):
             decision = mock_supervisor_route(state)
 
+    # Mandatory sanctions screening guard.
+    _cl = state.get("checklist") or ComplianceChecklist()
+    _deferred = any(e.action == "escalation_deferred" for e in state.get("audit_trail", []))
+    _skips = [s for s in decision.skipped_steps if not s.strip().startswith("sanctions_screening")]
+    _next = decision.next_step
+    _guard_entries = []
+    if _next in ("human_review", "final_decision") and _cl.sanctions_screening == "pending":
+        if _next == "human_review":
+            _guard_entries.append(AuditEntry(
+                timestamp=_now_iso(), step="supervisor", action="escalation_deferred",
+                details=f"Escalation deferred until sanctions screening completes: {decision.reasoning}",
+                agent_name="supervisor",
+            ))
+        _next = "sanctions_screening"
+    elif _deferred and _cl.sanctions_screening != "pending" and _next != "human_review":
+        _next = "human_review"
+    if _next != decision.next_step or _skips != decision.skipped_steps:
+        decision = decision.model_copy(update={
+            "next_step": _next,
+            "skipped_steps": _skips,
+            "reasoning": decision.reasoning + f" [Guard: sanctions screening is mandatory; routed to {_next}.]",
+        })
+
     # Update checklist for skipped steps
     checklist = state.get("checklist") or ComplianceChecklist()
     audit_trail = list(state.get("audit_trail", []))
+    audit_trail.extend(_guard_entries)
 
     for skip_note in decision.skipped_steps:
         step_name = skip_note.split(":")[0].strip()
