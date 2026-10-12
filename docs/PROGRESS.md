@@ -75,6 +75,14 @@ measured results. Current results: [evals/golden-set-report.md](evals/golden-set
 - **Baseline results archived, not overwritten.** The 2026-10-11 report and scorecards moved to
   `docs/evals-baseline-2026-10-11/` so `--summarize-runs` does not pool pre-fix and post-fix runs.
 - **The scenario-count test no longer caps a project at 15**, since ADR-001 plans to grow past 30.
+- **Independent review of the diff: no blockers, nine should-fix items.** Fixed: a deferred escalation now reaches the
+  reviewer with its original reason; screening also runs before risk assessment if the LLM supervisor tries to skip
+  ahead; the P1-12 narrative now states the 24 transactions in the past day that the tool returns (pinned as evidence;
+  inputs and labels unchanged); the P3-16 rationale, a cost rounding, a stale docstring and two compliance-mapping
+  claims were corrected.
+- **Claude run 4 predates the review hardening.** For its recorded replies the routes are unchanged (the
+  risk-before-screening path did not occur, and the guard's text is not sent to the LLM); only the guard's reasoning
+  text in those records differs from what the current code writes.
 
 ### Known issues (not fixed here)
 
@@ -82,4 +90,6 @@ measured results. Current results: [evals/golden-set-report.md](evals/golden-set
 - The document tool checks expiry against a fixed date (`project-3-kyc-platform/src/tools.py:104`); fixing it needs
   the application date passed to the tool, not a one-line change.
 - `datetime.utcnow()` is deprecated in Python 3.12 (15 call sites in P1 and P2); left as is.
+- The supervisor's `next_step` is not validated (pre-existing): an LLM reply naming an unknown step raises a
+  `KeyError`, and one that repeats a completed step can loop until LangGraph's recursion limit.
 

@@ -5,8 +5,9 @@ and produces the final assessment: the unweighted mean of the
 specialist risk scores, with low agreement turning an approval into
 a review, plus the debate analysis.
 
-The adjudicator doesn't just vote-count — it analyzes WHY agents
-disagree and weights expertise by transaction context.
+In LLM mode the adjudicator also analyzes why the agents disagree; that
+analysis and its agreement score are recorded, but the LLM's own final
+verdict is not used.
 """
 
 from __future__ import annotations

@@ -60,5 +60,5 @@
     "sanctions_screening_required": true,
     "edd_required": false
   },
-  "rationale": "A false-positive control for mandatory screening. Every sanctioned person in the simulated lists has an Arabic name, so a matcher that alerts on naming convention rather than identity would hold this applicant. Screening is required and must run, but sharing a naming convention with listed persons is not a match: a correctly tuned screen returns no alert, and the application is approved at low risk with standard due diligence. Holding or rejecting it would be a false positive and a fairness failure."
+  "rationale": "A false-positive control for mandatory screening. All but one of the sanctioned individuals in the simulated lists have Arabic names, so a matcher that alerts on naming convention rather than identity would hold this applicant. Screening is required and must run, but sharing a naming convention with listed persons is not a match: a correctly tuned screen returns no alert, and the application is approved at low risk with standard due diligence. Holding or rejecting it would be a false positive and a fairness failure."
 }

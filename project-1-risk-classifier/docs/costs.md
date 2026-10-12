@@ -20,7 +20,7 @@ $5 per million output tokens). The split between system prompt, transaction data
 | 100 txn/day | $0.40 | $12 | Development/testing |
 | 10K txn/day | $40 | $1,209 | Small fintech |
 | 100K txn/day | $403 | $12,091 | Mid-size processor |
-| 1M txn/day | $4,031 | $120,908 | Enterprise scale |
+| 1M txn/day | $4,030 | $120,908 | Enterprise scale |
 
 ## Cost Optimization Strategies
 
