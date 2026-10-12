@@ -13,34 +13,34 @@
   "summary": {
     "p1": {
       "project": "p1",
-      "scenarios": 11,
-      "scored": 11,
+      "scenarios": 12,
+      "scored": 12,
       "errors": 0,
       "harness_errors": 0,
       "fallbacks": 0,
       "skipped": 0,
       "headline_check": "action",
       "headline": {
-        "hits": 10,
-        "total": 11,
-        "pct": 90.9090909090909
+        "hits": 11,
+        "total": 12,
+        "pct": 91.66666666666667
       },
       "checks": {
         "action": {
-          "hits": 10,
-          "total": 11,
-          "pct": 90.9090909090909
+          "hits": 11,
+          "total": 12,
+          "pct": 91.66666666666667
         },
         "risk_level": {
-          "hits": 10,
-          "total": 11,
-          "pct": 90.9090909090909
+          "hits": 11,
+          "total": 12,
+          "pct": 91.66666666666667
         }
       },
       "all_checks": {
-        "hits": 10,
-        "total": 11,
-        "pct": 90.9090909090909
+        "hits": 11,
+        "total": 12,
+        "pct": 91.66666666666667
       },
       "legit_approved": {
         "hits": 3,
@@ -112,59 +112,59 @@
     },
     "p3": {
       "project": "p3",
-      "scenarios": 14,
-      "scored": 14,
+      "scenarios": 16,
+      "scored": 16,
       "errors": 0,
       "harness_errors": 0,
       "fallbacks": 0,
       "skipped": 0,
       "headline_check": "decision",
       "headline": {
-        "hits": 7,
-        "total": 14,
-        "pct": 50.0
+        "hits": 10,
+        "total": 16,
+        "pct": 62.5
       },
       "checks": {
         "decision": {
-          "hits": 7,
-          "total": 14,
-          "pct": 50.0
+          "hits": 10,
+          "total": 16,
+          "pct": 62.5
         },
         "risk_tier": {
-          "hits": 6,
-          "total": 9,
-          "pct": 66.66666666666667
+          "hits": 9,
+          "total": 11,
+          "pct": 81.81818181818181
         },
         "escalation": {
-          "hits": 5,
-          "total": 10,
-          "pct": 50.0
+          "hits": 8,
+          "total": 12,
+          "pct": 66.66666666666667
         },
         "screening": {
-          "hits": 5,
-          "total": 14,
-          "pct": 35.714285714285715
+          "hits": 16,
+          "total": 16,
+          "pct": 100.0
         },
         "conditions": {
-          "hits": 3,
-          "total": 3,
+          "hits": 4,
+          "total": 4,
           "pct": 100.0
         }
       },
       "all_checks": {
-        "hits": 2,
-        "total": 14,
-        "pct": 14.285714285714286
+        "hits": 8,
+        "total": 16,
+        "pct": 50.0
       },
       "legit_approved": {
-        "hits": 4,
-        "total": 4,
+        "hits": 5,
+        "total": 5,
         "pct": 100.0
       },
       "wrongly_approved": {
-        "hits": 7,
-        "total": 9,
-        "pct": 77.77777777777777
+        "hits": 6,
+        "total": 10,
+        "pct": 60.0
       }
     }
   },
@@ -438,6 +438,31 @@
           "recommended_action": "review",
           "confidence": 0.7,
           "summary": "Transaction shows mixed signals warranting human review (70% confidence). Some risk indicators present but not conclusive enough for automated decline.",
+          "p1_fallback": false
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": null,
+        "llm_cost_usd": null
+      },
+      {
+        "id": "P1-12",
+        "title": "Four ordinary purchases in an hour on the customer's trusted phone (velocity flag boundary)",
+        "category": "boundary",
+        "status": "scored",
+        "checks": {
+          "action": true,
+          "risk_level": true
+        },
+        "expected": {
+          "risk_level": "low|medium",
+          "recommended_action": "approve|review"
+        },
+        "output": {
+          "risk_level": "low",
+          "recommended_action": "approve",
+          "confidence": 0.95,
+          "summary": "Transaction appears legitimate (95% confidence). All analysis dimensions within normal parameters. Approved for processing.",
           "p1_fallback": false
         },
         "error": null,
@@ -958,7 +983,7 @@
           "decision": true,
           "risk_tier": true,
           "escalation": true,
-          "screening": false,
+          "screening": true,
           "conditions": true
         },
         "expected": {
@@ -976,22 +1001,27 @@
           "checklist": {
             "document_intake": "completed",
             "identity_verification": "completed",
-            "sanctions_screening": "skipped",
+            "sanctions_screening": "completed",
             "risk_assessment": "completed"
           },
           "route": [
             "document_intake",
             "identity_verification",
+            "sanctions_screening",
             "risk_assessment",
             "final_decision"
           ],
           "supervisor_reasoning": [
             "document_intake: Proceeding to document intake.",
             "identity_verification: Proceeding to identity verification.",
+            "sanctions_screening: Proceeding to sanctions screening.",
             "risk_assessment: Proceeding to risk assessment.",
             "final_decision: All compliance steps completed. Routing to final decision."
           ],
-          "sanctions": null,
+          "sanctions": {
+            "any_hits": false,
+            "highest_match_score": 0.0
+          },
           "identity_confirmed": true,
           "is_pep": false,
           "document_quality": 0.977,
@@ -1130,10 +1160,10 @@
         "category": "sanctions",
         "status": "scored",
         "checks": {
-          "decision": false,
-          "risk_tier": false,
-          "escalation": false,
-          "screening": false,
+          "decision": true,
+          "risk_tier": true,
+          "escalation": true,
+          "screening": true,
           "conditions": null
         },
         "expected": {
@@ -1143,35 +1173,38 @@
           "sanctions_screening_required": true
         },
         "output": {
-          "decision": "approved",
-          "risk_tier": "low",
-          "was_escalated": false,
+          "decision": "rejected",
+          "risk_tier": "prohibited",
+          "was_escalated": true,
           "conditions": [],
           "checklist": {
             "document_intake": "completed",
             "identity_verification": "completed",
-            "sanctions_screening": "skipped",
-            "risk_assessment": "completed"
+            "sanctions_screening": "completed",
+            "risk_assessment": "pending"
           },
           "route": [
             "document_intake",
             "identity_verification",
-            "risk_assessment",
-            "final_decision"
+            "sanctions_screening",
+            "human_review"
           ],
           "supervisor_reasoning": [
             "document_intake: Proceeding to document intake.",
             "identity_verification: Proceeding to identity verification.",
-            "risk_assessment: Proceeding to risk assessment.",
-            "final_decision: All compliance steps completed. Routing to final decision."
+            "sanctions_screening: Proceeding to sanctions screening.",
+            "human_review: Strong sanctions match detected (score=1.0). Immediate escalation required."
           ],
-          "sanctions": null,
+          "sanctions": {
+            "any_hits": true,
+            "highest_match_score": 1.0
+          },
           "identity_confirmed": true,
           "is_pep": false,
           "document_quality": 0.963,
           "document_issues": [],
-          "risk_composite": 0.1,
-          "reasoning": "Low risk \u2014 standard onboarding."
+          "risk_composite": null,
+          "reasoning": "Strong sanctions match detected (score: 1.0)."
         },
         "error": null,
         "fallbacks": {},
@@ -1248,7 +1281,7 @@
           "decision": false,
           "risk_tier": null,
           "escalation": null,
-          "screening": false,
+          "screening": true,
           "conditions": null
         },
         "expected": {
@@ -1265,22 +1298,27 @@
           "checklist": {
             "document_intake": "completed",
             "identity_verification": "completed",
-            "sanctions_screening": "skipped",
+            "sanctions_screening": "completed",
             "risk_assessment": "completed"
           },
           "route": [
             "document_intake",
             "identity_verification",
+            "sanctions_screening",
             "risk_assessment",
             "final_decision"
           ],
           "supervisor_reasoning": [
             "document_intake: Proceeding to document intake.",
             "identity_verification: Proceeding to identity verification.",
+            "sanctions_screening: Proceeding to sanctions screening.",
             "risk_assessment: Proceeding to risk assessment.",
             "final_decision: All compliance steps completed. Routing to final decision."
           ],
-          "sanctions": null,
+          "sanctions": {
+            "any_hits": false,
+            "highest_match_score": 0.0
+          },
           "identity_confirmed": true,
           "is_pep": false,
           "document_quality": 0.752,
@@ -1305,7 +1343,7 @@
           "decision": false,
           "risk_tier": null,
           "escalation": null,
-          "screening": false,
+          "screening": true,
           "conditions": null
         },
         "expected": {
@@ -1322,22 +1360,27 @@
           "checklist": {
             "document_intake": "completed",
             "identity_verification": "completed",
-            "sanctions_screening": "skipped",
+            "sanctions_screening": "completed",
             "risk_assessment": "completed"
           },
           "route": [
             "document_intake",
             "identity_verification",
+            "sanctions_screening",
             "risk_assessment",
             "final_decision"
           ],
           "supervisor_reasoning": [
             "document_intake: Proceeding to document intake.",
             "identity_verification: Proceeding to identity verification.",
+            "sanctions_screening: Proceeding to sanctions screening.",
             "risk_assessment: Proceeding to risk assessment.",
             "final_decision: All compliance steps completed. Routing to final decision."
           ],
-          "sanctions": null,
+          "sanctions": {
+            "any_hits": false,
+            "highest_match_score": 0.0
+          },
           "identity_confirmed": true,
           "is_pep": false,
           "document_quality": 0.966,
@@ -1359,7 +1402,7 @@
           "decision": true,
           "risk_tier": null,
           "escalation": true,
-          "screening": false,
+          "screening": true,
           "conditions": null
         },
         "expected": {
@@ -1376,20 +1419,25 @@
           "checklist": {
             "document_intake": "completed",
             "identity_verification": "completed",
-            "sanctions_screening": "pending",
+            "sanctions_screening": "completed",
             "risk_assessment": "pending"
           },
           "route": [
             "document_intake",
             "identity_verification",
+            "sanctions_screening",
             "human_review"
           ],
           "supervisor_reasoning": [
             "document_intake: Proceeding to document intake.",
             "identity_verification: Proceeding to identity verification.",
+            "sanctions_screening: Identity verification failed. Applicant identity could not be confirmed. [Guard: sanctions screening is mandatory; routed to sanctions_screening.]",
             "human_review: Identity verification failed. Applicant identity could not be confirmed."
           ],
-          "sanctions": null,
+          "sanctions": {
+            "any_hits": false,
+            "highest_match_score": 0.0
+          },
           "identity_confirmed": false,
           "is_pep": false,
           "document_quality": 0.964,
@@ -1411,7 +1459,7 @@
           "decision": false,
           "risk_tier": null,
           "escalation": false,
-          "screening": false,
+          "screening": true,
           "conditions": null
         },
         "expected": {
@@ -1428,22 +1476,27 @@
           "checklist": {
             "document_intake": "completed",
             "identity_verification": "completed",
-            "sanctions_screening": "skipped",
+            "sanctions_screening": "completed",
             "risk_assessment": "completed"
           },
           "route": [
             "document_intake",
             "identity_verification",
+            "sanctions_screening",
             "risk_assessment",
             "final_decision"
           ],
           "supervisor_reasoning": [
             "document_intake: Proceeding to document intake.",
             "identity_verification: Proceeding to identity verification.",
+            "sanctions_screening: Proceeding to sanctions screening.",
             "risk_assessment: Proceeding to risk assessment.",
             "final_decision: All compliance steps completed. Routing to final decision."
           ],
-          "sanctions": null,
+          "sanctions": {
+            "any_hits": false,
+            "highest_match_score": 0.0
+          },
           "identity_confirmed": true,
           "is_pep": false,
           "document_quality": 0.977,
@@ -1465,7 +1518,7 @@
           "decision": false,
           "risk_tier": null,
           "escalation": false,
-          "screening": false,
+          "screening": true,
           "conditions": null
         },
         "expected": {
@@ -1482,22 +1535,27 @@
           "checklist": {
             "document_intake": "completed",
             "identity_verification": "completed",
-            "sanctions_screening": "skipped",
+            "sanctions_screening": "completed",
             "risk_assessment": "completed"
           },
           "route": [
             "document_intake",
             "identity_verification",
+            "sanctions_screening",
             "risk_assessment",
             "final_decision"
           ],
           "supervisor_reasoning": [
             "document_intake: Proceeding to document intake.",
             "identity_verification: Proceeding to identity verification.",
+            "sanctions_screening: Proceeding to sanctions screening.",
             "risk_assessment: Proceeding to risk assessment.",
             "final_decision: All compliance steps completed. Routing to final decision."
           ],
-          "sanctions": null,
+          "sanctions": {
+            "any_hits": false,
+            "highest_match_score": 0.0
+          },
           "identity_confirmed": true,
           "is_pep": false,
           "document_quality": 0.815,
@@ -1521,7 +1579,7 @@
           "decision": true,
           "risk_tier": false,
           "escalation": true,
-          "screening": false,
+          "screening": true,
           "conditions": null
         },
         "expected": {
@@ -1539,22 +1597,27 @@
           "checklist": {
             "document_intake": "completed",
             "identity_verification": "completed",
-            "sanctions_screening": "skipped",
+            "sanctions_screening": "completed",
             "risk_assessment": "completed"
           },
           "route": [
             "document_intake",
             "identity_verification",
+            "sanctions_screening",
             "risk_assessment",
             "final_decision"
           ],
           "supervisor_reasoning": [
             "document_intake: Proceeding to document intake.",
             "identity_verification: Proceeding to identity verification.",
+            "sanctions_screening: Proceeding to sanctions screening.",
             "risk_assessment: Proceeding to risk assessment.",
             "final_decision: All compliance steps completed. Routing to final decision."
           ],
-          "sanctions": null,
+          "sanctions": {
+            "any_hits": false,
+            "highest_match_score": 0.0
+          },
           "identity_confirmed": true,
           "is_pep": false,
           "document_quality": 0.963,
@@ -1640,7 +1703,7 @@
           "decision": true,
           "risk_tier": true,
           "escalation": null,
-          "screening": false,
+          "screening": true,
           "conditions": true
         },
         "expected": {
@@ -1663,22 +1726,27 @@
           "checklist": {
             "document_intake": "completed",
             "identity_verification": "completed",
-            "sanctions_screening": "skipped",
+            "sanctions_screening": "completed",
             "risk_assessment": "completed"
           },
           "route": [
             "document_intake",
             "identity_verification",
+            "sanctions_screening",
             "risk_assessment",
             "final_decision"
           ],
           "supervisor_reasoning": [
             "document_intake: Proceeding to document intake.",
             "identity_verification: Proceeding to identity verification.",
+            "sanctions_screening: Proceeding to sanctions screening.",
             "risk_assessment: Proceeding to risk assessment.",
             "final_decision: All compliance steps completed. Routing to final decision."
           ],
-          "sanctions": null,
+          "sanctions": {
+            "any_hits": false,
+            "highest_match_score": 0.0
+          },
           "identity_confirmed": true,
           "is_pep": true,
           "document_quality": 0.975,
@@ -1743,6 +1811,126 @@
           "document_quality": 0.966,
           "document_issues": [],
           "risk_composite": 0.175,
+          "reasoning": "Low risk \u2014 standard onboarding."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": null,
+        "llm_cost_usd": null
+      },
+      {
+        "id": "P3-15",
+        "title": "Exact EU-list name, Russian national resident in the UK, volume just under the old skip threshold",
+        "category": "sanctions",
+        "status": "scored",
+        "checks": {
+          "decision": true,
+          "risk_tier": true,
+          "escalation": true,
+          "screening": true,
+          "conditions": null
+        },
+        "expected": {
+          "decision": "rejected|escalated",
+          "risk_tier": "high|prohibited",
+          "was_escalated": true,
+          "sanctions_screening_required": true
+        },
+        "output": {
+          "decision": "rejected",
+          "risk_tier": "prohibited",
+          "was_escalated": true,
+          "conditions": [
+            "PEP monitoring: close_associate",
+            "Enhanced Due Diligence required"
+          ],
+          "checklist": {
+            "document_intake": "completed",
+            "identity_verification": "completed",
+            "sanctions_screening": "completed",
+            "risk_assessment": "pending"
+          },
+          "route": [
+            "document_intake",
+            "identity_verification",
+            "sanctions_screening",
+            "human_review"
+          ],
+          "supervisor_reasoning": [
+            "document_intake: Proceeding to document intake.",
+            "identity_verification: Proceeding to identity verification.",
+            "sanctions_screening: Proceeding to sanctions screening.",
+            "human_review: Strong sanctions match detected (score=1.0). Immediate escalation required."
+          ],
+          "sanctions": {
+            "any_hits": true,
+            "highest_match_score": 1.0
+          },
+          "identity_confirmed": true,
+          "is_pep": true,
+          "document_quality": 0.975,
+          "document_issues": [],
+          "risk_composite": null,
+          "reasoning": "Strong sanctions match detected (score: 1.0)."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": null,
+        "llm_cost_usd": null
+      },
+      {
+        "id": "P3-16",
+        "title": "Common Arabic name with no list entry: false-positive control",
+        "category": "clean",
+        "status": "scored",
+        "checks": {
+          "decision": true,
+          "risk_tier": true,
+          "escalation": true,
+          "screening": true,
+          "conditions": true
+        },
+        "expected": {
+          "decision": "approved",
+          "risk_tier": "low",
+          "was_escalated": false,
+          "sanctions_screening_required": true,
+          "edd_required": false
+        },
+        "output": {
+          "decision": "approved",
+          "risk_tier": "low",
+          "was_escalated": false,
+          "conditions": [],
+          "checklist": {
+            "document_intake": "completed",
+            "identity_verification": "completed",
+            "sanctions_screening": "completed",
+            "risk_assessment": "completed"
+          },
+          "route": [
+            "document_intake",
+            "identity_verification",
+            "sanctions_screening",
+            "risk_assessment",
+            "final_decision"
+          ],
+          "supervisor_reasoning": [
+            "document_intake: Proceeding to document intake.",
+            "identity_verification: Proceeding to identity verification.",
+            "sanctions_screening: Proceeding to sanctions screening.",
+            "risk_assessment: Proceeding to risk assessment.",
+            "final_decision: All compliance steps completed. Routing to final decision."
+          ],
+          "sanctions": {
+            "any_hits": false,
+            "highest_match_score": 0.0
+          },
+          "identity_confirmed": true,
+          "is_pep": false,
+          "document_quality": 0.971,
+          "document_issues": [],
+          "risk_composite": 0.1,
           "reasoning": "Low risk \u2014 standard onboarding."
         },
         "error": null,

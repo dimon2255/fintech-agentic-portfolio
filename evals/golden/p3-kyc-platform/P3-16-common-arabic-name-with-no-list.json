@@ -1,0 +1,64 @@
+{
+  "id": "P3-16",
+  "title": "Common Arabic name with no list entry: false-positive control",
+  "category": "clean",
+  "narrative": "A US citizen living in the US applies for a personal account: salary income, $4,200 a month. His name, Omar Haddad, is a common Arabic name that is not on any sanctions list and is not a variant of a listed name. He is not politically exposed. His valid US passport matches his name and date of birth, and a utility bill in his name confirms his address.",
+  "inputs": {
+    "application": {
+      "application_id": "P3-16-app",
+      "applicant_name": "Omar Haddad",
+      "date_of_birth": "1990-02-14",
+      "nationality": "US",
+      "country_of_residence": "US",
+      "address": "455 Elm Street, Columbus, OH 43215",
+      "email": "omar.haddad@example.com",
+      "phone": "+1-614-555-0172",
+      "business_type": null,
+      "industry": null,
+      "expected_monthly_volume": 4200.0,
+      "source_of_funds": "Employment salary (civil engineer)",
+      "documents_submitted": [
+        {
+          "document_type": "passport",
+          "document_number": "512831913",
+          "issuing_country": "US",
+          "expiry_date": "2033-06-30",
+          "holder_name": "Omar Haddad",
+          "holder_dob": "1990-02-14",
+          "holder_address": null
+        },
+        {
+          "document_type": "utility_bill",
+          "document_number": "UB-2026-92189",
+          "issuing_country": "US",
+          "expiry_date": null,
+          "holder_name": "Omar Haddad",
+          "holder_dob": null,
+          "holder_address": "455 Elm Street, Columbus, OH 43215"
+        }
+      ],
+      "submitted_at": "2026-10-05T10:00:00"
+    }
+  },
+  "fixtures": {
+    "evidence": {
+      "documents.0.format_valid": true,
+      "documents.0.security_features_present": true,
+      "documents.0.tampering_detected": false,
+      "documents.0.is_correct_type": true,
+      "documents.1.format_valid": true,
+      "documents.1.security_features_present": true,
+      "documents.1.tampering_detected": false,
+      "documents.1.is_correct_type": true,
+      "identity.is_pep": false
+    }
+  },
+  "expected": {
+    "decision": "approved",
+    "risk_tier": "low",
+    "was_escalated": false,
+    "sanctions_screening_required": true,
+    "edd_required": false
+  },
+  "rationale": "A false-positive control for mandatory screening. Every sanctioned person in the simulated lists has an Arabic name, so a matcher that alerts on naming convention rather than identity would hold this applicant. Screening is required and must run, but sharing a naming convention with listed persons is not a match: a correctly tuned screen returns no alert, and the application is approved at low risk with standard due diligence. Holding or rejecting it would be a false positive and a fairness failure."
+}

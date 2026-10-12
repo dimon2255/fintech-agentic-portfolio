@@ -1,0 +1,1755 @@
+{
+  "tier": "rules",
+  "model": null,
+  "product": "this checkout",
+  "versions": {
+    "python": "3.12.1",
+    "langgraph": "1.1.3",
+    "langchain-core": "1.2.20",
+    "langchain-anthropic": "1.4.0",
+    "anthropic": "0.86.0",
+    "pydantic": "2.12.5"
+  },
+  "summary": {
+    "p1": {
+      "project": "p1",
+      "scenarios": 11,
+      "scored": 11,
+      "errors": 0,
+      "harness_errors": 0,
+      "fallbacks": 0,
+      "skipped": 0,
+      "headline_check": "action",
+      "headline": {
+        "hits": 10,
+        "total": 11,
+        "pct": 90.9090909090909
+      },
+      "checks": {
+        "action": {
+          "hits": 10,
+          "total": 11,
+          "pct": 90.9090909090909
+        },
+        "risk_level": {
+          "hits": 10,
+          "total": 11,
+          "pct": 90.9090909090909
+        }
+      },
+      "all_checks": {
+        "hits": 10,
+        "total": 11,
+        "pct": 90.9090909090909
+      },
+      "legit_approved": {
+        "hits": 3,
+        "total": 3,
+        "pct": 100.0
+      },
+      "wrongly_approved": {
+        "hits": 1,
+        "total": 6,
+        "pct": 16.666666666666668
+      }
+    },
+    "p2": {
+      "project": "p2",
+      "scenarios": 10,
+      "scored": 10,
+      "errors": 0,
+      "harness_errors": 0,
+      "fallbacks": 0,
+      "skipped": 0,
+      "headline_check": "action",
+      "headline": {
+        "hits": 8,
+        "total": 10,
+        "pct": 80.0
+      },
+      "checks": {
+        "action": {
+          "hits": 8,
+          "total": 10,
+          "pct": 80.0
+        },
+        "risk_level": {
+          "hits": 8,
+          "total": 10,
+          "pct": 80.0
+        },
+        "specialist_velocity": {
+          "hits": 9,
+          "total": 9,
+          "pct": 100.0
+        },
+        "specialist_identity": {
+          "hits": 8,
+          "total": 10,
+          "pct": 80.0
+        },
+        "specialist_behavioral": {
+          "hits": 10,
+          "total": 10,
+          "pct": 100.0
+        }
+      },
+      "all_checks": {
+        "hits": 7,
+        "total": 10,
+        "pct": 70.0
+      },
+      "legit_approved": {
+        "hits": 3,
+        "total": 3,
+        "pct": 100.0
+      },
+      "wrongly_approved": {
+        "hits": 1,
+        "total": 5,
+        "pct": 20.0
+      }
+    },
+    "p3": {
+      "project": "p3",
+      "scenarios": 14,
+      "scored": 14,
+      "errors": 0,
+      "harness_errors": 0,
+      "fallbacks": 0,
+      "skipped": 0,
+      "headline_check": "decision",
+      "headline": {
+        "hits": 7,
+        "total": 14,
+        "pct": 50.0
+      },
+      "checks": {
+        "decision": {
+          "hits": 7,
+          "total": 14,
+          "pct": 50.0
+        },
+        "risk_tier": {
+          "hits": 6,
+          "total": 9,
+          "pct": 66.66666666666667
+        },
+        "escalation": {
+          "hits": 5,
+          "total": 10,
+          "pct": 50.0
+        },
+        "screening": {
+          "hits": 5,
+          "total": 14,
+          "pct": 35.714285714285715
+        },
+        "conditions": {
+          "hits": 3,
+          "total": 3,
+          "pct": 100.0
+        }
+      },
+      "all_checks": {
+        "hits": 2,
+        "total": 14,
+        "pct": 14.285714285714286
+      },
+      "legit_approved": {
+        "hits": 4,
+        "total": 4,
+        "pct": 100.0
+      },
+      "wrongly_approved": {
+        "hits": 7,
+        "total": 9,
+        "pct": 77.77777777777777
+      }
+    }
+  },
+  "projects": {
+    "p1": [
+      {
+        "id": "P1-01",
+        "title": "Regular grocery purchase on the customer's own phone",
+        "category": "clean",
+        "status": "scored",
+        "checks": {
+          "action": true,
+          "risk_level": true
+        },
+        "expected": {
+          "risk_level": "low",
+          "recommended_action": "approve"
+        },
+        "output": {
+          "risk_level": "low",
+          "recommended_action": "approve",
+          "confidence": 0.95,
+          "summary": "Transaction appears legitimate (95% confidence). All analysis dimensions within normal parameters. Approved for processing.",
+          "p1_fallback": false
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": null,
+        "llm_cost_usd": null
+      },
+      {
+        "id": "P1-02",
+        "title": "Card-testing burst of tiny charges from a shared device behind a foreign VPN",
+        "category": "fraud",
+        "status": "scored",
+        "checks": {
+          "action": true,
+          "risk_level": true
+        },
+        "expected": {
+          "risk_level": "high|critical",
+          "recommended_action": "decline"
+        },
+        "output": {
+          "risk_level": "high",
+          "recommended_action": "decline",
+          "confidence": 0.95,
+          "summary": "Transaction flagged as high risk with 95% confidence. 3 of 3 analysis dimensions raised concerns. Recommended action: decline.",
+          "p1_fallback": false
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": null,
+        "llm_cost_usd": null
+      },
+      {
+        "id": "P1-03",
+        "title": "Account takeover: $2,399 of electronics from a new device on a foreign VPN",
+        "category": "fraud",
+        "status": "scored",
+        "checks": {
+          "action": true,
+          "risk_level": true
+        },
+        "expected": {
+          "risk_level": "high|critical",
+          "recommended_action": "decline"
+        },
+        "output": {
+          "risk_level": "high",
+          "recommended_action": "decline",
+          "confidence": 0.9,
+          "summary": "Transaction flagged as high risk with 90% confidence. 2 of 3 analysis dimensions raised concerns. Recommended action: decline.",
+          "p1_fallback": false
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": null,
+        "llm_cost_usd": null
+      },
+      {
+        "id": "P1-04",
+        "title": "Customer traveling abroad pays for dinner on their usual phone",
+        "category": "clean",
+        "status": "scored",
+        "checks": {
+          "action": true,
+          "risk_level": true
+        },
+        "expected": {
+          "risk_level": "low",
+          "recommended_action": "approve"
+        },
+        "output": {
+          "risk_level": "low",
+          "recommended_action": "approve",
+          "confidence": 0.94,
+          "summary": "Transaction appears legitimate (94% confidence). All analysis dimensions within normal parameters. Approved for processing.",
+          "p1_fallback": false
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": null,
+        "llm_cost_usd": null
+      },
+      {
+        "id": "P1-05",
+        "title": "Privacy-conscious customer always shops through a VPN",
+        "category": "clean",
+        "status": "scored",
+        "checks": {
+          "action": true,
+          "risk_level": true
+        },
+        "expected": {
+          "risk_level": "low|medium",
+          "recommended_action": "approve"
+        },
+        "output": {
+          "risk_level": "low",
+          "recommended_action": "approve",
+          "confidence": 0.93,
+          "summary": "Transaction appears legitimate (93% confidence). All analysis dimensions within normal parameters. Approved for processing.",
+          "p1_fallback": false
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": null,
+        "llm_cost_usd": null
+      },
+      {
+        "id": "P1-06",
+        "title": "Every signal at its worst: Tor, burst velocity, spoofed shared device, $3,500 in gift cards",
+        "category": "fraud",
+        "status": "scored",
+        "checks": {
+          "action": true,
+          "risk_level": true
+        },
+        "expected": {
+          "risk_level": "high|critical",
+          "recommended_action": "decline"
+        },
+        "output": {
+          "risk_level": "critical",
+          "recommended_action": "decline",
+          "confidence": 0.95,
+          "summary": "Transaction flagged as critical risk with 95% confidence. 3 of 3 analysis dimensions raised concerns. Recommended action: decline.",
+          "p1_fallback": false
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": null,
+        "llm_cost_usd": null
+      },
+      {
+        "id": "P1-07",
+        "title": "Customer with a new phone buys lunch from home",
+        "category": "clean",
+        "status": "scored",
+        "checks": {
+          "action": true,
+          "risk_level": true
+        },
+        "expected": {
+          "risk_level": "low|medium",
+          "recommended_action": "approve|review"
+        },
+        "output": {
+          "risk_level": "low",
+          "recommended_action": "approve",
+          "confidence": 0.93,
+          "summary": "Transaction appears legitimate (93% confidence). All analysis dimensions within normal parameters. Approved for processing.",
+          "p1_fallback": false
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": null,
+        "llm_cost_usd": null
+      },
+      {
+        "id": "P1-08",
+        "title": "Large furniture purchase from the customer's trusted laptop at home",
+        "category": "boundary",
+        "status": "scored",
+        "checks": {
+          "action": true,
+          "risk_level": true
+        },
+        "expected": {
+          "risk_level": "low|medium",
+          "recommended_action": "approve|review"
+        },
+        "output": {
+          "risk_level": "medium",
+          "recommended_action": "review",
+          "confidence": 0.7,
+          "summary": "Transaction shows mixed signals warranting human review (70% confidence). Some risk indicators present but not conclusive enough for automated decline.",
+          "p1_fallback": false
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": null,
+        "llm_cost_usd": null
+      },
+      {
+        "id": "P1-09",
+        "title": "Device farm: unrecognized device shared across accounts with a spoofed fingerprint",
+        "category": "fraud",
+        "status": "scored",
+        "checks": {
+          "action": true,
+          "risk_level": true
+        },
+        "expected": {
+          "risk_level": "medium|high",
+          "recommended_action": "review|decline"
+        },
+        "output": {
+          "risk_level": "medium",
+          "recommended_action": "review",
+          "confidence": 0.7,
+          "summary": "Transaction shows mixed signals warranting human review (70% confidence). Some risk indicators present but not conclusive enough for automated decline.",
+          "p1_fallback": false
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": null,
+        "llm_cost_usd": null
+      },
+      {
+        "id": "P1-10",
+        "title": "Ordinary order from a device never seen before, behind a VPN",
+        "category": "boundary",
+        "status": "scored",
+        "checks": {
+          "action": false,
+          "risk_level": false
+        },
+        "expected": {
+          "risk_level": "medium",
+          "recommended_action": "review"
+        },
+        "output": {
+          "risk_level": "low",
+          "recommended_action": "approve",
+          "confidence": 0.91,
+          "summary": "Transaction appears legitimate (91% confidence). All analysis dimensions within normal parameters. Approved for processing.",
+          "p1_fallback": false
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": null,
+        "llm_cost_usd": null
+      },
+      {
+        "id": "P1-11",
+        "title": "Several moderate signals on a trusted device: foreign VPN, a burst of purchases, a larger amount",
+        "category": "boundary",
+        "status": "scored",
+        "checks": {
+          "action": true,
+          "risk_level": true
+        },
+        "expected": {
+          "risk_level": "medium",
+          "recommended_action": "review"
+        },
+        "output": {
+          "risk_level": "medium",
+          "recommended_action": "review",
+          "confidence": 0.7,
+          "summary": "Transaction shows mixed signals warranting human review (70% confidence). Some risk indicators present but not conclusive enough for automated decline.",
+          "p1_fallback": false
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": null,
+        "llm_cost_usd": null
+      }
+    ],
+    "p2": [
+      {
+        "id": "P2-01",
+        "title": "Long-standing customer, ordinary order, normal browsing session",
+        "category": "clean",
+        "status": "scored",
+        "checks": {
+          "action": true,
+          "risk_level": true,
+          "specialist_velocity": true,
+          "specialist_identity": true,
+          "specialist_behavioral": true
+        },
+        "expected": {
+          "risk_level": "low",
+          "recommended_action": "approve",
+          "specialists": {
+            "velocity": "low",
+            "identity": "low",
+            "behavioral": "low"
+          }
+        },
+        "output": {
+          "risk_level": "low",
+          "recommended_action": "approve",
+          "confidence": 0.933,
+          "agreement_score": 1.0,
+          "specialists": {
+            "velocity": {
+              "risk_level": "low",
+              "risk_score": 0.11,
+              "recommended_action": "approve"
+            },
+            "identity": {
+              "risk_level": "low",
+              "risk_score": 0.05,
+              "recommended_action": "approve"
+            },
+            "behavioral": {
+              "risk_level": "low",
+              "risk_score": 0.0,
+              "recommended_action": "approve"
+            }
+          },
+          "summary": "All 3 specialists unanimously assess low risk (93% confidence). All 3 specialists agree on low risk. Unanimous consensus increases confidence in the assessment."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": null,
+        "llm_cost_usd": null
+      },
+      {
+        "id": "P2-02",
+        "title": "Loyal customer reorders from a saved cart in under thirty seconds",
+        "category": "false-positive-trap",
+        "status": "scored",
+        "checks": {
+          "action": true,
+          "risk_level": true,
+          "specialist_velocity": true,
+          "specialist_identity": true,
+          "specialist_behavioral": true
+        },
+        "expected": {
+          "risk_level": "low",
+          "recommended_action": "approve",
+          "specialists": {
+            "velocity": "low",
+            "identity": "low",
+            "behavioral": "low|medium"
+          }
+        },
+        "output": {
+          "risk_level": "low",
+          "recommended_action": "approve",
+          "confidence": 0.683,
+          "agreement_score": 0.667,
+          "specialists": {
+            "velocity": {
+              "risk_level": "low",
+              "risk_score": 0.097,
+              "recommended_action": "approve"
+            },
+            "identity": {
+              "risk_level": "low",
+              "risk_score": 0.05,
+              "recommended_action": "approve"
+            },
+            "behavioral": {
+              "risk_level": "medium",
+              "risk_score": 0.3,
+              "recommended_action": "review"
+            }
+          },
+          "summary": "Swarm assessment: low risk (68% confidence). velocity, identity agree while behavioral dissent. Majority (velocity, identity) assess low risk. behavioral dissents with medium risk. Leaning toward majority view but noting dissent for audit trail."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": null,
+        "llm_cost_usd": null
+      },
+      {
+        "id": "P2-03",
+        "title": "Scripted checkout on an established account (specialists disagree)",
+        "category": "disagreement",
+        "status": "scored",
+        "checks": {
+          "action": true,
+          "risk_level": true,
+          "specialist_velocity": true,
+          "specialist_identity": true,
+          "specialist_behavioral": true
+        },
+        "expected": {
+          "risk_level": "medium|high",
+          "recommended_action": "review|decline",
+          "specialists": {
+            "velocity": "low",
+            "identity": "low|medium",
+            "behavioral": "high"
+          }
+        },
+        "output": {
+          "risk_level": "medium",
+          "recommended_action": "review",
+          "confidence": 0.717,
+          "agreement_score": 0.333,
+          "specialists": {
+            "velocity": {
+              "risk_level": "low",
+              "risk_score": 0.086,
+              "recommended_action": "approve"
+            },
+            "identity": {
+              "risk_level": "low",
+              "risk_score": 0.05,
+              "recommended_action": "approve"
+            },
+            "behavioral": {
+              "risk_level": "high",
+              "risk_score": 0.95,
+              "recommended_action": "decline"
+            }
+          },
+          "summary": "Swarm assessment: medium risk (72% confidence). velocity, identity agree while behavioral dissent. Majority (velocity, identity) assess low risk. behavioral dissents with high risk. Leaning toward majority view but noting dissent for audit trail."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": null,
+        "llm_cost_usd": null
+      },
+      {
+        "id": "P2-04",
+        "title": "Synthetic identity: disposable email, days-old account, address mismatch, human-paced session",
+        "category": "fraud",
+        "status": "scored",
+        "checks": {
+          "action": false,
+          "risk_level": false,
+          "specialist_velocity": null,
+          "specialist_identity": true,
+          "specialist_behavioral": true
+        },
+        "expected": {
+          "risk_level": "high|critical",
+          "recommended_action": "decline",
+          "specialists": {
+            "velocity": null,
+            "identity": "high",
+            "behavioral": "low"
+          }
+        },
+        "output": {
+          "risk_level": "medium",
+          "recommended_action": "review",
+          "confidence": 0.517,
+          "agreement_score": 0.333,
+          "specialists": {
+            "velocity": {
+              "risk_level": "medium",
+              "risk_score": 0.6,
+              "recommended_action": "review"
+            },
+            "identity": {
+              "risk_level": "high",
+              "risk_score": 0.867,
+              "recommended_action": "decline"
+            },
+            "behavioral": {
+              "risk_level": "low",
+              "risk_score": 0.0,
+              "recommended_action": "approve"
+            }
+          },
+          "summary": "Swarm assessment: medium risk (52% confidence). velocity agree while identity, behavioral dissent. No clear consensus \u2014 agents are split across risk levels. This ambiguity itself is a risk signal warranting human review."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": null,
+        "llm_cost_usd": null
+      },
+      {
+        "id": "P2-05",
+        "title": "Fraud ring: chargeback history, linked accounts, burst velocity, VPN, rushed checkout",
+        "category": "fraud",
+        "status": "scored",
+        "checks": {
+          "action": true,
+          "risk_level": true,
+          "specialist_velocity": true,
+          "specialist_identity": true,
+          "specialist_behavioral": true
+        },
+        "expected": {
+          "risk_level": "high|critical",
+          "recommended_action": "decline",
+          "specialists": {
+            "velocity": "high|critical",
+            "identity": "high|critical",
+            "behavioral": "high|critical"
+          }
+        },
+        "output": {
+          "risk_level": "high",
+          "recommended_action": "decline",
+          "confidence": 0.9,
+          "agreement_score": 1.0,
+          "specialists": {
+            "velocity": {
+              "risk_level": "high",
+              "risk_score": 0.88,
+              "recommended_action": "decline"
+            },
+            "identity": {
+              "risk_level": "high",
+              "risk_score": 0.85,
+              "recommended_action": "decline"
+            },
+            "behavioral": {
+              "risk_level": "high",
+              "risk_score": 0.55,
+              "recommended_action": "decline"
+            }
+          },
+          "summary": "All 3 specialists unanimously assess high risk (90% confidence). All 3 specialists agree on high risk. Unanimous consensus increases confidence in the assessment."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": null,
+        "llm_cost_usd": null
+      },
+      {
+        "id": "P2-06",
+        "title": "Trusted customer's holiday shopping spree: several normal-sized purchases in an hour",
+        "category": "boundary",
+        "status": "scored",
+        "checks": {
+          "action": true,
+          "risk_level": true,
+          "specialist_velocity": true,
+          "specialist_identity": true,
+          "specialist_behavioral": true
+        },
+        "expected": {
+          "risk_level": "low|medium",
+          "recommended_action": "approve|review",
+          "specialists": {
+            "velocity": "medium|high",
+            "identity": "low",
+            "behavioral": "low"
+          }
+        },
+        "output": {
+          "risk_level": "low",
+          "recommended_action": "approve",
+          "confidence": 0.683,
+          "agreement_score": 0.667,
+          "specialists": {
+            "velocity": {
+              "risk_level": "medium",
+              "risk_score": 0.346,
+              "recommended_action": "review"
+            },
+            "identity": {
+              "risk_level": "low",
+              "risk_score": 0.05,
+              "recommended_action": "approve"
+            },
+            "behavioral": {
+              "risk_level": "low",
+              "risk_score": 0.0,
+              "recommended_action": "approve"
+            }
+          },
+          "summary": "Swarm assessment: low risk (68% confidence). identity, behavioral agree while velocity dissent. Majority (identity, behavioral) assess low risk. velocity dissents with medium risk. Leaning toward majority view but noting dissent for audit trail."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": null,
+        "llm_cost_usd": null
+      },
+      {
+        "id": "P2-07",
+        "title": "Tor exit node and a new device on an established account, everything else clean",
+        "category": "data-gap",
+        "status": "scored",
+        "checks": {
+          "action": false,
+          "risk_level": false,
+          "specialist_velocity": true,
+          "specialist_identity": false,
+          "specialist_behavioral": true
+        },
+        "expected": {
+          "risk_level": "medium|high",
+          "recommended_action": "review|decline",
+          "specialists": {
+            "velocity": "low",
+            "identity": "medium|high",
+            "behavioral": "low"
+          }
+        },
+        "output": {
+          "risk_level": "low",
+          "recommended_action": "approve",
+          "confidence": 0.933,
+          "agreement_score": 1.0,
+          "specialists": {
+            "velocity": {
+              "risk_level": "low",
+              "risk_score": 0.096,
+              "recommended_action": "approve"
+            },
+            "identity": {
+              "risk_level": "low",
+              "risk_score": 0.05,
+              "recommended_action": "approve"
+            },
+            "behavioral": {
+              "risk_level": "low",
+              "risk_score": 0.0,
+              "recommended_action": "approve"
+            }
+          },
+          "summary": "All 3 specialists unanimously assess low risk (93% confidence). All 3 specialists agree on low risk. Unanimous consensus increases confidence in the assessment."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": null,
+        "llm_cost_usd": null
+      },
+      {
+        "id": "P2-08",
+        "title": "Moderate anomalies in every dimension at once",
+        "category": "boundary",
+        "status": "scored",
+        "checks": {
+          "action": true,
+          "risk_level": true,
+          "specialist_velocity": true,
+          "specialist_identity": true,
+          "specialist_behavioral": true
+        },
+        "expected": {
+          "risk_level": "medium",
+          "recommended_action": "review",
+          "specialists": {
+            "velocity": "medium",
+            "identity": "medium",
+            "behavioral": "medium"
+          }
+        },
+        "output": {
+          "risk_level": "medium",
+          "recommended_action": "review",
+          "confidence": 0.783,
+          "agreement_score": 1.0,
+          "specialists": {
+            "velocity": {
+              "risk_level": "medium",
+              "risk_score": 0.361,
+              "recommended_action": "review"
+            },
+            "identity": {
+              "risk_level": "medium",
+              "risk_score": 0.4,
+              "recommended_action": "review"
+            },
+            "behavioral": {
+              "risk_level": "medium",
+              "risk_score": 0.3,
+              "recommended_action": "review"
+            }
+          },
+          "summary": "All 3 specialists unanimously assess medium risk (78% confidence). All 3 specialists agree on medium risk. Unanimous consensus increases confidence in the assessment."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": null,
+        "llm_cost_usd": null
+      },
+      {
+        "id": "P2-09",
+        "title": "First purchase by a new customer with an established email and verified details",
+        "category": "clean",
+        "status": "scored",
+        "checks": {
+          "action": true,
+          "risk_level": true,
+          "specialist_velocity": true,
+          "specialist_identity": true,
+          "specialist_behavioral": true
+        },
+        "expected": {
+          "risk_level": "low",
+          "recommended_action": "approve",
+          "specialists": {
+            "velocity": "low",
+            "identity": "low|medium",
+            "behavioral": "low"
+          }
+        },
+        "output": {
+          "risk_level": "low",
+          "recommended_action": "approve",
+          "confidence": 0.933,
+          "agreement_score": 1.0,
+          "specialists": {
+            "velocity": {
+              "risk_level": "low",
+              "risk_score": 0.101,
+              "recommended_action": "approve"
+            },
+            "identity": {
+              "risk_level": "low",
+              "risk_score": 0.225,
+              "recommended_action": "approve"
+            },
+            "behavioral": {
+              "risk_level": "low",
+              "risk_score": 0.0,
+              "recommended_action": "approve"
+            }
+          },
+          "summary": "All 3 specialists unanimously assess low risk (93% confidence). All 3 specialists agree on low risk. Unanimous consensus increases confidence in the assessment."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": null,
+        "llm_cost_usd": null
+      },
+      {
+        "id": "P2-10",
+        "title": "Customer with two past chargebacks makes an ordinary purchase",
+        "category": "disagreement",
+        "status": "scored",
+        "checks": {
+          "action": true,
+          "risk_level": true,
+          "specialist_velocity": true,
+          "specialist_identity": false,
+          "specialist_behavioral": true
+        },
+        "expected": {
+          "risk_level": "low|medium",
+          "recommended_action": "approve|review",
+          "specialists": {
+            "velocity": "low",
+            "identity": "medium|high",
+            "behavioral": "low"
+          }
+        },
+        "output": {
+          "risk_level": "low",
+          "recommended_action": "approve",
+          "confidence": 0.933,
+          "agreement_score": 1.0,
+          "specialists": {
+            "velocity": {
+              "risk_level": "low",
+              "risk_score": 0.1,
+              "recommended_action": "approve"
+            },
+            "identity": {
+              "risk_level": "low",
+              "risk_score": 0.3,
+              "recommended_action": "approve"
+            },
+            "behavioral": {
+              "risk_level": "low",
+              "risk_score": 0.0,
+              "recommended_action": "approve"
+            }
+          },
+          "summary": "All 3 specialists unanimously assess low risk (93% confidence). All 3 specialists agree on low risk. Unanimous consensus increases confidence in the assessment."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": null,
+        "llm_cost_usd": null
+      }
+    ],
+    "p3": [
+      {
+        "id": "P3-01",
+        "title": "Clean domestic individual with matching passport and utility bill",
+        "category": "clean",
+        "status": "scored",
+        "checks": {
+          "decision": true,
+          "risk_tier": true,
+          "escalation": true,
+          "screening": false,
+          "conditions": true
+        },
+        "expected": {
+          "decision": "approved",
+          "risk_tier": "low",
+          "was_escalated": false,
+          "sanctions_screening_required": true,
+          "edd_required": false
+        },
+        "output": {
+          "decision": "approved",
+          "risk_tier": "low",
+          "was_escalated": false,
+          "conditions": [],
+          "checklist": {
+            "document_intake": "completed",
+            "identity_verification": "completed",
+            "sanctions_screening": "skipped",
+            "risk_assessment": "completed"
+          },
+          "route": [
+            "document_intake",
+            "identity_verification",
+            "risk_assessment",
+            "final_decision"
+          ],
+          "supervisor_reasoning": [
+            "document_intake: Proceeding to document intake.",
+            "identity_verification: Proceeding to identity verification.",
+            "risk_assessment: Proceeding to risk assessment.",
+            "final_decision: All compliance steps completed. Routing to final decision."
+          ],
+          "sanctions": null,
+          "identity_confirmed": true,
+          "is_pep": false,
+          "document_quality": 0.977,
+          "document_issues": [],
+          "risk_composite": 0.1,
+          "reasoning": "Low risk \u2014 standard onboarding."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": null,
+        "llm_cost_usd": null
+      },
+      {
+        "id": "P3-02",
+        "title": "Low-risk UK software company with a clean director",
+        "category": "clean",
+        "status": "scored",
+        "checks": {
+          "decision": true,
+          "risk_tier": true,
+          "escalation": true,
+          "screening": true,
+          "conditions": true
+        },
+        "expected": {
+          "decision": "approved",
+          "risk_tier": "low",
+          "was_escalated": false,
+          "sanctions_screening_required": true,
+          "edd_required": false
+        },
+        "output": {
+          "decision": "approved",
+          "risk_tier": "low",
+          "was_escalated": false,
+          "conditions": [],
+          "checklist": {
+            "document_intake": "completed",
+            "identity_verification": "completed",
+            "sanctions_screening": "completed",
+            "risk_assessment": "completed"
+          },
+          "route": [
+            "document_intake",
+            "identity_verification",
+            "sanctions_screening",
+            "risk_assessment",
+            "final_decision"
+          ],
+          "supervisor_reasoning": [
+            "document_intake: Proceeding to document intake.",
+            "identity_verification: Proceeding to identity verification.",
+            "sanctions_screening: Proceeding to sanctions screening.",
+            "risk_assessment: Proceeding to risk assessment.",
+            "final_decision: All compliance steps completed. Routing to final decision."
+          ],
+          "sanctions": {
+            "any_hits": false,
+            "highest_match_score": 0.0
+          },
+          "identity_confirmed": true,
+          "is_pep": false,
+          "document_quality": 0.958,
+          "document_issues": [],
+          "risk_composite": 0.055,
+          "reasoning": "Low risk \u2014 standard onboarding."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": null,
+        "llm_cost_usd": null
+      },
+      {
+        "id": "P3-03",
+        "title": "Exact sanctions match: Iranian national on the OFAC and UN lists",
+        "category": "sanctions",
+        "status": "scored",
+        "checks": {
+          "decision": true,
+          "risk_tier": true,
+          "escalation": true,
+          "screening": true,
+          "conditions": null
+        },
+        "expected": {
+          "decision": "rejected",
+          "risk_tier": "prohibited",
+          "was_escalated": true,
+          "sanctions_screening_required": true
+        },
+        "output": {
+          "decision": "rejected",
+          "risk_tier": "prohibited",
+          "was_escalated": true,
+          "conditions": [
+            "PEP monitoring: family_member",
+            "Enhanced Due Diligence required"
+          ],
+          "checklist": {
+            "document_intake": "completed",
+            "identity_verification": "completed",
+            "sanctions_screening": "completed",
+            "risk_assessment": "pending"
+          },
+          "route": [
+            "document_intake",
+            "identity_verification",
+            "sanctions_screening",
+            "human_review"
+          ],
+          "supervisor_reasoning": [
+            "document_intake: Proceeding to document intake.",
+            "identity_verification: Proceeding to identity verification.",
+            "sanctions_screening: Proceeding to sanctions screening.",
+            "human_review: Strong sanctions match detected (score=1.0). Immediate escalation required."
+          ],
+          "sanctions": {
+            "any_hits": true,
+            "highest_match_score": 1.0
+          },
+          "identity_confirmed": true,
+          "is_pep": true,
+          "document_quality": 0.95,
+          "document_issues": [],
+          "risk_composite": null,
+          "reasoning": "Strong sanctions match detected (score: 1.0)."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": null,
+        "llm_cost_usd": null
+      },
+      {
+        "id": "P3-04",
+        "title": "UN-listed name, Iranian national resident in the US: screening skipped",
+        "category": "sanctions",
+        "status": "scored",
+        "checks": {
+          "decision": false,
+          "risk_tier": false,
+          "escalation": false,
+          "screening": false,
+          "conditions": null
+        },
+        "expected": {
+          "decision": "rejected|escalated",
+          "risk_tier": "high|prohibited",
+          "was_escalated": true,
+          "sanctions_screening_required": true
+        },
+        "output": {
+          "decision": "approved",
+          "risk_tier": "low",
+          "was_escalated": false,
+          "conditions": [],
+          "checklist": {
+            "document_intake": "completed",
+            "identity_verification": "completed",
+            "sanctions_screening": "skipped",
+            "risk_assessment": "completed"
+          },
+          "route": [
+            "document_intake",
+            "identity_verification",
+            "risk_assessment",
+            "final_decision"
+          ],
+          "supervisor_reasoning": [
+            "document_intake: Proceeding to document intake.",
+            "identity_verification: Proceeding to identity verification.",
+            "risk_assessment: Proceeding to risk assessment.",
+            "final_decision: All compliance steps completed. Routing to final decision."
+          ],
+          "sanctions": null,
+          "identity_confirmed": true,
+          "is_pep": false,
+          "document_quality": 0.963,
+          "document_issues": [],
+          "risk_composite": 0.1,
+          "reasoning": "Low risk \u2014 standard onboarding."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": null,
+        "llm_cost_usd": null
+      },
+      {
+        "id": "P3-05",
+        "title": "Transliteration variant of an OFAC-listed name (potential match)",
+        "category": "sanctions",
+        "status": "scored",
+        "checks": {
+          "decision": false,
+          "risk_tier": true,
+          "escalation": false,
+          "screening": true,
+          "conditions": null
+        },
+        "expected": {
+          "decision": "escalated",
+          "risk_tier": "medium|high",
+          "was_escalated": true,
+          "sanctions_screening_required": true
+        },
+        "output": {
+          "decision": "approved",
+          "risk_tier": "medium",
+          "was_escalated": false,
+          "conditions": [
+            "Annual review required"
+          ],
+          "checklist": {
+            "document_intake": "completed",
+            "identity_verification": "completed",
+            "sanctions_screening": "completed",
+            "risk_assessment": "completed"
+          },
+          "route": [
+            "document_intake",
+            "identity_verification",
+            "sanctions_screening",
+            "risk_assessment",
+            "final_decision"
+          ],
+          "supervisor_reasoning": [
+            "document_intake: Proceeding to document intake.",
+            "identity_verification: Proceeding to identity verification.",
+            "sanctions_screening: Proceeding to sanctions screening.",
+            "risk_assessment: Proceeding to risk assessment.",
+            "final_decision: All compliance steps completed. Routing to final decision."
+          ],
+          "sanctions": {
+            "any_hits": true,
+            "highest_match_score": 0.6
+          },
+          "identity_confirmed": true,
+          "is_pep": false,
+          "document_quality": 0.973,
+          "document_issues": [],
+          "risk_composite": 0.325,
+          "reasoning": "Medium risk \u2014 approved with standard monitoring."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": null,
+        "llm_cost_usd": null
+      },
+      {
+        "id": "P3-06",
+        "title": "Expired passport is the only problem",
+        "category": "documents",
+        "status": "scored",
+        "checks": {
+          "decision": false,
+          "risk_tier": null,
+          "escalation": null,
+          "screening": false,
+          "conditions": null
+        },
+        "expected": {
+          "decision": "escalated|rejected",
+          "risk_tier": null,
+          "was_escalated": null,
+          "sanctions_screening_required": true
+        },
+        "output": {
+          "decision": "approved",
+          "risk_tier": "low",
+          "was_escalated": false,
+          "conditions": [],
+          "checklist": {
+            "document_intake": "completed",
+            "identity_verification": "completed",
+            "sanctions_screening": "skipped",
+            "risk_assessment": "completed"
+          },
+          "route": [
+            "document_intake",
+            "identity_verification",
+            "risk_assessment",
+            "final_decision"
+          ],
+          "supervisor_reasoning": [
+            "document_intake: Proceeding to document intake.",
+            "identity_verification: Proceeding to identity verification.",
+            "risk_assessment: Proceeding to risk assessment.",
+            "final_decision: All compliance steps completed. Routing to final decision."
+          ],
+          "sanctions": null,
+          "identity_confirmed": true,
+          "is_pep": false,
+          "document_quality": 0.752,
+          "document_issues": [
+            "Low extraction confidence on document 1: 44%",
+            "Document 1 (passport) is expired"
+          ],
+          "risk_composite": 0.1,
+          "reasoning": "Low risk \u2014 standard onboarding."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": null,
+        "llm_cost_usd": null
+      },
+      {
+        "id": "P3-07",
+        "title": "Passport expired five weeks before the application date",
+        "category": "documents",
+        "status": "scored",
+        "checks": {
+          "decision": false,
+          "risk_tier": null,
+          "escalation": null,
+          "screening": false,
+          "conditions": null
+        },
+        "expected": {
+          "decision": "escalated|rejected",
+          "risk_tier": null,
+          "was_escalated": null,
+          "sanctions_screening_required": true
+        },
+        "output": {
+          "decision": "approved",
+          "risk_tier": "low",
+          "was_escalated": false,
+          "conditions": [],
+          "checklist": {
+            "document_intake": "completed",
+            "identity_verification": "completed",
+            "sanctions_screening": "skipped",
+            "risk_assessment": "completed"
+          },
+          "route": [
+            "document_intake",
+            "identity_verification",
+            "risk_assessment",
+            "final_decision"
+          ],
+          "supervisor_reasoning": [
+            "document_intake: Proceeding to document intake.",
+            "identity_verification: Proceeding to identity verification.",
+            "risk_assessment: Proceeding to risk assessment.",
+            "final_decision: All compliance steps completed. Routing to final decision."
+          ],
+          "sanctions": null,
+          "identity_confirmed": true,
+          "is_pep": false,
+          "document_quality": 0.966,
+          "document_issues": [],
+          "risk_composite": 0.1,
+          "reasoning": "Low risk \u2014 standard onboarding."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": null,
+        "llm_cost_usd": null
+      },
+      {
+        "id": "P3-08",
+        "title": "Passport name does not match the application name",
+        "category": "identity",
+        "status": "scored",
+        "checks": {
+          "decision": true,
+          "risk_tier": null,
+          "escalation": true,
+          "screening": false,
+          "conditions": null
+        },
+        "expected": {
+          "decision": "escalated",
+          "risk_tier": null,
+          "was_escalated": true,
+          "sanctions_screening_required": true
+        },
+        "output": {
+          "decision": "escalated",
+          "risk_tier": "high",
+          "was_escalated": true,
+          "conditions": [],
+          "checklist": {
+            "document_intake": "completed",
+            "identity_verification": "completed",
+            "sanctions_screening": "pending",
+            "risk_assessment": "pending"
+          },
+          "route": [
+            "document_intake",
+            "identity_verification",
+            "human_review"
+          ],
+          "supervisor_reasoning": [
+            "document_intake: Proceeding to document intake.",
+            "identity_verification: Proceeding to identity verification.",
+            "human_review: Identity verification failed. Applicant identity could not be confirmed."
+          ],
+          "sanctions": null,
+          "identity_confirmed": false,
+          "is_pep": false,
+          "document_quality": 0.964,
+          "document_issues": [],
+          "risk_composite": null,
+          "reasoning": "Applicant identity could not be confirmed."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": null,
+        "llm_cost_usd": null
+      },
+      {
+        "id": "P3-09",
+        "title": "Proof of address belongs to another person at another address",
+        "category": "identity",
+        "status": "scored",
+        "checks": {
+          "decision": false,
+          "risk_tier": null,
+          "escalation": false,
+          "screening": false,
+          "conditions": null
+        },
+        "expected": {
+          "decision": "escalated",
+          "risk_tier": null,
+          "was_escalated": true,
+          "sanctions_screening_required": true
+        },
+        "output": {
+          "decision": "approved",
+          "risk_tier": "low",
+          "was_escalated": false,
+          "conditions": [],
+          "checklist": {
+            "document_intake": "completed",
+            "identity_verification": "completed",
+            "sanctions_screening": "skipped",
+            "risk_assessment": "completed"
+          },
+          "route": [
+            "document_intake",
+            "identity_verification",
+            "risk_assessment",
+            "final_decision"
+          ],
+          "supervisor_reasoning": [
+            "document_intake: Proceeding to document intake.",
+            "identity_verification: Proceeding to identity verification.",
+            "risk_assessment: Proceeding to risk assessment.",
+            "final_decision: All compliance steps completed. Routing to final decision."
+          ],
+          "sanctions": null,
+          "identity_confirmed": true,
+          "is_pep": false,
+          "document_quality": 0.977,
+          "document_issues": [],
+          "risk_composite": 0.1,
+          "reasoning": "Low risk \u2014 standard onboarding."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": null,
+        "llm_cost_usd": null
+      },
+      {
+        "id": "P3-10",
+        "title": "Passport flagged for tampering by the authenticity check",
+        "category": "documents",
+        "status": "scored",
+        "checks": {
+          "decision": false,
+          "risk_tier": null,
+          "escalation": false,
+          "screening": false,
+          "conditions": null
+        },
+        "expected": {
+          "decision": "rejected|escalated",
+          "risk_tier": null,
+          "was_escalated": true,
+          "sanctions_screening_required": true
+        },
+        "output": {
+          "decision": "approved",
+          "risk_tier": "low",
+          "was_escalated": false,
+          "conditions": [],
+          "checklist": {
+            "document_intake": "completed",
+            "identity_verification": "completed",
+            "sanctions_screening": "skipped",
+            "risk_assessment": "completed"
+          },
+          "route": [
+            "document_intake",
+            "identity_verification",
+            "risk_assessment",
+            "final_decision"
+          ],
+          "supervisor_reasoning": [
+            "document_intake: Proceeding to document intake.",
+            "identity_verification: Proceeding to identity verification.",
+            "risk_assessment: Proceeding to risk assessment.",
+            "final_decision: All compliance steps completed. Routing to final decision."
+          ],
+          "sanctions": null,
+          "identity_confirmed": true,
+          "is_pep": false,
+          "document_quality": 0.815,
+          "document_issues": [
+            "Tampering detected on document 1"
+          ],
+          "risk_composite": 0.1,
+          "reasoning": "Low risk \u2014 standard onboarding."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": null,
+        "llm_cost_usd": null
+      },
+      {
+        "id": "P3-11",
+        "title": "Cash-intensive self-employment income declared just under $10,000 a month",
+        "category": "risk-tiering",
+        "status": "scored",
+        "checks": {
+          "decision": true,
+          "risk_tier": false,
+          "escalation": true,
+          "screening": false,
+          "conditions": null
+        },
+        "expected": {
+          "decision": "approved",
+          "risk_tier": "medium|high",
+          "was_escalated": false,
+          "sanctions_screening_required": true,
+          "edd_required": null
+        },
+        "output": {
+          "decision": "approved",
+          "risk_tier": "low",
+          "was_escalated": false,
+          "conditions": [],
+          "checklist": {
+            "document_intake": "completed",
+            "identity_verification": "completed",
+            "sanctions_screening": "skipped",
+            "risk_assessment": "completed"
+          },
+          "route": [
+            "document_intake",
+            "identity_verification",
+            "risk_assessment",
+            "final_decision"
+          ],
+          "supervisor_reasoning": [
+            "document_intake: Proceeding to document intake.",
+            "identity_verification: Proceeding to identity verification.",
+            "risk_assessment: Proceeding to risk assessment.",
+            "final_decision: All compliance steps completed. Routing to final decision."
+          ],
+          "sanctions": null,
+          "identity_confirmed": true,
+          "is_pep": false,
+          "document_quality": 0.963,
+          "document_issues": [],
+          "risk_composite": 0.1,
+          "reasoning": "Low risk \u2014 standard onboarding."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": null,
+        "llm_cost_usd": null
+      },
+      {
+        "id": "P3-12",
+        "title": "Foreign PEP (senior official) running a crypto exchange in Nigeria",
+        "category": "pep",
+        "status": "scored",
+        "checks": {
+          "decision": false,
+          "risk_tier": true,
+          "escalation": false,
+          "screening": true,
+          "conditions": null
+        },
+        "expected": {
+          "decision": "escalated",
+          "risk_tier": "high",
+          "was_escalated": true,
+          "sanctions_screening_required": true
+        },
+        "output": {
+          "decision": "approved",
+          "risk_tier": "high",
+          "was_escalated": false,
+          "conditions": [
+            "Enhanced Due Diligence required",
+            "Quarterly review scheduled",
+            "Enhanced transaction monitoring",
+            "PEP monitoring: senior_official"
+          ],
+          "checklist": {
+            "document_intake": "completed",
+            "identity_verification": "completed",
+            "sanctions_screening": "completed",
+            "risk_assessment": "completed"
+          },
+          "route": [
+            "document_intake",
+            "identity_verification",
+            "sanctions_screening",
+            "risk_assessment",
+            "final_decision"
+          ],
+          "supervisor_reasoning": [
+            "document_intake: Proceeding to document intake.",
+            "identity_verification: Proceeding to identity verification.",
+            "sanctions_screening: Proceeding to sanctions screening.",
+            "risk_assessment: Proceeding to risk assessment.",
+            "final_decision: All compliance steps completed. Routing to final decision."
+          ],
+          "sanctions": {
+            "any_hits": false,
+            "highest_match_score": 0.0
+          },
+          "identity_confirmed": true,
+          "is_pep": true,
+          "document_quality": 0.947,
+          "document_issues": [],
+          "risk_composite": 0.5465,
+          "reasoning": "High risk \u2014 approved with Enhanced Due Diligence."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": null,
+        "llm_cost_usd": null
+      },
+      {
+        "id": "P3-13",
+        "title": "Domestic PEP with an otherwise low-risk personal account",
+        "category": "pep",
+        "status": "scored",
+        "checks": {
+          "decision": true,
+          "risk_tier": true,
+          "escalation": null,
+          "screening": false,
+          "conditions": true
+        },
+        "expected": {
+          "decision": "approved|escalated",
+          "risk_tier": "medium|high",
+          "was_escalated": null,
+          "sanctions_screening_required": true,
+          "edd_required": true,
+          "pep_monitoring_required": true
+        },
+        "output": {
+          "decision": "approved",
+          "risk_tier": "medium",
+          "was_escalated": false,
+          "conditions": [
+            "Annual review required",
+            "PEP monitoring: senior_official",
+            "Enhanced Due Diligence required"
+          ],
+          "checklist": {
+            "document_intake": "completed",
+            "identity_verification": "completed",
+            "sanctions_screening": "skipped",
+            "risk_assessment": "completed"
+          },
+          "route": [
+            "document_intake",
+            "identity_verification",
+            "risk_assessment",
+            "final_decision"
+          ],
+          "supervisor_reasoning": [
+            "document_intake: Proceeding to document intake.",
+            "identity_verification: Proceeding to identity verification.",
+            "risk_assessment: Proceeding to risk assessment.",
+            "final_decision: All compliance steps completed. Routing to final decision."
+          ],
+          "sanctions": null,
+          "identity_confirmed": true,
+          "is_pep": true,
+          "document_quality": 0.975,
+          "document_issues": [],
+          "risk_composite": 0.276,
+          "reasoning": "Medium risk \u2014 approved with standard monitoring."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": null,
+        "llm_cost_usd": null
+      },
+      {
+        "id": "P3-14",
+        "title": "Brazilian property-management company, minor document variations",
+        "category": "risk-tiering",
+        "status": "scored",
+        "checks": {
+          "decision": true,
+          "risk_tier": false,
+          "escalation": null,
+          "screening": true,
+          "conditions": null
+        },
+        "expected": {
+          "decision": "approved",
+          "risk_tier": "medium|high",
+          "was_escalated": null,
+          "sanctions_screening_required": true
+        },
+        "output": {
+          "decision": "approved",
+          "risk_tier": "low",
+          "was_escalated": false,
+          "conditions": [],
+          "checklist": {
+            "document_intake": "completed",
+            "identity_verification": "completed",
+            "sanctions_screening": "completed",
+            "risk_assessment": "completed"
+          },
+          "route": [
+            "document_intake",
+            "identity_verification",
+            "sanctions_screening",
+            "risk_assessment",
+            "final_decision"
+          ],
+          "supervisor_reasoning": [
+            "document_intake: Proceeding to document intake.",
+            "identity_verification: Proceeding to identity verification.",
+            "sanctions_screening: Proceeding to sanctions screening.",
+            "risk_assessment: Proceeding to risk assessment.",
+            "final_decision: All compliance steps completed. Routing to final decision."
+          ],
+          "sanctions": {
+            "any_hits": false,
+            "highest_match_score": 0.0
+          },
+          "identity_confirmed": true,
+          "is_pep": false,
+          "document_quality": 0.966,
+          "document_issues": [],
+          "risk_composite": 0.175,
+          "reasoning": "Low risk \u2014 standard onboarding."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": null,
+        "llm_cost_usd": null
+      }
+    ]
+  }
+}

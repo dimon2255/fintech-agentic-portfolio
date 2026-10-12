@@ -43,6 +43,10 @@
     "action": true,
     "risk_level": true
   },
+  "P1-12": {
+    "action": true,
+    "risk_level": true
+  },
   "P2-01": {
     "action": true,
     "risk_level": true,
@@ -117,7 +121,7 @@
     "decision": true,
     "escalation": true,
     "risk_tier": true,
-    "screening": false
+    "screening": true
   },
   "P3-02": {
     "conditions": true,
@@ -133,10 +137,10 @@
     "screening": true
   },
   "P3-04": {
-    "decision": false,
-    "escalation": false,
-    "risk_tier": false,
-    "screening": false
+    "decision": true,
+    "escalation": true,
+    "risk_tier": true,
+    "screening": true
   },
   "P3-05": {
     "decision": false,
@@ -146,32 +150,32 @@
   },
   "P3-06": {
     "decision": false,
-    "screening": false
+    "screening": true
   },
   "P3-07": {
     "decision": false,
-    "screening": false
+    "screening": true
   },
   "P3-08": {
     "decision": true,
     "escalation": true,
-    "screening": false
+    "screening": true
   },
   "P3-09": {
     "decision": false,
     "escalation": false,
-    "screening": false
+    "screening": true
   },
   "P3-10": {
     "decision": false,
     "escalation": false,
-    "screening": false
+    "screening": true
   },
   "P3-11": {
     "decision": true,
     "escalation": true,
     "risk_tier": false,
-    "screening": false
+    "screening": true
   },
   "P3-12": {
     "decision": false,
@@ -183,11 +187,24 @@
     "conditions": true,
     "decision": true,
     "risk_tier": true,
-    "screening": false
+    "screening": true
   },
   "P3-14": {
     "decision": true,
     "risk_tier": false,
+    "screening": true
+  },
+  "P3-15": {
+    "decision": true,
+    "escalation": true,
+    "risk_tier": true,
+    "screening": true
+  },
+  "P3-16": {
+    "conditions": true,
+    "decision": true,
+    "escalation": true,
+    "risk_tier": true,
     "screening": true
   }
 }

@@ -1,0 +1,63 @@
+{
+  "id": "P3-15",
+  "title": "Exact EU-list name, Russian national resident in the UK, volume just under the old skip threshold",
+  "category": "sanctions",
+  "narrative": "A Russian national who lives in London applies for a personal account: salary income, $9,900 a month, just under the $10,000 level below which the platform used to skip sanctions screening for individuals resident in low-risk countries. His name, Viktor Petrov, exactly matches an entry on the EU Consolidated List, and the PEP source returns him as a close associate of a politically exposed person. His Russian passport and a UK utility bill are genuine and consistent with the application.",
+  "inputs": {
+    "application": {
+      "application_id": "P3-15-app",
+      "applicant_name": "Viktor Petrov",
+      "date_of_birth": "1981-09-03",
+      "nationality": "RU",
+      "country_of_residence": "GB",
+      "address": "18 Elgin Crescent, London W11 2JH",
+      "email": "v.petrov@example.com",
+      "phone": "+44 20 7946 0321",
+      "business_type": null,
+      "industry": null,
+      "expected_monthly_volume": 9900.0,
+      "source_of_funds": "Employment salary (shipping analyst)",
+      "documents_submitted": [
+        {
+          "document_type": "passport",
+          "document_number": "762056783",
+          "issuing_country": "RU",
+          "expiry_date": "2031-04-30",
+          "holder_name": "Viktor Petrov",
+          "holder_dob": "1981-09-03",
+          "holder_address": null
+        },
+        {
+          "document_type": "utility_bill",
+          "document_number": "TW-1363795242",
+          "issuing_country": "GB",
+          "expiry_date": null,
+          "holder_name": "Viktor Petrov",
+          "holder_dob": null,
+          "holder_address": "18 Elgin Crescent, London W11 2JH"
+        }
+      ],
+      "submitted_at": "2026-10-05T10:00:00"
+    }
+  },
+  "fixtures": {
+    "evidence": {
+      "documents.0.format_valid": true,
+      "documents.0.security_features_present": true,
+      "documents.0.tampering_detected": false,
+      "documents.0.is_correct_type": true,
+      "documents.1.format_valid": true,
+      "documents.1.security_features_present": true,
+      "documents.1.tampering_detected": false,
+      "documents.1.is_correct_type": true,
+      "identity.is_pep": true
+    }
+  },
+  "expected": {
+    "decision": "rejected|escalated",
+    "risk_tier": "high|prohibited",
+    "was_escalated": true,
+    "sanctions_screening_required": true
+  },
+  "rationale": "Same judgment as P3-04 on a different list, nationality, country of residence and volume: residence in a low-risk country and an expected volume just under a threshold do not exempt anyone from sanctions screening. Screening returns an exact match on the EU list. With a name-only match the analyst either confirms and rejects or holds the case pending disposition; both are acceptable. Approval is not. The scenario sits on the boundary of the removed skip rule, so it checks that the fix holds beyond the case that exposed the defect."
+}
