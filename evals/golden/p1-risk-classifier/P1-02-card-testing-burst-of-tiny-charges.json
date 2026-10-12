@@ -11,7 +11,7 @@
       "merchant_category": "digital_goods",
       "customer_id": "cust_10009",
       "customer_email": "p1-02.customer@example.com",
-      "ip_address": "73.1.1.2",
+      "ip_address": "73.1.1.126",
       "device_id": "dev_0000116c",
       "timestamp": "2026-10-10T18:42:00",
       "card_last_four": "4821",
@@ -34,7 +34,13 @@
       "geo.billing_geo_match": false,
       "device.device_known": false,
       "device.multiple_accounts_on_device": true,
-      "device.os_fingerprint_changed": false
+      "device.os_fingerprint_changed": false,
+      "geo.ip_country": "RU",
+      "geo.ip_city": "Moscow",
+      "geo.distance_from_usual_km": [
+        3000,
+        5000
+      ]
     }
   },
   "expected": {

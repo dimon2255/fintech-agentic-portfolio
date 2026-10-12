@@ -869,7 +869,7 @@
       },
       {
         "id": "P2-10",
-        "title": "Customer with two or three past chargebacks makes an ordinary purchase",
+        "title": "Customer with two past chargebacks makes an ordinary purchase",
         "category": "disagreement",
         "status": "scored",
         "checks": {
@@ -958,7 +958,7 @@
           "sanctions": null,
           "identity_confirmed": true,
           "is_pep": false,
-          "document_quality": 0.958,
+          "document_quality": 0.977,
           "document_issues": [],
           "risk_composite": 0.1,
           "reasoning": "Low risk \u2014 standard onboarding."
@@ -1011,7 +1011,7 @@
           },
           "identity_confirmed": true,
           "is_pep": false,
-          "document_quality": 0.97,
+          "document_quality": 0.958,
           "document_issues": [],
           "risk_composite": 0.055,
           "reasoning": "Low risk \u2014 standard onboarding."
@@ -1065,7 +1065,7 @@
           },
           "identity_confirmed": true,
           "is_pep": true,
-          "document_quality": 0.979,
+          "document_quality": 0.95,
           "document_issues": [],
           "risk_composite": null,
           "reasoning": "Strong sanctions match detected (score: 1.0)."
@@ -1113,7 +1113,7 @@
           "sanctions": null,
           "identity_confirmed": true,
           "is_pep": false,
-          "document_quality": 0.968,
+          "document_quality": 0.963,
           "document_issues": [],
           "risk_composite": 0.1,
           "reasoning": "Low risk \u2014 standard onboarding."
@@ -1167,7 +1167,7 @@
           },
           "identity_confirmed": true,
           "is_pep": false,
-          "document_quality": 0.972,
+          "document_quality": 0.973,
           "document_issues": [],
           "risk_composite": 0.325,
           "reasoning": "Medium risk \u2014 approved with standard monitoring."
@@ -1215,9 +1215,9 @@
           "sanctions": null,
           "identity_confirmed": true,
           "is_pep": false,
-          "document_quality": 0.813,
+          "document_quality": 0.752,
           "document_issues": [
-            "Low extraction confidence on document 1: 69%",
+            "Low extraction confidence on document 1: 44%",
             "Document 1 (passport) is expired"
           ],
           "risk_composite": 0.1,
@@ -1266,7 +1266,7 @@
           "sanctions": null,
           "identity_confirmed": true,
           "is_pep": false,
-          "document_quality": 0.964,
+          "document_quality": 0.966,
           "document_issues": [],
           "risk_composite": 0.1,
           "reasoning": "Low risk \u2014 standard onboarding."
@@ -1313,7 +1313,7 @@
           "sanctions": null,
           "identity_confirmed": false,
           "is_pep": false,
-          "document_quality": 0.96,
+          "document_quality": 0.964,
           "document_issues": [],
           "risk_composite": null,
           "reasoning": "Applicant identity could not be confirmed."
@@ -1361,7 +1361,7 @@
           "sanctions": null,
           "identity_confirmed": true,
           "is_pep": false,
-          "document_quality": 0.961,
+          "document_quality": 0.977,
           "document_issues": [],
           "risk_composite": 0.1,
           "reasoning": "Low risk \u2014 standard onboarding."
@@ -1409,7 +1409,7 @@
           "sanctions": null,
           "identity_confirmed": true,
           "is_pep": false,
-          "document_quality": 0.818,
+          "document_quality": 0.815,
           "document_issues": [
             "Tampering detected on document 1"
           ],
@@ -1460,7 +1460,7 @@
           "sanctions": null,
           "identity_confirmed": true,
           "is_pep": false,
-          "document_quality": 0.965,
+          "document_quality": 0.963,
           "document_issues": [],
           "risk_composite": 0.1,
           "reasoning": "Low risk \u2014 standard onboarding."
@@ -1517,7 +1517,7 @@
           },
           "identity_confirmed": true,
           "is_pep": true,
-          "document_quality": 0.948,
+          "document_quality": 0.947,
           "document_issues": [],
           "risk_composite": 0.5465,
           "reasoning": "High risk \u2014 approved with Enhanced Due Diligence."
@@ -1571,7 +1571,7 @@
           "sanctions": null,
           "identity_confirmed": true,
           "is_pep": true,
-          "document_quality": 0.965,
+          "document_quality": 0.975,
           "document_issues": [],
           "risk_composite": 0.276,
           "reasoning": "Medium risk \u2014 approved with standard monitoring."
@@ -1623,7 +1623,7 @@
           },
           "identity_confirmed": true,
           "is_pep": false,
-          "document_quality": 0.975,
+          "document_quality": 0.966,
           "document_issues": [],
           "risk_composite": 0.175,
           "reasoning": "Low risk \u2014 standard onboarding."

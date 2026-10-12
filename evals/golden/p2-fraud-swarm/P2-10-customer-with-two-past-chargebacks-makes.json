@@ -1,8 +1,8 @@
 {
   "id": "P2-10",
-  "title": "Customer with two or three past chargebacks makes an ordinary purchase",
+  "title": "Customer with two past chargebacks makes an ordinary purchase",
   "category": "disagreement",
-  "narrative": "An established customer (years-old Gmail, verified phone, matching address) with two or three chargebacks on record buys $72 of goods on their usual phone from home, in a normal session, at normal frequency.",
+  "narrative": "An established customer (years-old Gmail, verified phone, matching address) with two chargebacks on record buys $72 of goods on their usual phone from home, in a normal session, at normal frequency.",
   "inputs": {
     "transaction": {
       "transaction_id": "p2-10-txn",
@@ -10,8 +10,8 @@
       "currency": "USD",
       "merchant_category": "online_retail",
       "customer_id": "cust_10015",
-      "customer_email": "casey.nguyen24@gmail.com",
-      "ip_address": "73.1.1.1",
+      "customer_email": "casey.nguyen847@gmail.com",
+      "ip_address": "73.1.1.33",
       "device_id": "dev_0000101d",
       "timestamp": "2026-10-10T18:42:00",
       "card_last_four": "4821",
@@ -49,10 +49,7 @@
         1,
         3
       ],
-      "identity.previous_chargebacks": [
-        2,
-        3
-      ],
+      "identity.previous_chargebacks": 2,
       "identity.account_age_days": [
         700,
         1825
@@ -72,7 +69,13 @@
       "behavioral.typing_pattern_anomaly": false,
       "behavioral.mouse_movement_anomaly": false,
       "behavioral.time_of_day_unusual": false,
-      "behavioral.navigation_pattern": "normal"
+      "behavioral.navigation_pattern": "normal",
+      "geo.ip_country": "US",
+      "geo.ip_city": "New York",
+      "identity.name_email_match_score": [
+        0.7,
+        1.0
+      ]
     }
   },
   "expected": {
