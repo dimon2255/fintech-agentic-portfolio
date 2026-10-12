@@ -43,23 +43,26 @@ Transaction ──▶ [Gather Signals] ──▶ [Assess Risk] ──▶ RiskAss
 ```
 
 **Key design decisions:**
-- Async parallel tool execution (~0.3s vs ~0.9s sequential)
+- Async parallel tool execution (~0.2s vs ~0.6s sequential with the simulated 0.2s tool latency)
 - Pydantic models enforce schema validation on all data
-- Model-agnostic: supports OpenAI and Anthropic via env config
+- Provider switch: Anthropic or OpenAI via env config (only the Anthropic path has been evaluated)
 - Synthetic data only — zero real PII
 
 ## Quick Start
 
 ```bash
-# Clone and install
-cd project-1-risk-classifier
+# Install (from the repo root, where pyproject.toml lives)
 pip install -e ".[dev]"
 
-# Configure (copy and fill in your API key)
-cp .env.example .env
+# Configure: mock mode needs no key; uncomment one in .env for LLM mode
+cp project-1-risk-classifier/.env.example project-1-risk-classifier/.env
 
 # Run the classifier
+cd project-1-risk-classifier
 python -m src.main
+
+# Run Streamlit demo
+streamlit run app.py
 ```
 
 ## Tech Stack
@@ -84,7 +87,7 @@ python -m src.main
 ## Trade-offs
 
 - **LLM latency vs rule engines**: This agent takes ~1-2s per transaction (LLM inference). Production fraud systems need <200ms. This design is better suited for secondary review or batch analysis, not inline payment authorization.
-- **Cost**: Each assessment costs ~$0.01-0.05 in API tokens. At 1M transactions/day, that's $10K-50K/month in LLM costs alone. See [costs.md](docs/costs.md) for detailed analysis.
+- **Cost**: Each assessment costs about $0.004 in API tokens with Claude Haiku 4.5 (measured: 845 input and 637 output tokens on average). At 1M transactions/day, that's about $120K/month in LLM costs alone. See [costs.md](docs/costs.md) for detailed analysis.
 - **Determinism**: LLM reasoning can vary between runs. The Pydantic output schema constrains the structure, but reasoning narratives may differ.
 
 ## What I'd Do Differently
@@ -92,7 +95,7 @@ python -m src.main
 - **Add caching**: Repeat customers with known devices could skip the full LLM reasoning and use cached assessments with a TTL
 - **Hybrid approach**: Use a fast ML model (like Kount's) for the 80% of clearly safe/risky transactions, and route only ambiguous cases to the LLM agent. Best of both worlds
 - **Streaming**: Stream the reasoning chain as it's generated so human reviewers can see the agent "thinking" in real-time
-- **Evaluation framework**: Build a systematic eval pipeline with labeled transactions to measure precision/recall against known fraud patterns. A first version now exists: the repository-level [golden-set evaluation](../docs/evals/golden-set-report.md) replays 11 labeled transactions through this agent, in rules mode as a CI gate and on Claude Haiku 4.5 in three repeated runs
+- **Evaluation framework**: Build a systematic eval pipeline with labeled transactions to measure precision/recall against known fraud patterns. A first version now exists: the repository-level [golden-set evaluation](../docs/evals/golden-set-report.md) replays 12 labeled transactions through this agent, in rules mode as a CI gate and with Claude Haiku 4.5
 
 ## Next: Project 2
 

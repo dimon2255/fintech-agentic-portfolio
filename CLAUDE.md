@@ -8,7 +8,7 @@ A 3-project fintech portfolio demonstrating agentic AI for fraud detection and c
 
 - **Project 1** (`project-1-risk-classifier/`): Single LangGraph agent — async parallel tool execution → LLM reasoning → explainable risk assessment
 - **Project 2** (`project-2-fraud-swarm/`): Multi-agent swarm — 3 specialist agents (velocity, identity, behavioral) fan-out in parallel → adjudicator debate/resolution → final verdict
-- **Project 3** (`project-3-kyc-platform/`): Supervisor hub-and-spoke — 4 specialist agents (document intake, identity, sanctions, risk) orchestrated by a supervisor with conditional routing, skip logic, and human-in-the-loop escalation
+- **Project 3** (`project-3-kyc-platform/`): Supervisor hub-and-spoke — 4 specialist agents (document intake, identity, sanctions, risk) orchestrated by a supervisor with conditional routing, mandatory sanctions screening, and human-in-the-loop escalation
 
 ## Commands
 
@@ -24,7 +24,7 @@ python -m src.main                    # from project-1-risk-classifier/
 # Run Project 2 swarm
 python -m src.main                    # from project-2-fraud-swarm/
 # Run Project 3 KYC platform
-python -m src.main                    # from project-3-kyc-platform/
+python -m src                         # from project-3-kyc-platform/
 
 # Streamlit demos
 streamlit run project-1-risk-classifier/app.py

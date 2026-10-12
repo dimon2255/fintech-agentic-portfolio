@@ -1,0 +1,3324 @@
+{
+  "tier": "llm",
+  "model": "claude-haiku-4-5-20251001",
+  "product": "this checkout",
+  "versions": {
+    "python": "3.12.1",
+    "langgraph": "1.1.3",
+    "langchain-core": "1.2.20",
+    "langchain-anthropic": "1.4.0",
+    "anthropic": "0.86.0",
+    "pydantic": "2.12.5"
+  },
+  "summary": {
+    "p1": {
+      "project": "p1",
+      "scenarios": 12,
+      "scored": 12,
+      "errors": 0,
+      "harness_errors": 0,
+      "fallbacks": 0,
+      "skipped": 0,
+      "headline_check": "action",
+      "headline": {
+        "hits": 10,
+        "total": 12,
+        "pct": 83.33333333333333
+      },
+      "checks": {
+        "action": {
+          "hits": 10,
+          "total": 12,
+          "pct": 83.33333333333333
+        },
+        "risk_level": {
+          "hits": 10,
+          "total": 12,
+          "pct": 83.33333333333333
+        }
+      },
+      "all_checks": {
+        "hits": 9,
+        "total": 12,
+        "pct": 75.0
+      },
+      "legit_approved": {
+        "hits": 1,
+        "total": 3,
+        "pct": 33.333333333333336
+      },
+      "wrongly_approved": {
+        "hits": 0,
+        "total": 6,
+        "pct": 0.0
+      }
+    },
+    "p2": {
+      "project": "p2",
+      "scenarios": 10,
+      "scored": 10,
+      "errors": 0,
+      "harness_errors": 0,
+      "fallbacks": 0,
+      "skipped": 0,
+      "headline_check": "action",
+      "headline": {
+        "hits": 8,
+        "total": 10,
+        "pct": 80.0
+      },
+      "checks": {
+        "action": {
+          "hits": 8,
+          "total": 10,
+          "pct": 80.0
+        },
+        "risk_level": {
+          "hits": 8,
+          "total": 10,
+          "pct": 80.0
+        },
+        "specialist_velocity": {
+          "hits": 9,
+          "total": 9,
+          "pct": 100.0
+        },
+        "specialist_identity": {
+          "hits": 8,
+          "total": 10,
+          "pct": 80.0
+        },
+        "specialist_behavioral": {
+          "hits": 9,
+          "total": 10,
+          "pct": 90.0
+        }
+      },
+      "all_checks": {
+        "hits": 6,
+        "total": 10,
+        "pct": 60.0
+      },
+      "legit_approved": {
+        "hits": 2,
+        "total": 3,
+        "pct": 66.66666666666667
+      },
+      "wrongly_approved": {
+        "hits": 0,
+        "total": 5,
+        "pct": 0.0
+      }
+    },
+    "p3": {
+      "project": "p3",
+      "scenarios": 16,
+      "scored": 16,
+      "errors": 0,
+      "harness_errors": 0,
+      "fallbacks": 0,
+      "skipped": 0,
+      "headline_check": "decision",
+      "headline": {
+        "hits": 15,
+        "total": 16,
+        "pct": 93.75
+      },
+      "checks": {
+        "decision": {
+          "hits": 15,
+          "total": 16,
+          "pct": 93.75
+        },
+        "risk_tier": {
+          "hits": 9,
+          "total": 11,
+          "pct": 81.81818181818181
+        },
+        "escalation": {
+          "hits": 12,
+          "total": 12,
+          "pct": 100.0
+        },
+        "screening": {
+          "hits": 16,
+          "total": 16,
+          "pct": 100.0
+        },
+        "conditions": {
+          "hits": 4,
+          "total": 4,
+          "pct": 100.0
+        }
+      },
+      "all_checks": {
+        "hits": 13,
+        "total": 16,
+        "pct": 81.25
+      },
+      "legit_approved": {
+        "hits": 5,
+        "total": 5,
+        "pct": 100.0
+      },
+      "wrongly_approved": {
+        "hits": 1,
+        "total": 10,
+        "pct": 10.0
+      }
+    }
+  },
+  "projects": {
+    "p1": [
+      {
+        "id": "P1-01",
+        "title": "Regular grocery purchase on the customer's own phone",
+        "category": "clean",
+        "status": "scored",
+        "checks": {
+          "action": true,
+          "risk_level": true
+        },
+        "expected": {
+          "risk_level": "low",
+          "recommended_action": "approve"
+        },
+        "output": {
+          "risk_level": "low",
+          "recommended_action": "approve",
+          "confidence": 0.94,
+          "summary": "This transaction presents minimal fraud risk. The customer is using a trusted, established device from their home region with normal spending velocity and amount. All risk signals are aligned and indicate legitimate customer activity.",
+          "p1_fallback": false
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": {
+          "calls": 1,
+          "api_errors": 0,
+          "error_types": [],
+          "input_tokens": 844,
+          "output_tokens": 559,
+          "models": {
+            "claude-haiku-4-5-20251001": 1
+          },
+          "stop_reasons": {
+            "end_turn": 1
+          },
+          "replies": [
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 559,
+              "head": "```json\n{\n  \"risk_level\": \"low\",\n  \"confidence\": 0.94,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"Transaction Velocity\",\n      \"observation\": \"1 transaction "
+            }
+          ]
+        },
+        "llm_cost_usd": 0.0036390000000000003
+      },
+      {
+        "id": "P1-02",
+        "title": "Card-testing burst of tiny charges from a shared device behind a foreign VPN",
+        "category": "fraud",
+        "status": "scored",
+        "checks": {
+          "action": true,
+          "risk_level": true
+        },
+        "expected": {
+          "risk_level": "high|critical",
+          "recommended_action": "decline"
+        },
+        "output": {
+          "risk_level": "critical",
+          "recommended_action": "decline",
+          "confidence": 0.94,
+          "summary": "Critical fraud risk detected. Transaction exhibits classic account takeover indicators: rapid velocity spike with small test amounts, US customer transacting through Russian VPN from 4,334 km away, and brand new device hosting multiple accounts. Immediate decline and account security review recommended.",
+          "p1_fallback": false
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": {
+          "calls": 1,
+          "api_errors": 0,
+          "error_types": [],
+          "input_tokens": 848,
+          "output_tokens": 650,
+          "models": {
+            "claude-haiku-4-5-20251001": 1
+          },
+          "stop_reasons": {
+            "end_turn": 1
+          },
+          "replies": [
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 650,
+              "head": "```json\n{\n  \"risk_level\": \"critical\",\n  \"confidence\": 0.94,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"Transaction Velocity\",\n      \"observation\": \"8 transac"
+            }
+          ]
+        },
+        "llm_cost_usd": 0.004098
+      },
+      {
+        "id": "P1-03",
+        "title": "Account takeover: $2,399 of electronics from a new device on a foreign VPN",
+        "category": "fraud",
+        "status": "scored",
+        "checks": {
+          "action": true,
+          "risk_level": true
+        },
+        "expected": {
+          "risk_level": "high|critical",
+          "recommended_action": "decline"
+        },
+        "output": {
+          "risk_level": "high",
+          "recommended_action": "decline",
+          "confidence": 0.92,
+          "summary": "This transaction exhibits multiple converging high-risk signals: a 21x spike in transaction amount, access from a VPN-masked Nigerian IP address 3,747 km from the customer's usual location with billing mismatch, and a completely new device with no trust history. The alignment of all three risk dimensions strongly suggests account compromise or fraudulent activity. Immediate decline and customer ve",
+          "p1_fallback": false
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": {
+          "calls": 1,
+          "api_errors": 0,
+          "error_types": [],
+          "input_tokens": 846,
+          "output_tokens": 687,
+          "models": {
+            "claude-haiku-4-5-20251001": 1
+          },
+          "stop_reasons": {
+            "end_turn": 1
+          },
+          "replies": [
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 687,
+              "head": "```json\n{\n  \"risk_level\": \"high\",\n  \"confidence\": 0.92,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"Transaction Velocity\",\n      \"observation\": \"Transaction a"
+            }
+          ]
+        },
+        "llm_cost_usd": 0.004281
+      },
+      {
+        "id": "P1-04",
+        "title": "Customer traveling abroad pays for dinner on their usual phone",
+        "category": "clean",
+        "status": "scored",
+        "checks": {
+          "action": false,
+          "risk_level": false
+        },
+        "expected": {
+          "risk_level": "low",
+          "recommended_action": "approve"
+        },
+        "output": {
+          "risk_level": "medium",
+          "recommended_action": "review",
+          "confidence": 0.78,
+          "summary": "Transaction presents a medium-risk profile driven primarily by geographic mismatch (UK IP, US billing) that conflicts with an otherwise trusted device and appropriate spending pattern. The absence of anonymization tools and moderate transaction velocity suggest possible legitimate travel, but the location discrepancy warrants manual review to confirm customer authorization before approval.",
+          "p1_fallback": false
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": {
+          "calls": 1,
+          "api_errors": 0,
+          "error_types": [],
+          "input_tokens": 844,
+          "output_tokens": 615,
+          "models": {
+            "claude-haiku-4-5-20251001": 1
+          },
+          "stop_reasons": {
+            "end_turn": 1
+          },
+          "replies": [
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 615,
+              "head": "```json\n{\n  \"risk_level\": \"medium\",\n  \"confidence\": 0.78,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"Transaction Velocity\",\n      \"observation\": \"19 transact"
+            }
+          ]
+        },
+        "llm_cost_usd": 0.003919
+      },
+      {
+        "id": "P1-05",
+        "title": "Privacy-conscious customer always shops through a VPN",
+        "category": "clean",
+        "status": "scored",
+        "checks": {
+          "action": false,
+          "risk_level": true
+        },
+        "expected": {
+          "risk_level": "low|medium",
+          "recommended_action": "approve"
+        },
+        "output": {
+          "risk_level": "medium",
+          "recommended_action": "review",
+          "confidence": 0.78,
+          "summary": "Transaction shows conflicting risk signals. While device trust, transaction velocity, and billing geography are all favorable, the active VPN combined with 123km geographic deviation from usual location creates uncertainty about transaction legitimacy. Recommend manual review to verify customer identity before processing, particularly given the VPN obfuscation which prevents confident geolocation ",
+          "p1_fallback": false
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": {
+          "calls": 1,
+          "api_errors": 0,
+          "error_types": [],
+          "input_tokens": 846,
+          "output_tokens": 613,
+          "models": {
+            "claude-haiku-4-5-20251001": 1
+          },
+          "stop_reasons": {
+            "end_turn": 1
+          },
+          "replies": [
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 613,
+              "head": "```json\n{\n  \"risk_level\": \"medium\",\n  \"confidence\": 0.78,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"Transaction Velocity\",\n      \"observation\": \"1 transacti"
+            }
+          ]
+        },
+        "llm_cost_usd": 0.0039109999999999995
+      },
+      {
+        "id": "P1-06",
+        "title": "Every signal at its worst: Tor, burst velocity, spoofed shared device, $3,500 in gift cards",
+        "category": "fraud",
+        "status": "scored",
+        "checks": {
+          "action": true,
+          "risk_level": true
+        },
+        "expected": {
+          "risk_level": "high|critical",
+          "recommended_action": "decline"
+        },
+        "output": {
+          "risk_level": "critical",
+          "recommended_action": "decline",
+          "confidence": 0.98,
+          "summary": "This transaction presents critical fraud risk across all analysis dimensions. The combination of extreme transaction velocity (37x normal amount), gift card merchant category, anonymized access from Russia, and a brand new device with multiple accounts strongly indicates organized fraud or account compromise. Immediate decline and account review are warranted.",
+          "p1_fallback": false
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": {
+          "calls": 1,
+          "api_errors": 0,
+          "error_types": [],
+          "input_tokens": 848,
+          "output_tokens": 609,
+          "models": {
+            "claude-haiku-4-5-20251001": 1
+          },
+          "stop_reasons": {
+            "end_turn": 1
+          },
+          "replies": [
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 609,
+              "head": "```json\n{\n  \"risk_level\": \"critical\",\n  \"confidence\": 0.98,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"Transaction Velocity\",\n      \"observation\": \"8 transac"
+            }
+          ]
+        },
+        "llm_cost_usd": 0.0038929999999999998
+      },
+      {
+        "id": "P1-07",
+        "title": "Customer with a new phone buys lunch from home",
+        "category": "clean",
+        "status": "scored",
+        "checks": {
+          "action": true,
+          "risk_level": true
+        },
+        "expected": {
+          "risk_level": "low|medium",
+          "recommended_action": "approve|review"
+        },
+        "output": {
+          "risk_level": "medium",
+          "recommended_action": "review",
+          "confidence": 0.78,
+          "summary": "This transaction presents moderate risk primarily due to an unknown device with low trust score, but all other signals (velocity, geolocation, amount consistency) are clean and normal. The modest transaction amount and restaurant merchant category are consistent with everyday spending. Recommend device verification review rather than automatic decline.",
+          "p1_fallback": false
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": {
+          "calls": 1,
+          "api_errors": 0,
+          "error_types": [],
+          "input_tokens": 844,
+          "output_tokens": 670,
+          "models": {
+            "claude-haiku-4-5-20251001": 1
+          },
+          "stop_reasons": {
+            "end_turn": 1
+          },
+          "replies": [
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 670,
+              "head": "```json\n{\n  \"risk_level\": \"medium\",\n  \"confidence\": 0.78,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"Transaction Velocity\",\n      \"observation\": \"1 transacti"
+            }
+          ]
+        },
+        "llm_cost_usd": 0.004194
+      },
+      {
+        "id": "P1-08",
+        "title": "Large furniture purchase from the customer's trusted laptop at home",
+        "category": "boundary",
+        "status": "scored",
+        "checks": {
+          "action": true,
+          "risk_level": true
+        },
+        "expected": {
+          "risk_level": "low|medium",
+          "recommended_action": "approve|review"
+        },
+        "output": {
+          "risk_level": "low",
+          "recommended_action": "approve",
+          "confidence": 0.85,
+          "summary": "This transaction presents low fraud risk despite the elevated amount relative to customer history. The combination of a trusted, established device, clean geolocation with no anonymization, and absence of velocity red flags strongly suggests a legitimate large purchase. The 9.5x amount deviation is explained by the furniture category and customer's infrequent transaction pattern rather than fraudu",
+          "p1_fallback": false
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": {
+          "calls": 1,
+          "api_errors": 0,
+          "error_types": [],
+          "input_tokens": 845,
+          "output_tokens": 664,
+          "models": {
+            "claude-haiku-4-5-20251001": 1
+          },
+          "stop_reasons": {
+            "end_turn": 1
+          },
+          "replies": [
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 664,
+              "head": "```json\n{\n  \"risk_level\": \"low\",\n  \"confidence\": 0.85,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"Transaction Velocity\",\n      \"observation\": \"Transaction am"
+            }
+          ]
+        },
+        "llm_cost_usd": 0.004165
+      },
+      {
+        "id": "P1-09",
+        "title": "Device farm: unrecognized device shared across accounts with a spoofed fingerprint",
+        "category": "fraud",
+        "status": "scored",
+        "checks": {
+          "action": true,
+          "risk_level": true
+        },
+        "expected": {
+          "risk_level": "medium|high",
+          "recommended_action": "review|decline"
+        },
+        "output": {
+          "risk_level": "high",
+          "recommended_action": "review",
+          "confidence": 0.87,
+          "summary": "Transaction shows normal velocity and clean geolocation patterns consistent with legitimate customer behavior. However, the device fingerprint presents critical anomalies: unknown device, OS fingerprint changes, and multiple accounts detected, yielding a 0.99 device risk score. This conflict between positive behavioral signals and severe device-level red flags requires manual review to determine i",
+          "p1_fallback": false
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": {
+          "calls": 1,
+          "api_errors": 0,
+          "error_types": [],
+          "input_tokens": 844,
+          "output_tokens": 658,
+          "models": {
+            "claude-haiku-4-5-20251001": 1
+          },
+          "stop_reasons": {
+            "end_turn": 1
+          },
+          "replies": [
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 658,
+              "head": "```json\n{\n  \"risk_level\": \"high\",\n  \"confidence\": 0.87,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"Transaction Velocity\",\n      \"observation\": \"1 transaction"
+            }
+          ]
+        },
+        "llm_cost_usd": 0.004134
+      },
+      {
+        "id": "P1-10",
+        "title": "Ordinary order from a device never seen before, behind a VPN",
+        "category": "boundary",
+        "status": "scored",
+        "checks": {
+          "action": true,
+          "risk_level": true
+        },
+        "expected": {
+          "risk_level": "medium",
+          "recommended_action": "review"
+        },
+        "output": {
+          "risk_level": "medium",
+          "recommended_action": "review",
+          "confidence": 0.78,
+          "summary": "Transaction shows normal spending velocity and billing consistency, but the combination of a brand-new unknown device and VPN usage raises authentication concerns. While the $110 amount is modest and within customer norms, the technical indicators suggest either account compromise or unusual access patterns that require verification before approval.",
+          "p1_fallback": false
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": {
+          "calls": 1,
+          "api_errors": 0,
+          "error_types": [],
+          "input_tokens": 846,
+          "output_tokens": 640,
+          "models": {
+            "claude-haiku-4-5-20251001": 1
+          },
+          "stop_reasons": {
+            "end_turn": 1
+          },
+          "replies": [
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 640,
+              "head": "```json\n{\n  \"risk_level\": \"medium\",\n  \"confidence\": 0.78,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"Transaction Velocity\",\n      \"observation\": \"9 transacti"
+            }
+          ]
+        },
+        "llm_cost_usd": 0.004046
+      },
+      {
+        "id": "P1-11",
+        "title": "Several moderate signals on a trusted device: foreign VPN, a burst of purchases, a larger amount",
+        "category": "boundary",
+        "status": "scored",
+        "checks": {
+          "action": true,
+          "risk_level": false
+        },
+        "expected": {
+          "risk_level": "medium",
+          "recommended_action": "review"
+        },
+        "output": {
+          "risk_level": "high",
+          "recommended_action": "review",
+          "confidence": 0.85,
+          "summary": "Transaction presents conflicting signals requiring manual review. While the device is trusted and has clean history, the combination of VPN usage from UK with US billing address mismatch, elevated transaction velocity (5 in 1 hour), and 57% above-average transaction amount creates sufficient concern for fraud. Recommend contacting customer to verify international travel and VPN usage before proces",
+          "p1_fallback": false
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": {
+          "calls": 1,
+          "api_errors": 0,
+          "error_types": [],
+          "input_tokens": 844,
+          "output_tokens": 641,
+          "models": {
+            "claude-haiku-4-5-20251001": 1
+          },
+          "stop_reasons": {
+            "end_turn": 1
+          },
+          "replies": [
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 641,
+              "head": "```json\n{\n  \"risk_level\": \"high\",\n  \"confidence\": 0.85,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"Transaction Velocity\",\n      \"observation\": \"5 transaction"
+            }
+          ]
+        },
+        "llm_cost_usd": 0.004049
+      },
+      {
+        "id": "P1-12",
+        "title": "Four ordinary purchases in an hour on the customer's trusted phone (velocity flag boundary)",
+        "category": "boundary",
+        "status": "scored",
+        "checks": {
+          "action": true,
+          "risk_level": true
+        },
+        "expected": {
+          "risk_level": "low|medium",
+          "recommended_action": "approve|review"
+        },
+        "output": {
+          "risk_level": "low",
+          "recommended_action": "approve",
+          "confidence": 0.82,
+          "summary": "This transaction presents a low fraud risk profile. The customer demonstrates consistent spending patterns from a known device in their home country with no anonymization indicators. While transaction velocity is elevated, the amounts remain within historical norms and all geolocation and device signals are clean.",
+          "p1_fallback": false
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": {
+          "calls": 1,
+          "api_errors": 0,
+          "error_types": [],
+          "input_tokens": 844,
+          "output_tokens": 638,
+          "models": {
+            "claude-haiku-4-5-20251001": 1
+          },
+          "stop_reasons": {
+            "end_turn": 1
+          },
+          "replies": [
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 638,
+              "head": "```json\n{\n  \"risk_level\": \"low\",\n  \"confidence\": 0.82,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"Transaction Velocity\",\n      \"observation\": \"4 transactions"
+            }
+          ]
+        },
+        "llm_cost_usd": 0.004034
+      }
+    ],
+    "p2": [
+      {
+        "id": "P2-01",
+        "title": "Long-standing customer, ordinary order, normal browsing session",
+        "category": "clean",
+        "status": "scored",
+        "checks": {
+          "action": true,
+          "risk_level": true,
+          "specialist_velocity": true,
+          "specialist_identity": true,
+          "specialist_behavioral": true
+        },
+        "expected": {
+          "risk_level": "low",
+          "recommended_action": "approve",
+          "specialists": {
+            "velocity": "low",
+            "identity": "low",
+            "behavioral": "low"
+          }
+        },
+        "output": {
+          "risk_level": "low",
+          "recommended_action": "approve",
+          "confidence": 0.957,
+          "agreement_score": 1.0,
+          "specialists": {
+            "velocity": {
+              "risk_level": "low",
+              "risk_score": 0.12,
+              "recommended_action": "approve"
+            },
+            "identity": {
+              "risk_level": "low",
+              "risk_score": 0.08,
+              "recommended_action": "approve"
+            },
+            "behavioral": {
+              "risk_level": "low",
+              "risk_score": 0.08,
+              "recommended_action": "approve"
+            }
+          },
+          "summary": "All 3 specialists unanimously assess low risk (96% confidence). All three specialist agents unanimously assess this transaction as low-risk and recommend approval. Velocity agent confirms normal spending patterns with no card-testing indicators. Identity agent validates a 4+ year account with perfect verification layers and maximum device trust. Behavioral agent confirms human-paced interaction wi"
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": {
+          "calls": 4,
+          "api_errors": 0,
+          "error_types": [],
+          "input_tokens": 3905,
+          "output_tokens": 2417,
+          "models": {
+            "claude-haiku-4-5-20251001": 4
+          },
+          "stop_reasons": {
+            "end_turn": 4
+          },
+          "replies": [
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 484,
+              "head": "```json\n{\n  \"risk_score\": 0.12,\n  \"risk_level\": \"low\",\n  \"confidence\": 0.92,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"Transaction Frequency - Last Hour\",\n "
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 594,
+              "head": "```json\n{\n  \"risk_score\": 0.08,\n  \"risk_level\": \"low\",\n  \"confidence\": 0.95,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"session_duration\",\n      \"observation"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 1072,
+              "head": "```json\n{\n  \"risk_score\": 0.08,\n  \"risk_level\": \"low\",\n  \"confidence\": 0.94,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"email_age_days\",\n      \"observation\":"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 267,
+              "head": "```json\n{\n  \"debate_analysis\": {\n    \"agreement_score\": 1.0,\n    \"agreeing_agents\": [\"velocity\", \"identity\", \"behavioral\"],\n    \"dissenting_agents\": [],\n    \"po"
+            }
+          ]
+        },
+        "llm_cost_usd": 0.015989999999999997
+      },
+      {
+        "id": "P2-02",
+        "title": "Loyal customer reorders from a saved cart in under thirty seconds",
+        "category": "false-positive-trap",
+        "status": "scored",
+        "checks": {
+          "action": false,
+          "risk_level": false,
+          "specialist_velocity": true,
+          "specialist_identity": true,
+          "specialist_behavioral": true
+        },
+        "expected": {
+          "risk_level": "low",
+          "recommended_action": "approve",
+          "specialists": {
+            "velocity": "low",
+            "identity": "low",
+            "behavioral": "low|medium"
+          }
+        },
+        "output": {
+          "risk_level": "medium",
+          "recommended_action": "review",
+          "confidence": 0.833,
+          "agreement_score": 0.33,
+          "specialists": {
+            "velocity": {
+              "risk_level": "low",
+              "risk_score": 0.097,
+              "recommended_action": "approve"
+            },
+            "identity": {
+              "risk_level": "low",
+              "risk_score": 0.08,
+              "recommended_action": "approve"
+            },
+            "behavioral": {
+              "risk_level": "medium",
+              "risk_score": 0.62,
+              "recommended_action": "review"
+            }
+          },
+          "summary": "Swarm assessment: medium risk (83% confidence). velocity, identity agree while behavioral dissent. The Behavioral agent's concerns about direct-to-checkout navigation and 76-second session duration are valid red flags in isolation. However, they must be contextualized against strong corroborating evidence: (1) Velocity agent confirms zero recent transaction clustering, normal spending amounts, and"
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": {
+          "calls": 4,
+          "api_errors": 0,
+          "error_types": [],
+          "input_tokens": 4014,
+          "output_tokens": 2773,
+          "models": {
+            "claude-haiku-4-5-20251001": 4
+          },
+          "stop_reasons": {
+            "end_turn": 4
+          },
+          "replies": [
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 496,
+              "head": "```json\n{\n  \"risk_score\": 0.097,\n  \"risk_level\": \"low\",\n  \"confidence\": 0.95,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"Transaction Frequency - Last Hour\",\n"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 643,
+              "head": "```json\n{\n  \"risk_score\": 0.62,\n  \"risk_level\": \"medium\",\n  \"confidence\": 0.85,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"Direct-to-Checkout Navigation\",\n  "
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 1116,
+              "head": "```json\n{\n  \"risk_score\": 0.08,\n  \"risk_level\": \"low\",\n  \"confidence\": 0.94,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"email_age_days\",\n      \"observation\":"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 518,
+              "head": "```json\n{\n  \"debate_analysis\": {\n    \"agreement_score\": 0.33,\n    \"agreeing_agents\": [\"velocity\", \"identity\"],\n    \"dissenting_agents\": [\"behavioral\"],\n    \"poi"
+            }
+          ]
+        },
+        "llm_cost_usd": 0.017879
+      },
+      {
+        "id": "P2-03",
+        "title": "Scripted checkout on an established account (specialists disagree)",
+        "category": "disagreement",
+        "status": "scored",
+        "checks": {
+          "action": true,
+          "risk_level": true,
+          "specialist_velocity": true,
+          "specialist_identity": true,
+          "specialist_behavioral": true
+        },
+        "expected": {
+          "risk_level": "medium|high",
+          "recommended_action": "review|decline",
+          "specialists": {
+            "velocity": "low",
+            "identity": "low|medium",
+            "behavioral": "high"
+          }
+        },
+        "output": {
+          "risk_level": "medium",
+          "recommended_action": "review",
+          "confidence": 0.783,
+          "agreement_score": 0.33,
+          "specialists": {
+            "velocity": {
+              "risk_level": "low",
+              "risk_score": 0.12,
+              "recommended_action": "approve"
+            },
+            "identity": {
+              "risk_level": "low",
+              "risk_score": 0.18,
+              "recommended_action": "approve"
+            },
+            "behavioral": {
+              "risk_level": "high",
+              "risk_score": 0.87,
+              "recommended_action": "decline"
+            }
+          },
+          "summary": "Swarm assessment: medium risk (78% confidence). velocity, identity agree while behavioral dissent. Critical disagreement exists between behavioral agent (high risk, 0.87) and velocity/identity agents (low risk, 0.12-0.18). The behavioral agent's concerns about direct-to-checkout navigation, 7-second checkout completion, and mouse anomalies are legitimate technical fraud indicators. However, these "
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": {
+          "calls": 4,
+          "api_errors": 0,
+          "error_types": [],
+          "input_tokens": 3967,
+          "output_tokens": 2758,
+          "models": {
+            "claude-haiku-4-5-20251001": 4
+          },
+          "stop_reasons": {
+            "end_turn": 4
+          },
+          "replies": [
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 458,
+              "head": "```json\n{\n  \"risk_score\": 0.12,\n  \"risk_level\": \"low\",\n  \"confidence\": 0.92,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"Transaction Frequency - 24h Window\",\n"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 642,
+              "head": "```json\n{\n  \"risk_score\": 0.87,\n  \"risk_level\": \"high\",\n  \"confidence\": 0.92,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"direct_to_checkout_navigation\",\n    "
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 1111,
+              "head": "```json\n{\n  \"risk_score\": 0.18,\n  \"risk_level\": \"low\",\n  \"confidence\": 0.87,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"email_age_days\",\n      \"observation\":"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 547,
+              "head": "```json\n{\n  \"debate_analysis\": {\n    \"agreement_score\": 0.33,\n    \"agreeing_agents\": [\"velocity\", \"identity\"],\n    \"dissenting_agents\": [\"behavioral\"],\n    \"poi"
+            }
+          ]
+        },
+        "llm_cost_usd": 0.017757000000000002
+      },
+      {
+        "id": "P2-04",
+        "title": "Synthetic identity: disposable email, days-old account, address mismatch, human-paced session",
+        "category": "fraud",
+        "status": "scored",
+        "checks": {
+          "action": false,
+          "risk_level": false,
+          "specialist_velocity": null,
+          "specialist_identity": false,
+          "specialist_behavioral": true
+        },
+        "expected": {
+          "risk_level": "high|critical",
+          "recommended_action": "decline",
+          "specialists": {
+            "velocity": null,
+            "identity": "high",
+            "behavioral": "low"
+          }
+        },
+        "output": {
+          "risk_level": "medium",
+          "recommended_action": "review",
+          "confidence": 0.777,
+          "agreement_score": 0.15,
+          "specialists": {
+            "velocity": {
+              "risk_level": "medium",
+              "risk_score": 0.62,
+              "recommended_action": "review"
+            },
+            "identity": {
+              "risk_level": "critical",
+              "risk_score": 0.92,
+              "recommended_action": "decline"
+            },
+            "behavioral": {
+              "risk_level": "low",
+              "risk_score": 0.08,
+              "recommended_action": "approve"
+            }
+          },
+          "summary": "Swarm assessment: medium risk (78% confidence).  agree while velocity, identity, behavioral dissent. This represents a classic synthetic identity fraud scenario masked by legitimate behavioral patterns. The Identity Agent's signals are STRUCTURAL RED FLAGS that precede transaction behavior: a brand new account (0 days), brand new email (5 days, disposable domain), brand new device (0 days), maximu"
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": {
+          "calls": 4,
+          "api_errors": 0,
+          "error_types": [],
+          "input_tokens": 3963,
+          "output_tokens": 2856,
+          "models": {
+            "claude-haiku-4-5-20251001": 4
+          },
+          "stop_reasons": {
+            "end_turn": 4
+          },
+          "replies": [
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 445,
+              "head": "```json\n{\n  \"risk_score\": 0.62,\n  \"risk_level\": \"medium\",\n  \"confidence\": 0.85,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"Amount Deviation Factor\",\n      \"o"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 611,
+              "head": "```json\n{\n  \"risk_score\": 0.08,\n  \"risk_level\": \"low\",\n  \"confidence\": 0.95,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"session_duration\",\n      \"observation"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 1152,
+              "head": "```json\n{\n  \"risk_score\": 0.92,\n  \"risk_level\": \"critical\",\n  \"confidence\": 0.98,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"email_age_days\",\n      \"observat"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 648,
+              "head": "```json\n{\n  \"debate_analysis\": {\n    \"agreement_score\": 0.15,\n    \"agreeing_agents\": [],\n    \"dissenting_agents\": [\"velocity\", \"identity\", \"behavioral\"],\n    \"p"
+            }
+          ]
+        },
+        "llm_cost_usd": 0.018243000000000002
+      },
+      {
+        "id": "P2-05",
+        "title": "Fraud ring: chargeback history, linked accounts, burst velocity, VPN, rushed checkout",
+        "category": "fraud",
+        "status": "scored",
+        "checks": {
+          "action": true,
+          "risk_level": true,
+          "specialist_velocity": true,
+          "specialist_identity": true,
+          "specialist_behavioral": false
+        },
+        "expected": {
+          "risk_level": "high|critical",
+          "recommended_action": "decline",
+          "specialists": {
+            "velocity": "high|critical",
+            "identity": "high|critical",
+            "behavioral": "high|critical"
+          }
+        },
+        "output": {
+          "risk_level": "high",
+          "recommended_action": "decline",
+          "confidence": 0.987,
+          "agreement_score": 0.67,
+          "specialists": {
+            "velocity": {
+              "risk_level": "critical",
+              "risk_score": 0.87,
+              "recommended_action": "decline"
+            },
+            "identity": {
+              "risk_level": "critical",
+              "risk_score": 0.92,
+              "recommended_action": "decline"
+            },
+            "behavioral": {
+              "risk_level": "medium",
+              "risk_score": 0.58,
+              "recommended_action": "review"
+            }
+          },
+          "summary": "Swarm assessment: high risk (99% confidence). velocity, identity agree while behavioral dissent. Velocity and Identity agents present overwhelming corroborating evidence of organized fraud: (1) Velocity documents a burst attack pattern (7 txns/hour, 29x amount deviation) with pre-calculated velocity_risk_score of 0.88; (2) Identity reveals a comprehensive fraud ring signature\u20144-day-old email with "
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": {
+          "calls": 4,
+          "api_errors": 0,
+          "error_types": [],
+          "input_tokens": 4309,
+          "output_tokens": 3230,
+          "models": {
+            "claude-haiku-4-5-20251001": 4
+          },
+          "stop_reasons": {
+            "end_turn": 4
+          },
+          "replies": [
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 506,
+              "head": "```json\n{\n  \"risk_score\": 0.87,\n  \"risk_level\": \"critical\",\n  \"confidence\": 0.94,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"Extreme Transaction Frequency\",\n"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 623,
+              "head": "```json\n{\n  \"risk_score\": 0.58,\n  \"risk_level\": \"medium\",\n  \"confidence\": 0.82,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"navigation_pattern\",\n      \"observ"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 1420,
+              "head": "```json\n{\n  \"risk_score\": 0.92,\n  \"risk_level\": \"critical\",\n  \"confidence\": 0.96,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"email_age_days\",\n      \"observat"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 681,
+              "head": "```json\n{\n  \"debate_analysis\": {\n    \"agreement_score\": 0.67,\n    \"agreeing_agents\": [\"velocity\", \"identity\"],\n    \"dissenting_agents\": [\"behavioral\"],\n    \"poi"
+            }
+          ]
+        },
+        "llm_cost_usd": 0.020458999999999998
+      },
+      {
+        "id": "P2-06",
+        "title": "Trusted customer's holiday shopping spree: several normal-sized purchases in an hour",
+        "category": "boundary",
+        "status": "scored",
+        "checks": {
+          "action": true,
+          "risk_level": true,
+          "specialist_velocity": true,
+          "specialist_identity": true,
+          "specialist_behavioral": true
+        },
+        "expected": {
+          "risk_level": "low|medium",
+          "recommended_action": "approve|review",
+          "specialists": {
+            "velocity": "medium|high",
+            "identity": "low",
+            "behavioral": "low"
+          }
+        },
+        "output": {
+          "risk_level": "medium",
+          "recommended_action": "review",
+          "confidence": 0.793,
+          "agreement_score": 0.33,
+          "specialists": {
+            "velocity": {
+              "risk_level": "high",
+              "risk_score": 0.62,
+              "recommended_action": "decline"
+            },
+            "identity": {
+              "risk_level": "low",
+              "risk_score": 0.08,
+              "recommended_action": "approve"
+            },
+            "behavioral": {
+              "risk_level": "low",
+              "risk_score": 0.08,
+              "recommended_action": "approve"
+            }
+          },
+          "summary": "Swarm assessment: medium risk (79% confidence). identity, behavioral agree while velocity dissent. The velocity agent has identified a genuinely concerning pattern: 7 transactions in one hour with rapid succession flags is statistically anomalous and consistent with card testing methodology. However, this must be contextualized against the identity and behavioral agents' findings. The identity age"
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": {
+          "calls": 4,
+          "api_errors": 0,
+          "error_types": [],
+          "input_tokens": 4064,
+          "output_tokens": 2848,
+          "models": {
+            "claude-haiku-4-5-20251001": 4
+          },
+          "stop_reasons": {
+            "end_turn": 4
+          },
+          "replies": [
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 546,
+              "head": "```json\n{\n  \"risk_score\": 0.62,\n  \"risk_level\": \"high\",\n  \"confidence\": 0.85,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"Transactions Last Hour\",\n      \"obse"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 649,
+              "head": "```json\n{\n  \"risk_score\": 0.08,\n  \"risk_level\": \"low\",\n  \"confidence\": 0.95,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"session_duration\",\n      \"observation"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 1114,
+              "head": "```json\n{\n  \"risk_score\": 0.08,\n  \"risk_level\": \"low\",\n  \"confidence\": 0.94,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"email_age_days\",\n      \"observation\":"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 539,
+              "head": "```json\n{\n  \"debate_analysis\": {\n    \"agreement_score\": 0.33,\n    \"agreeing_agents\": [\"identity\", \"behavioral\"],\n    \"dissenting_agents\": [\"velocity\"],\n    \"poi"
+            }
+          ]
+        },
+        "llm_cost_usd": 0.018304
+      },
+      {
+        "id": "P2-07",
+        "title": "Tor exit node and a new device on an established account, everything else clean",
+        "category": "data-gap",
+        "status": "scored",
+        "checks": {
+          "action": true,
+          "risk_level": true,
+          "specialist_velocity": true,
+          "specialist_identity": true,
+          "specialist_behavioral": true
+        },
+        "expected": {
+          "risk_level": "medium|high",
+          "recommended_action": "review|decline",
+          "specialists": {
+            "velocity": "low",
+            "identity": "medium|high",
+            "behavioral": "low"
+          }
+        },
+        "output": {
+          "risk_level": "medium",
+          "recommended_action": "review",
+          "confidence": 0.787,
+          "agreement_score": 0.33,
+          "specialists": {
+            "velocity": {
+              "risk_level": "low",
+              "risk_score": 0.12,
+              "recommended_action": "approve"
+            },
+            "identity": {
+              "risk_level": "high",
+              "risk_score": 0.62,
+              "recommended_action": "review"
+            },
+            "behavioral": {
+              "risk_level": "low",
+              "risk_score": 0.08,
+              "recommended_action": "approve"
+            }
+          },
+          "summary": "Swarm assessment: medium risk (79% confidence). velocity, behavioral agree while identity dissent. The Identity Agent's concerns are contextually compelling and should not be dismissed despite agreement from other agents. Tor network usage + 3860.9 km geographic deviation + billing address mismatch + unknown device with zero trust history form a coherent account takeover pattern. However, Velocity"
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": {
+          "calls": 4,
+          "api_errors": 0,
+          "error_types": [],
+          "input_tokens": 3862,
+          "output_tokens": 2635,
+          "models": {
+            "claude-haiku-4-5-20251001": 4
+          },
+          "stop_reasons": {
+            "end_turn": 4
+          },
+          "replies": [
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 497,
+              "head": "```json\n{\n  \"risk_score\": 0.12,\n  \"risk_level\": \"low\",\n  \"confidence\": 0.92,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"Transaction Frequency - Last 24 Hours"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 592,
+              "head": "```json\n{\n  \"risk_score\": 0.08,\n  \"risk_level\": \"low\",\n  \"confidence\": 0.95,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"session_duration\",\n      \"observation"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 1019,
+              "head": "```json\n{\n  \"risk_score\": 0.62,\n  \"risk_level\": \"high\",\n  \"confidence\": 0.85,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"email_age_days\",\n      \"observation\""
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 527,
+              "head": "```json\n{\n  \"debate_analysis\": {\n    \"agreement_score\": 0.33,\n    \"agreeing_agents\": [\"velocity\", \"behavioral\"],\n    \"dissenting_agents\": [\"identity\"],\n    \"poi"
+            }
+          ]
+        },
+        "llm_cost_usd": 0.017037
+      },
+      {
+        "id": "P2-08",
+        "title": "Moderate anomalies in every dimension at once",
+        "category": "boundary",
+        "status": "scored",
+        "checks": {
+          "action": true,
+          "risk_level": true,
+          "specialist_velocity": true,
+          "specialist_identity": true,
+          "specialist_behavioral": true
+        },
+        "expected": {
+          "risk_level": "medium",
+          "recommended_action": "review",
+          "specialists": {
+            "velocity": "medium",
+            "identity": "medium",
+            "behavioral": "medium"
+          }
+        },
+        "output": {
+          "risk_level": "medium",
+          "recommended_action": "review",
+          "confidence": 0.883,
+          "agreement_score": 1.0,
+          "specialists": {
+            "velocity": {
+              "risk_level": "medium",
+              "risk_score": 0.42,
+              "recommended_action": "review"
+            },
+            "identity": {
+              "risk_level": "medium",
+              "risk_score": 0.42,
+              "recommended_action": "review"
+            },
+            "behavioral": {
+              "risk_level": "medium",
+              "risk_score": 0.42,
+              "recommended_action": "review"
+            }
+          },
+          "summary": "All 3 specialists unanimously assess medium risk (88% confidence). All three agents independently converged on identical risk_score (0.42), risk_level (medium), and recommended_action (review). This unanimous agreement across orthogonal detection dimensions (spending patterns, identity coherence, session behavior) significantly strengthens confidence in the assessment. No disagreement to resolve."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": {
+          "calls": 4,
+          "api_errors": 0,
+          "error_types": [],
+          "input_tokens": 3846,
+          "output_tokens": 2405,
+          "models": {
+            "claude-haiku-4-5-20251001": 4
+          },
+          "stop_reasons": {
+            "end_turn": 4
+          },
+          "replies": [
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 549,
+              "head": "```json\n{\n  \"risk_score\": 0.42,\n  \"risk_level\": \"medium\",\n  \"confidence\": 0.78,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"Transaction Frequency - Last 24 Ho"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 613,
+              "head": "```json\n{\n  \"risk_score\": 0.42,\n  \"risk_level\": \"medium\",\n  \"confidence\": 0.78,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"session_duration_vs_pages_visited\""
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 930,
+              "head": "```json\n{\n  \"risk_score\": 0.42,\n  \"risk_level\": \"medium\",\n  \"confidence\": 0.85,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"email_domain_reputation\",\n      \"o"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 313,
+              "head": "```json\n{\n  \"debate_analysis\": {\n    \"agreement_score\": 1.0,\n    \"agreeing_agents\": [\"velocity\", \"identity\", \"behavioral\"],\n    \"dissenting_agents\": [],\n    \"po"
+            }
+          ]
+        },
+        "llm_cost_usd": 0.015871
+      },
+      {
+        "id": "P2-09",
+        "title": "First purchase by a new customer with an established email and verified details",
+        "category": "clean",
+        "status": "scored",
+        "checks": {
+          "action": true,
+          "risk_level": true,
+          "specialist_velocity": true,
+          "specialist_identity": true,
+          "specialist_behavioral": true
+        },
+        "expected": {
+          "risk_level": "low",
+          "recommended_action": "approve",
+          "specialists": {
+            "velocity": "low",
+            "identity": "low|medium",
+            "behavioral": "low"
+          }
+        },
+        "output": {
+          "risk_level": "low",
+          "recommended_action": "approve",
+          "confidence": 0.807,
+          "agreement_score": 0.67,
+          "specialists": {
+            "velocity": {
+              "risk_level": "low",
+              "risk_score": 0.12,
+              "recommended_action": "approve"
+            },
+            "identity": {
+              "risk_level": "medium",
+              "risk_score": 0.31,
+              "recommended_action": "review"
+            },
+            "behavioral": {
+              "risk_level": "low",
+              "risk_score": 0.12,
+              "recommended_action": "approve"
+            }
+          },
+          "summary": "Swarm assessment: low risk (81% confidence). velocity, behavioral agree while identity dissent. The identity agent's concerns are structurally valid but contextually overstated. The account-email-device mismatch IS unusual and warrants scrutiny. However, velocity and behavioral agents provide strong counter-evidence: (1) spending is conservative and well-paced with no card-testing patterns, (2) se"
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": {
+          "calls": 4,
+          "api_errors": 0,
+          "error_types": [],
+          "input_tokens": 4064,
+          "output_tokens": 2845,
+          "models": {
+            "claude-haiku-4-5-20251001": 4
+          },
+          "stop_reasons": {
+            "end_turn": 4
+          },
+          "replies": [
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 505,
+              "head": "```json\n{\n  \"risk_score\": 0.12,\n  \"risk_level\": \"low\",\n  \"confidence\": 0.92,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"Transaction Frequency - Last Hour\",\n "
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 689,
+              "head": "```json\n{\n  \"risk_score\": 0.12,\n  \"risk_level\": \"low\",\n  \"confidence\": 0.92,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"session_duration\",\n      \"observation"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 1116,
+              "head": "```json\n{\n  \"risk_score\": 0.31,\n  \"risk_level\": \"medium\",\n  \"confidence\": 0.82,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"email_age_days\",\n      \"observatio"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 535,
+              "head": "```json\n{\n  \"debate_analysis\": {\n    \"agreement_score\": 0.67,\n    \"agreeing_agents\": [\"velocity\", \"behavioral\"],\n    \"dissenting_agents\": [\"identity\"],\n    \"poi"
+            }
+          ]
+        },
+        "llm_cost_usd": 0.018289
+      },
+      {
+        "id": "P2-10",
+        "title": "Customer with two past chargebacks makes an ordinary purchase",
+        "category": "disagreement",
+        "status": "scored",
+        "checks": {
+          "action": true,
+          "risk_level": true,
+          "specialist_velocity": true,
+          "specialist_identity": false,
+          "specialist_behavioral": true
+        },
+        "expected": {
+          "risk_level": "low|medium",
+          "recommended_action": "approve|review",
+          "specialists": {
+            "velocity": "low",
+            "identity": "medium|high",
+            "behavioral": "low"
+          }
+        },
+        "output": {
+          "risk_level": "low",
+          "recommended_action": "approve",
+          "confidence": 0.94,
+          "agreement_score": 0.95,
+          "specialists": {
+            "velocity": {
+              "risk_level": "low",
+              "risk_score": 0.12,
+              "recommended_action": "approve"
+            },
+            "identity": {
+              "risk_level": "low",
+              "risk_score": 0.28,
+              "recommended_action": "approve"
+            },
+            "behavioral": {
+              "risk_level": "low",
+              "risk_score": 0.08,
+              "recommended_action": "approve"
+            }
+          },
+          "summary": "All 3 specialists unanimously assess low risk (94% confidence). All three agents unanimously recommend approval with low risk levels (0.08-0.28). The Identity Agent's chargeback concern is noted but contextualized: it represents historical payment disputes rather than indicators of current fraud. The transaction itself shows no velocity, behavioral, or identity compromise signals. The chargeback h"
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": {
+          "calls": 4,
+          "api_errors": 0,
+          "error_types": [],
+          "input_tokens": 3934,
+          "output_tokens": 2512,
+          "models": {
+            "claude-haiku-4-5-20251001": 4
+          },
+          "stop_reasons": {
+            "end_turn": 4
+          },
+          "replies": [
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 456,
+              "head": "```json\n{\n  \"risk_score\": 0.12,\n  \"risk_level\": \"low\",\n  \"confidence\": 0.92,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"Transaction Frequency\",\n      \"observ"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 711,
+              "head": "```json\n{\n  \"risk_score\": 0.08,\n  \"risk_level\": \"low\",\n  \"confidence\": 0.95,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"session_duration\",\n      \"observation"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 1011,
+              "head": "```json\n{\n  \"risk_score\": 0.28,\n  \"risk_level\": \"low\",\n  \"confidence\": 0.89,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"email_age_days\",\n      \"observation\":"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 334,
+              "head": "```json\n{\n  \"debate_analysis\": {\n    \"agreement_score\": 0.95,\n    \"agreeing_agents\": [\"velocity\", \"identity\", \"behavioral\"],\n    \"dissenting_agents\": [],\n    \"p"
+            }
+          ]
+        },
+        "llm_cost_usd": 0.016494
+      }
+    ],
+    "p3": [
+      {
+        "id": "P3-01",
+        "title": "Clean domestic individual with matching passport and utility bill",
+        "category": "clean",
+        "status": "scored",
+        "checks": {
+          "decision": true,
+          "risk_tier": true,
+          "escalation": true,
+          "screening": true,
+          "conditions": true
+        },
+        "expected": {
+          "decision": "approved",
+          "risk_tier": "low",
+          "was_escalated": false,
+          "sanctions_screening_required": true,
+          "edd_required": false
+        },
+        "output": {
+          "decision": "approved",
+          "risk_tier": "low",
+          "was_escalated": false,
+          "conditions": [],
+          "checklist": {
+            "document_intake": "completed",
+            "identity_verification": "completed",
+            "sanctions_screening": "completed",
+            "risk_assessment": "completed"
+          },
+          "route": [
+            "document_intake",
+            "identity_verification",
+            "sanctions_screening",
+            "risk_assessment",
+            "final_decision"
+          ],
+          "supervisor_reasoning": [
+            "document_intake: Pipeline is at initial state with all steps pending. Document intake must be the first step to validate submitted documents before any downstream processing can occur.",
+            "identity_verification: Document intake completed successfully with high quality score (0.96) and no issues. Identity verification is the logical next step in the sequential pipeline before mandatory sanctions screening.",
+            "sanctions_screening: Document intake and identity verification are completed. Sanctions screening is mandatory for every applicant and must be performed before risk assessment. Despite the address verification discrepancy in identity verification, this is a minor issue that does not warrant skipping the mandatory sanctions screening step.",
+            "risk_assessment: All mandatory steps completed successfully. Document intake passed with high quality (0.96), identity verified with good confidence (0.85), and sanctions screening cleared with no hits. Risk assessment is the final pending step before final decision.",
+            "final_decision: All four mandatory pipeline stages have been completed successfully. Document intake passed with high quality (0.96), identity verification confirmed with good confidence (0.85), sanctions screening returned no hits, and risk assessment determined low tier with no EDD recommendation. The single discrepancy (address verification unavailable due to null document field) is minor and does not warrant "
+          ],
+          "sanctions": {
+            "any_hits": false,
+            "highest_match_score": 0.0
+          },
+          "identity_confirmed": true,
+          "is_pep": false,
+          "document_quality": 0.96,
+          "document_issues": [],
+          "risk_composite": 0.1,
+          "reasoning": "Low risk \u2014 standard onboarding."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": {
+          "calls": 9,
+          "api_errors": 0,
+          "error_types": [],
+          "input_tokens": 4664,
+          "output_tokens": 2798,
+          "models": {
+            "claude-haiku-4-5-20251001": 9
+          },
+          "stop_reasons": {
+            "end_turn": 9
+          },
+          "replies": [
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 78,
+              "head": "```json\n{\n  \"next_step\": \"document_intake\",\n  \"reasoning\": \"Pipeline is at initial state with all steps pending. Document intake must be the first step to valid"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 749,
+              "head": "```json\n{\n  \"overall_document_quality\": 0.96,\n  \"issues_found\": [],\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"Passport Expiry Status\",\n      \"observation\": "
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 83,
+              "head": "```json\n{\n  \"next_step\": \"identity_verification\",\n  \"reasoning\": \"Document intake completed successfully with high quality score (0.96) and no issues. Identity "
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 400,
+              "head": "```json\n{\n  \"identity_confirmed\": true,\n  \"confidence\": 0.85,\n  \"discrepancies\": [\n    \"Address verification not available - document address field is null\"\n  ]"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 142,
+              "head": "```json\n{\n  \"next_step\": \"sanctions_screening\",\n  \"reasoning\": \"Document intake and identity verification are completed. Sanctions screening is mandatory for ev"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 466,
+              "head": "```json\n{\n  \"any_hits\": false,\n  \"highest_match_score\": 0.0,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"OFAC SDN List Match\",\n      \"observation\": \"No hits r"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 113,
+              "head": "```json\n{\n  \"next_step\": \"risk_assessment\",\n  \"reasoning\": \"All mandatory steps completed successfully. Document intake passed with high quality (0.96), identit"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 612,
+              "head": "```json\n{\n  \"risk_tier\": \"low\",\n  \"edd_recommended\": false,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"Country Risk - FATF Compliance\",\n      \"observation\": "
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 155,
+              "head": "```json\n{\n  \"next_step\": \"final_decision\",\n  \"reasoning\": \"All four mandatory pipeline stages have been completed successfully. Document intake passed with high"
+            }
+          ]
+        },
+        "llm_cost_usd": 0.018654
+      },
+      {
+        "id": "P3-02",
+        "title": "Low-risk UK software company with a clean director",
+        "category": "clean",
+        "status": "scored",
+        "checks": {
+          "decision": true,
+          "risk_tier": true,
+          "escalation": true,
+          "screening": true,
+          "conditions": true
+        },
+        "expected": {
+          "decision": "approved",
+          "risk_tier": "low",
+          "was_escalated": false,
+          "sanctions_screening_required": true,
+          "edd_required": false
+        },
+        "output": {
+          "decision": "approved",
+          "risk_tier": "low",
+          "was_escalated": false,
+          "conditions": [],
+          "checklist": {
+            "document_intake": "completed",
+            "identity_verification": "completed",
+            "sanctions_screening": "completed",
+            "risk_assessment": "completed"
+          },
+          "route": [
+            "document_intake",
+            "identity_verification",
+            "sanctions_screening",
+            "risk_assessment",
+            "final_decision"
+          ],
+          "supervisor_reasoning": [
+            "document_intake: Pipeline is at initial state with all steps pending. Document intake must be the first step to validate submitted documents before any downstream processing can occur.",
+            "identity_verification: Document intake completed successfully with high quality score (0.94) and no issues. Identity verification is the logical next step in the KYC pipeline sequence before mandatory sanctions screening.",
+            "sanctions_screening: Document intake and identity verification are completed. Sanctions screening is mandatory for every applicant and must be executed before risk assessment. The minor address verification discrepancy does not warrant skipping this mandatory step.",
+            "risk_assessment: All mandatory steps completed successfully. Document intake passed with high quality (0.94), identity verified with good confidence (0.85), and sanctions screening cleared with no hits. Risk assessment is the final pending step before decision.",
+            "final_decision: All four mandatory pipeline stages have been completed successfully. Document intake shows high quality (0.94) with no issues. Identity verification confirmed with good confidence (0.85), though address verification unavailable due to null document field. Sanctions screening returned no hits. Risk assessment determined low tier with no EDD recommendation. All critical compliance checks are done."
+          ],
+          "sanctions": {
+            "any_hits": false,
+            "highest_match_score": 0.0
+          },
+          "identity_confirmed": true,
+          "is_pep": false,
+          "document_quality": 0.94,
+          "document_issues": [],
+          "risk_composite": 0.055,
+          "reasoning": "Low risk \u2014 standard onboarding."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": {
+          "calls": 9,
+          "api_errors": 0,
+          "error_types": [],
+          "input_tokens": 4665,
+          "output_tokens": 2542,
+          "models": {
+            "claude-haiku-4-5-20251001": 9
+          },
+          "stop_reasons": {
+            "end_turn": 9
+          },
+          "replies": [
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 78,
+              "head": "```json\n{\n  \"next_step\": \"document_intake\",\n  \"reasoning\": \"Pipeline is at initial state with all steps pending. Document intake must be the first step to valid"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 558,
+              "head": "```json\n{\n  \"overall_document_quality\": 0.94,\n  \"issues_found\": [],\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"Passport Expiry Status\",\n      \"observation\": "
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 86,
+              "head": "```json\n{\n  \"next_step\": \"identity_verification\",\n  \"reasoning\": \"Document intake completed successfully with high quality score (0.94) and no issues. Identity "
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 421,
+              "head": "```json\n{\n  \"identity_confirmed\": true,\n  \"confidence\": 0.85,\n  \"discrepancies\": [\n    \"Address verification not available - document address field is null\"\n  ]"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 129,
+              "head": "```json\n{\n  \"next_step\": \"sanctions_screening\",\n  \"reasoning\": \"Document intake and identity verification are completed. Sanctions screening is mandatory for ev"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 445,
+              "head": "```json\n{\n  \"any_hits\": false,\n  \"highest_match_score\": 0.0,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"OFAC SDN List\",\n      \"observation\": \"No matches retu"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 112,
+              "head": "```json\n{\n  \"next_step\": \"risk_assessment\",\n  \"reasoning\": \"All mandatory steps completed successfully. Document intake passed with high quality (0.94), identit"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 565,
+              "head": "```json\n{\n  \"risk_tier\": \"low\",\n  \"edd_recommended\": false,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"Country Risk - FATF Membership\",\n      \"observation\": "
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 148,
+              "head": "```json\n{\n  \"next_step\": \"final_decision\",\n  \"reasoning\": \"All four mandatory pipeline stages have been completed successfully. Document intake shows high quali"
+            }
+          ]
+        },
+        "llm_cost_usd": 0.017374999999999998
+      },
+      {
+        "id": "P3-03",
+        "title": "Exact sanctions match: Iranian national on the OFAC and UN lists",
+        "category": "sanctions",
+        "status": "scored",
+        "checks": {
+          "decision": true,
+          "risk_tier": true,
+          "escalation": true,
+          "screening": true,
+          "conditions": null
+        },
+        "expected": {
+          "decision": "rejected",
+          "risk_tier": "prohibited",
+          "was_escalated": true,
+          "sanctions_screening_required": true
+        },
+        "output": {
+          "decision": "rejected",
+          "risk_tier": "prohibited",
+          "was_escalated": true,
+          "conditions": [],
+          "checklist": {
+            "document_intake": "completed",
+            "identity_verification": "skipped",
+            "sanctions_screening": "completed",
+            "risk_assessment": "skipped"
+          },
+          "route": [
+            "document_intake",
+            "sanctions_screening",
+            "human_review"
+          ],
+          "supervisor_reasoning": [
+            "document_intake: Pipeline is at initial state with all steps pending. Document intake must be the first step to validate submitted documents before any downstream processing can occur.",
+            "sanctions_screening: Document intake completed with quality score 0.94, but critical issues identified: passport extraction confidence (0.854) below 0.90 threshold, missing address field extraction, and name consistency requiring manual verification. These document quality issues must be resolved before proceeding to identity verification and mandatory sanctions screening. Human review required to validate document au",
+            "human_review: Critical sanctions hit detected (match score 1.0) requires immediate human escalation. Although identity_verification is pending, sanctions screening completion with positive hits takes precedence per compliance protocol. The combination of sanctions match + document quality issues (passport confidence 0.854, missing address field, name consistency concerns) necessitates human review before procee"
+          ],
+          "sanctions": {
+            "any_hits": true,
+            "highest_match_score": 1.0
+          },
+          "identity_confirmed": null,
+          "is_pep": null,
+          "document_quality": 0.94,
+          "document_issues": [
+            "Passport extraction confidence below 0.90 threshold (0.854)",
+            "Passport missing address field extraction",
+            "Name consistency requires manual verification across documents"
+          ],
+          "risk_composite": null,
+          "reasoning": "Strong sanctions match detected (score: 1.0)."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": {
+          "calls": 5,
+          "api_errors": 0,
+          "error_types": [],
+          "input_tokens": 2835,
+          "output_tokens": 1912,
+          "models": {
+            "claude-haiku-4-5-20251001": 5
+          },
+          "stop_reasons": {
+            "end_turn": 5
+          },
+          "replies": [
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 126,
+              "head": "```json\n{\n  \"next_step\": \"document_intake\",\n  \"reasoning\": \"Pipeline is at initial state with all steps pending. Document intake must be the first step to valid"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 612,
+              "head": "```json\n{\n  \"overall_document_quality\": 0.94,\n  \"issues_found\": [\n    \"Passport extraction confidence below 0.90 threshold (0.854)\",\n    \"Passport missing addre"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 211,
+              "head": "```json\n{\n  \"next_step\": \"human_review\",\n  \"reasoning\": \"Document intake completed with quality score 0.94, but critical issues identified: passport extraction "
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 685,
+              "head": "```json\n{\n  \"any_hits\": true,\n  \"highest_match_score\": 1.0,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"UN Consolidated List - Exact Match\",\n      \"observatio"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 278,
+              "head": "```json\n{\n  \"next_step\": \"human_review\",\n  \"reasoning\": \"Critical sanctions hit detected (match score 1.0) requires immediate human escalation. Although identit"
+            }
+          ]
+        },
+        "llm_cost_usd": 0.012395
+      },
+      {
+        "id": "P3-04",
+        "title": "UN-listed name, Iranian national resident in the US: screening skipped",
+        "category": "sanctions",
+        "status": "scored",
+        "checks": {
+          "decision": true,
+          "risk_tier": true,
+          "escalation": true,
+          "screening": true,
+          "conditions": null
+        },
+        "expected": {
+          "decision": "rejected|escalated",
+          "risk_tier": "high|prohibited",
+          "was_escalated": true,
+          "sanctions_screening_required": true
+        },
+        "output": {
+          "decision": "rejected",
+          "risk_tier": "prohibited",
+          "was_escalated": true,
+          "conditions": [],
+          "checklist": {
+            "document_intake": "completed",
+            "identity_verification": "skipped",
+            "sanctions_screening": "completed",
+            "risk_assessment": "skipped"
+          },
+          "route": [
+            "document_intake",
+            "sanctions_screening",
+            "human_review"
+          ],
+          "supervisor_reasoning": [
+            "document_intake: Pipeline initialization: all steps pending. Document intake is the mandatory first step to validate submitted documents before any downstream processing can occur.",
+            "sanctions_screening: Document intake completed with quality score 0.94, but multiple critical issues detected: passport extraction confidence (0.854) below 0.90 threshold, missing address field extraction, and utility bill lacking expiry date. These document quality issues must be resolved before proceeding to identity verification and sanctions screening. Escalating to human review for document remediation. [Guard: s",
+            "human_review: Critical sanctions hit detected (match score 1.0) requires immediate human escalation. Although identity_verification is pending, sanctions screening results take precedence due to compliance severity. The applicant (Iranian national) with a perfect sanctions match must be reviewed by compliance officer before proceeding further."
+          ],
+          "sanctions": {
+            "any_hits": true,
+            "highest_match_score": 1.0
+          },
+          "identity_confirmed": null,
+          "is_pep": null,
+          "document_quality": 0.94,
+          "document_issues": [
+            "Passport extraction confidence below 0.90 threshold (0.854)",
+            "Passport missing address field extraction",
+            "Utility bill lacks expiry date (expected for address verification documents)"
+          ],
+          "risk_composite": null,
+          "reasoning": "Strong sanctions match detected (score: 1.0)."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": {
+          "calls": 5,
+          "api_errors": 0,
+          "error_types": [],
+          "input_tokens": 2829,
+          "output_tokens": 2049,
+          "models": {
+            "claude-haiku-4-5-20251001": 5
+          },
+          "stop_reasons": {
+            "end_turn": 5
+          },
+          "replies": [
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 130,
+              "head": "```json\n{\n  \"next_step\": \"document_intake\",\n  \"reasoning\": \"Pipeline initialization: all steps pending. Document intake is the mandatory first step to validate "
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 693,
+              "head": "```json\n{\n  \"overall_document_quality\": 0.94,\n  \"issues_found\": [\n    \"Passport extraction confidence below 0.90 threshold (0.854)\",\n    \"Passport missing addre"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 216,
+              "head": "```json\n{\n  \"next_step\": \"human_review\",\n  \"reasoning\": \"Document intake completed with quality score 0.94, but multiple critical issues detected: passport extr"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 770,
+              "head": "```json\n{\n  \"any_hits\": true,\n  \"highest_match_score\": 1.0,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"UN Consolidated List - Exact Match\",\n      \"observatio"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 240,
+              "head": "```json\n{\n  \"next_step\": \"human_review\",\n  \"reasoning\": \"Critical sanctions hit detected (match score 1.0) requires immediate human escalation. Although identit"
+            }
+          ]
+        },
+        "llm_cost_usd": 0.013074
+      },
+      {
+        "id": "P3-05",
+        "title": "Transliteration variant of an OFAC-listed name (potential match)",
+        "category": "sanctions",
+        "status": "scored",
+        "checks": {
+          "decision": true,
+          "risk_tier": true,
+          "escalation": true,
+          "screening": true,
+          "conditions": null
+        },
+        "expected": {
+          "decision": "escalated",
+          "risk_tier": "medium|high",
+          "was_escalated": true,
+          "sanctions_screening_required": true
+        },
+        "output": {
+          "decision": "escalated",
+          "risk_tier": "high",
+          "was_escalated": true,
+          "conditions": [],
+          "checklist": {
+            "document_intake": "completed",
+            "identity_verification": "completed",
+            "sanctions_screening": "completed",
+            "risk_assessment": "pending"
+          },
+          "route": [
+            "document_intake",
+            "identity_verification",
+            "sanctions_screening",
+            "human_review"
+          ],
+          "supervisor_reasoning": [
+            "document_intake: Pipeline is at initial state with all steps pending. Document intake must be the first step to validate submitted documents before any downstream processing can occur.",
+            "identity_verification: Document intake completed successfully with high quality score (0.96) and no issues. Identity verification is the logical next step in the KYC pipeline sequence before mandatory sanctions screening.",
+            "sanctions_screening: Document intake and identity verification are completed. Sanctions screening is mandatory for every applicant and must be executed before risk assessment. Despite the address verification discrepancy noted in identity verification, this does not override the mandatory sanctions screening requirement.",
+            "human_review: Sanctions screening returned positive hits (highest_match: 0.6) requiring mandatory human review before proceeding to risk assessment. Per compliance protocol, any sanctions match must be escalated regardless of confidence level."
+          ],
+          "sanctions": {
+            "any_hits": true,
+            "highest_match_score": 0.6
+          },
+          "identity_confirmed": true,
+          "is_pep": false,
+          "document_quality": 0.96,
+          "document_issues": [],
+          "risk_composite": null,
+          "reasoning": "Case was escalated during processing."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": {
+          "calls": 7,
+          "api_errors": 0,
+          "error_types": [],
+          "input_tokens": 3644,
+          "output_tokens": 2176,
+          "models": {
+            "claude-haiku-4-5-20251001": 7
+          },
+          "stop_reasons": {
+            "end_turn": 7
+          },
+          "replies": [
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 78,
+              "head": "```json\n{\n  \"next_step\": \"document_intake\",\n  \"reasoning\": \"Pipeline is at initial state with all steps pending. Document intake must be the first step to valid"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 733,
+              "head": "```json\n{\n  \"overall_document_quality\": 0.96,\n  \"issues_found\": [],\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"Passport Extraction Confidence\",\n      \"observ"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 86,
+              "head": "```json\n{\n  \"next_step\": \"identity_verification\",\n  \"reasoning\": \"Document intake completed successfully with high quality score (0.96) and no issues. Identity "
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 423,
+              "head": "```json\n{\n  \"identity_confirmed\": true,\n  \"confidence\": 0.82,\n  \"discrepancies\": [\n    \"Address verification unavailable - document address field is null, preve"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 152,
+              "head": "```json\n{\n  \"next_step\": \"sanctions_screening\",\n  \"reasoning\": \"Document intake and identity verification are completed. Sanctions screening is mandatory for ev"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 535,
+              "head": "```json\n{\n  \"any_hits\": true,\n  \"highest_match_score\": 0.6,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"OFAC SDN Match - Low Confidence\",\n      \"observation\":"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 169,
+              "head": "```json\n{\n  \"next_step\": \"human_review\",\n  \"reasoning\": \"Sanctions screening returned positive hits (highest_match: 0.6) requiring mandatory human review before"
+            }
+          ]
+        },
+        "llm_cost_usd": 0.014524
+      },
+      {
+        "id": "P3-06",
+        "title": "Expired passport is the only problem",
+        "category": "documents",
+        "status": "scored",
+        "checks": {
+          "decision": true,
+          "risk_tier": null,
+          "escalation": null,
+          "screening": true,
+          "conditions": null
+        },
+        "expected": {
+          "decision": "escalated|rejected",
+          "risk_tier": null,
+          "was_escalated": null,
+          "sanctions_screening_required": true
+        },
+        "output": {
+          "decision": "escalated",
+          "risk_tier": "high",
+          "was_escalated": true,
+          "conditions": [],
+          "checklist": {
+            "document_intake": "completed",
+            "identity_verification": "skipped",
+            "sanctions_screening": "completed",
+            "risk_assessment": "skipped"
+          },
+          "route": [
+            "document_intake",
+            "sanctions_screening",
+            "human_review"
+          ],
+          "supervisor_reasoning": [
+            "document_intake: Pipeline is at initial state with all steps pending. Document intake must be the first step to validate submitted documents before any downstream processing can occur.",
+            "sanctions_screening: Document intake completed with critical quality issues that prevent progression through automated pipeline. Expired passport, low extraction confidence (0.435 - well below acceptable threshold), missing address field, and validation score discrepancies create substantial identity verification risk. These issues must be resolved by human review before proceeding to identity verification or sanction",
+            "human_review: Critical document quality issues identified in document_intake that prevent reliable identity verification. Expired passport (2025-08-31), low extraction confidence (0.435 - well below acceptable threshold), missing address field, and validation score discrepancies (0.6 vs 1.0) create substantial risk of false negatives in downstream verification. Although sanctions_screening completed with no hit"
+          ],
+          "sanctions": {
+            "any_hits": false,
+            "highest_match_score": 0.0
+          },
+          "identity_confirmed": null,
+          "is_pep": null,
+          "document_quality": 0.62,
+          "document_issues": [
+            "Passport document is EXPIRED (expiry: 2025-08-31)",
+            "Low extraction confidence on passport (0.435) - significantly below acceptable threshold",
+            "Passport missing address field - incomplete identity verification data",
+            "Discrepancy in validation scores between documents (0.6 vs 1.0)"
+          ],
+          "risk_composite": null,
+          "reasoning": "Case was escalated during processing."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": {
+          "calls": 5,
+          "api_errors": 0,
+          "error_types": [],
+          "input_tokens": 2629,
+          "output_tokens": 1719,
+          "models": {
+            "claude-haiku-4-5-20251001": 5
+          },
+          "stop_reasons": {
+            "end_turn": 5
+          },
+          "replies": [
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 78,
+              "head": "```json\n{\n  \"next_step\": \"document_intake\",\n  \"reasoning\": \"Pipeline is at initial state with all steps pending. Document intake must be the first step to valid"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 676,
+              "head": "```json\n{\n  \"overall_document_quality\": 0.62,\n  \"issues_found\": [\n    \"Passport document is EXPIRED (expiry: 2025-08-31)\",\n    \"Low extraction confidence on pas"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 244,
+              "head": "```json\n{\n  \"next_step\": \"human_review\",\n  \"reasoning\": \"Document intake completed with critical quality issues that prevent progression through automated pipel"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 439,
+              "head": "```json\n{\n  \"any_hits\": false,\n  \"highest_match_score\": 0.0,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"OFAC SDN List Match\",\n      \"observation\": \"No hits r"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 282,
+              "head": "```json\n{\n  \"next_step\": \"human_review\",\n  \"reasoning\": \"Critical document quality issues identified in document_intake that prevent reliable identity verificat"
+            }
+          ]
+        },
+        "llm_cost_usd": 0.011224
+      },
+      {
+        "id": "P3-07",
+        "title": "Passport expired five weeks before the application date",
+        "category": "documents",
+        "status": "scored",
+        "checks": {
+          "decision": false,
+          "risk_tier": null,
+          "escalation": null,
+          "screening": true,
+          "conditions": null
+        },
+        "expected": {
+          "decision": "escalated|rejected",
+          "risk_tier": null,
+          "was_escalated": null,
+          "sanctions_screening_required": true
+        },
+        "output": {
+          "decision": "approved",
+          "risk_tier": "low",
+          "was_escalated": false,
+          "conditions": [],
+          "checklist": {
+            "document_intake": "completed",
+            "identity_verification": "completed",
+            "sanctions_screening": "completed",
+            "risk_assessment": "completed"
+          },
+          "route": [
+            "document_intake",
+            "identity_verification",
+            "sanctions_screening",
+            "risk_assessment",
+            "final_decision"
+          ],
+          "supervisor_reasoning": [
+            "document_intake: Pipeline is at initial state with all steps pending. Document intake must be the first step to validate submitted documents before any downstream processing can occur.",
+            "identity_verification: Document intake is completed with acceptable quality (0.94). Despite minor extraction issues noted (missing address field, moderate confidence on passport), the documents are sufficient to proceed to identity verification. Identity verification must complete before sanctions screening can be executed.",
+            "sanctions_screening: Document intake and identity verification are completed. Sanctions screening is mandatory for every applicant and must be executed before risk assessment. Despite minor document quality issues and address verification limitations, the applicant's identity is confirmed with 0.85 confidence, allowing progression to the mandatory sanctions screening step.",
+            "risk_assessment: All mandatory steps completed: document_intake (0.94 quality), identity_verification (0.85 confidence, confirmed), and sanctions_screening (no hits). Risk assessment is the final pending step before final_decision. No critical blockers warrant escalation.",
+            "final_decision: All four mandatory pipeline stages have been completed successfully. Document intake passed with high quality (0.94), identity verification confirmed with acceptable confidence (0.85), sanctions screening returned no hits, and risk assessment determined low tier with no EDD recommendation. The applicant is ready for final decision."
+          ],
+          "sanctions": {
+            "any_hits": false,
+            "highest_match_score": 0.0
+          },
+          "identity_confirmed": true,
+          "is_pep": false,
+          "document_quality": 0.94,
+          "document_issues": [
+            "Passport missing extracted address field - limits address verification capability",
+            "Moderate extraction confidence on passport (0.897) compared to utility bill (0.931)"
+          ],
+          "risk_composite": 0.1,
+          "reasoning": "Low risk \u2014 standard onboarding."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": {
+          "calls": 9,
+          "api_errors": 0,
+          "error_types": [],
+          "input_tokens": 4859,
+          "output_tokens": 2824,
+          "models": {
+            "claude-haiku-4-5-20251001": 9
+          },
+          "stop_reasons": {
+            "end_turn": 9
+          },
+          "replies": [
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 78,
+              "head": "```json\n{\n  \"next_step\": \"document_intake\",\n  \"reasoning\": \"Pipeline is at initial state with all steps pending. Document intake must be the first step to valid"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 688,
+              "head": "```json\n{\n  \"overall_document_quality\": 0.94,\n  \"issues_found\": [\n    \"Passport missing extracted address field - limits address verification capability\",\n    \""
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 140,
+              "head": "```json\n{\n  \"next_step\": \"identity_verification\",\n  \"reasoning\": \"Document intake is completed with acceptable quality (0.94). Despite minor extraction issues n"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 405,
+              "head": "```json\n{\n  \"identity_confirmed\": true,\n  \"confidence\": 0.85,\n  \"discrepancies\": [\n    \"Address verification unavailable - document address not provided for cro"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 185,
+              "head": "```json\n{\n  \"next_step\": \"sanctions_screening\",\n  \"reasoning\": \"Document intake and identity verification are completed. Sanctions screening is mandatory for ev"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 435,
+              "head": "```json\n{\n  \"any_hits\": false,\n  \"highest_match_score\": 0.0,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"OFAC SDN List\",\n      \"observation\": \"No hits returne"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 179,
+              "head": "```json\n{\n  \"next_step\": \"risk_assessment\",\n  \"reasoning\": \"All mandatory steps completed: document_intake (0.94 quality), identity_verification (0.85 confidenc"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 545,
+              "head": "```json\n{\n  \"risk_tier\": \"low\",\n  \"edd_recommended\": false,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"Country Risk - FATF Compliance\",\n      \"observation\": "
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 169,
+              "head": "```json\n{\n  \"next_step\": \"final_decision\",\n  \"reasoning\": \"All four mandatory pipeline stages have been completed successfully. Document intake passed with high"
+            }
+          ]
+        },
+        "llm_cost_usd": 0.018979
+      },
+      {
+        "id": "P3-08",
+        "title": "Passport name does not match the application name",
+        "category": "identity",
+        "status": "scored",
+        "checks": {
+          "decision": true,
+          "risk_tier": null,
+          "escalation": true,
+          "screening": true,
+          "conditions": null
+        },
+        "expected": {
+          "decision": "escalated",
+          "risk_tier": null,
+          "was_escalated": true,
+          "sanctions_screening_required": true
+        },
+        "output": {
+          "decision": "escalated",
+          "risk_tier": "high",
+          "was_escalated": true,
+          "conditions": [],
+          "checklist": {
+            "document_intake": "completed",
+            "identity_verification": "pending",
+            "sanctions_screening": "completed",
+            "risk_assessment": "pending"
+          },
+          "route": [
+            "document_intake",
+            "sanctions_screening",
+            "human_review"
+          ],
+          "supervisor_reasoning": [
+            "document_intake: Pipeline is at initial state with all steps pending. Document intake must be the first step to validate submitted documents before any downstream processing can occur.",
+            "sanctions_screening: Critical name mismatch detected across documents ('Jamie Robertson-Thompson' vs 'James Robert Thompson') that cannot be automatically resolved. This discrepancy must be clarified before proceeding with identity verification and sanctions screening, as it could indicate document fraud, identity confusion, or legitimate name variation. Manual review is required to validate the applicant's true ident",
+            "human_review: Document intake is completed with quality score 0.89. Sanctions screening is already completed with no hits. Identity verification is the next pending step in the mandatory sequence. The name mismatch flagged in document intake ('Jamie Robertson-Thompson' vs 'James Robert Thompson') must be resolved through identity verification before proceeding to risk assessment. [Guard: sanctions screening is "
+          ],
+          "sanctions": {
+            "any_hits": false,
+            "highest_match_score": 0.0
+          },
+          "identity_confirmed": null,
+          "is_pep": null,
+          "document_quality": 0.89,
+          "document_issues": [
+            "Name mismatch across documents: 'Jamie Robertson-Thompson' (passport) vs 'James Robert Thompson' (bank statement)",
+            "Passport missing address extraction while bank statement provides address",
+            "Potential name variation inconsistency requires manual verification"
+          ],
+          "risk_composite": null,
+          "reasoning": "Case was escalated during processing."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": {
+          "calls": 5,
+          "api_errors": 0,
+          "error_types": [],
+          "input_tokens": 2550,
+          "output_tokens": 1598,
+          "models": {
+            "claude-haiku-4-5-20251001": 5
+          },
+          "stop_reasons": {
+            "end_turn": 5
+          },
+          "replies": [
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 78,
+              "head": "```json\n{\n  \"next_step\": \"document_intake\",\n  \"reasoning\": \"Pipeline is at initial state with all steps pending. Document intake must be the first step to valid"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 740,
+              "head": "```json\n{\n  \"overall_document_quality\": 0.89,\n  \"issues_found\": [\n    \"Name mismatch across documents: 'Jamie Robertson-Thompson' (passport) vs 'James Robert Th"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 201,
+              "head": "```json\n{\n  \"next_step\": \"human_review\",\n  \"reasoning\": \"Critical name mismatch detected across documents ('Jamie Robertson-Thompson' vs 'James Robert Thompson'"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 399,
+              "head": "```json\n{\n  \"any_hits\": false,\n  \"highest_match_score\": 0.0,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"OFAC SDN List\",\n      \"observation\": \"No matches retu"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 180,
+              "head": "```json\n{\n  \"next_step\": \"identity_verification\",\n  \"reasoning\": \"Document intake is completed with quality score 0.89. Sanctions screening is already completed"
+            }
+          ]
+        },
+        "llm_cost_usd": 0.01054
+      },
+      {
+        "id": "P3-09",
+        "title": "Proof of address belongs to another person at another address",
+        "category": "identity",
+        "status": "scored",
+        "checks": {
+          "decision": true,
+          "risk_tier": null,
+          "escalation": true,
+          "screening": true,
+          "conditions": null
+        },
+        "expected": {
+          "decision": "escalated",
+          "risk_tier": null,
+          "was_escalated": true,
+          "sanctions_screening_required": true
+        },
+        "output": {
+          "decision": "escalated",
+          "risk_tier": "high",
+          "was_escalated": true,
+          "conditions": [],
+          "checklist": {
+            "document_intake": "completed",
+            "identity_verification": "skipped",
+            "sanctions_screening": "completed",
+            "risk_assessment": "skipped"
+          },
+          "route": [
+            "document_intake",
+            "sanctions_screening",
+            "human_review"
+          ],
+          "supervisor_reasoning": [
+            "document_intake: Pipeline is at initial state with all steps pending. Document intake must be the first step to validate submitted documents before any downstream processing can occur.",
+            "sanctions_screening: Critical document integrity issues detected in document_intake that must be resolved before proceeding. Name mismatch between passport ('Maria Gonzalez') and utility bill ('Roberto Diaz') is a major red flag indicating potential identity fraud or document forgery. This discrepancy must be manually reviewed and clarified before any downstream verification steps can proceed reliably. [Guard: sanctio",
+            "human_review: Critical identity discrepancy detected: applicant name 'Maria Gonzalez' does not match utility bill name 'Roberto Diaz'. This is a fundamental KYC red flag indicating potential identity fraud or document forgery. Despite sanctions screening being completed with no hits, the document integrity issues (name mismatch, missing address field, invalid utility bill format) require immediate human investi"
+          ],
+          "sanctions": {
+            "any_hits": false,
+            "highest_match_score": 0.0
+          },
+          "identity_confirmed": null,
+          "is_pep": null,
+          "document_quality": 0.94,
+          "document_issues": [
+            "Name mismatch between documents: 'Maria Gonzalez' (passport) vs 'Roberto Diaz' (utility bill)",
+            "Passport missing extracted address field",
+            "Utility bill lacks expiry date (expected for address verification documents)"
+          ],
+          "risk_composite": null,
+          "reasoning": "Case was escalated during processing."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": {
+          "calls": 5,
+          "api_errors": 0,
+          "error_types": [],
+          "input_tokens": 2625,
+          "output_tokens": 1626,
+          "models": {
+            "claude-haiku-4-5-20251001": 5
+          },
+          "stop_reasons": {
+            "end_turn": 5
+          },
+          "replies": [
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 78,
+              "head": "```json\n{\n  \"next_step\": \"document_intake\",\n  \"reasoning\": \"Pipeline is at initial state with all steps pending. Document intake must be the first step to valid"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 638,
+              "head": "```json\n{\n  \"overall_document_quality\": 0.94,\n  \"issues_found\": [\n    \"Name mismatch between documents: 'Maria Gonzalez' (passport) vs 'Roberto Diaz' (utility b"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 234,
+              "head": "```json\n{\n  \"next_step\": \"human_review\",\n  \"reasoning\": \"Critical document integrity issues detected in document_intake that must be resolved before proceeding."
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 428,
+              "head": "```json\n{\n  \"any_hits\": false,\n  \"highest_match_score\": 0.0,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"OFAC SDN List\",\n      \"observation\": \"No hits returne"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 248,
+              "head": "```json\n{\n  \"next_step\": \"human_review\",\n  \"reasoning\": \"Critical identity discrepancy detected: applicant name 'Maria Gonzalez' does not match utility bill nam"
+            }
+          ]
+        },
+        "llm_cost_usd": 0.010755
+      },
+      {
+        "id": "P3-10",
+        "title": "Passport flagged for tampering by the authenticity check",
+        "category": "documents",
+        "status": "scored",
+        "checks": {
+          "decision": true,
+          "risk_tier": null,
+          "escalation": true,
+          "screening": true,
+          "conditions": null
+        },
+        "expected": {
+          "decision": "rejected|escalated",
+          "risk_tier": null,
+          "was_escalated": true,
+          "sanctions_screening_required": true
+        },
+        "output": {
+          "decision": "escalated",
+          "risk_tier": "high",
+          "was_escalated": true,
+          "conditions": [],
+          "checklist": {
+            "document_intake": "completed",
+            "identity_verification": "skipped",
+            "sanctions_screening": "completed",
+            "risk_assessment": "skipped"
+          },
+          "route": [
+            "document_intake",
+            "sanctions_screening",
+            "human_review"
+          ],
+          "supervisor_reasoning": [
+            "document_intake: Pipeline is at initial state with all steps pending. Document intake must be the first step to validate submitted documents before any downstream processing can occur.",
+            "sanctions_screening: Document intake completed with critical red flags: tampering detected on passport is a serious integrity concern that requires immediate human investigation before proceeding with identity verification or sanctions screening. Tampering indicators combined with reduced validation score (0.5) and missing address information represent material compliance risks that cannot be automatically progressed.",
+            "human_review: Critical document integrity issues detected during intake that require human judgment before proceeding. Tampering detected on passport is a red flag that cannot be automatically cleared. Despite sanctions screening being complete with no hits, the document quality issues (tampering indicators, reduced validation score of 0.5, missing address) present significant compliance risk and must be escala"
+          ],
+          "sanctions": {
+            "any_hits": false,
+            "highest_match_score": 0.0
+          },
+          "identity_confirmed": null,
+          "is_pep": null,
+          "document_quality": 0.68,
+          "document_issues": [
+            "Tampering detected on passport document",
+            "Passport validation score significantly reduced (0.5) due to tampering indicators",
+            "Name consistency verified but address missing from primary identity document",
+            "Moderate extraction confidence on passport (0.934) combined with tampering concerns"
+          ],
+          "risk_composite": null,
+          "reasoning": "Case was escalated during processing."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": {
+          "calls": 5,
+          "api_errors": 0,
+          "error_types": [],
+          "input_tokens": 2607,
+          "output_tokens": 1610,
+          "models": {
+            "claude-haiku-4-5-20251001": 5
+          },
+          "stop_reasons": {
+            "end_turn": 5
+          },
+          "replies": [
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 78,
+              "head": "```json\n{\n  \"next_step\": \"document_intake\",\n  \"reasoning\": \"Pipeline is at initial state with all steps pending. Document intake must be the first step to valid"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 620,
+              "head": "```json\n{\n  \"overall_document_quality\": 0.68,\n  \"issues_found\": [\n    \"Tampering detected on passport document\",\n    \"Passport validation score significantly re"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 212,
+              "head": "```json\n{\n  \"next_step\": \"human_review\",\n  \"reasoning\": \"Document intake completed with critical red flags: tampering detected on passport is a serious integrit"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 453,
+              "head": "```json\n{\n  \"any_hits\": false,\n  \"highest_match_score\": 0.0,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"OFAC SDN List Match\",\n      \"observation\": \"No hits r"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 247,
+              "head": "```json\n{\n  \"next_step\": \"human_review\",\n  \"reasoning\": \"Critical document integrity issues detected during intake that require human judgment before proceeding"
+            }
+          ]
+        },
+        "llm_cost_usd": 0.010657
+      },
+      {
+        "id": "P3-11",
+        "title": "Cash-intensive self-employment income declared just under $10,000 a month",
+        "category": "risk-tiering",
+        "status": "scored",
+        "checks": {
+          "decision": true,
+          "risk_tier": false,
+          "escalation": true,
+          "screening": true,
+          "conditions": null
+        },
+        "expected": {
+          "decision": "approved",
+          "risk_tier": "medium|high",
+          "was_escalated": false,
+          "sanctions_screening_required": true,
+          "edd_required": null
+        },
+        "output": {
+          "decision": "approved",
+          "risk_tier": "low",
+          "was_escalated": false,
+          "conditions": [],
+          "checklist": {
+            "document_intake": "completed",
+            "identity_verification": "completed",
+            "sanctions_screening": "completed",
+            "risk_assessment": "completed"
+          },
+          "route": [
+            "document_intake",
+            "identity_verification",
+            "sanctions_screening",
+            "risk_assessment",
+            "final_decision"
+          ],
+          "supervisor_reasoning": [
+            "document_intake: Pipeline is at initial state with all steps pending. Document intake must be the first step to validate submitted documents before any downstream processing can occur.",
+            "identity_verification: Document intake is completed with high quality (0.94) and no issues. Identity verification is the next logical step in the pipeline sequence before mandatory sanctions screening.",
+            "sanctions_screening: Document intake and identity verification are complete. Sanctions screening is mandatory for every applicant and must be performed before risk assessment. No critical blockers prevent proceeding to sanctions screening.",
+            "risk_assessment: All mandatory steps completed successfully: document_intake (quality 0.94, no issues), identity_verification (confirmed with 0.85 confidence), and sanctions_screening (no hits). Risk assessment is the final pending step before final_decision.",
+            "final_decision: All four mandatory pipeline stages have been completed successfully. Document intake shows high quality (0.94) with no issues. Identity verification confirmed with good confidence (0.85), though address verification has a minor discrepancy. Sanctions screening returned no hits. Risk assessment determined low tier with no EDD recommendation. All critical compliance checks are complete and show no c"
+          ],
+          "sanctions": {
+            "any_hits": false,
+            "highest_match_score": 0.0
+          },
+          "identity_confirmed": true,
+          "is_pep": false,
+          "document_quality": 0.94,
+          "document_issues": [],
+          "risk_composite": 0.1,
+          "reasoning": "Low risk \u2014 standard onboarding."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": {
+          "calls": 9,
+          "api_errors": 0,
+          "error_types": [],
+          "input_tokens": 4668,
+          "output_tokens": 2711,
+          "models": {
+            "claude-haiku-4-5-20251001": 9
+          },
+          "stop_reasons": {
+            "end_turn": 9
+          },
+          "replies": [
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 78,
+              "head": "```json\n{\n  \"next_step\": \"document_intake\",\n  \"reasoning\": \"Pipeline is at initial state with all steps pending. Document intake must be the first step to valid"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 733,
+              "head": "```json\n{\n  \"overall_document_quality\": 0.94,\n  \"issues_found\": [],\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"Passport Extraction Confidence\",\n      \"observ"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 82,
+              "head": "```json\n{\n  \"next_step\": \"identity_verification\",\n  \"reasoning\": \"Document intake is completed with high quality (0.94) and no issues. Identity verification is "
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 409,
+              "head": "```json\n{\n  \"identity_confirmed\": true,\n  \"confidence\": 0.85,\n  \"discrepancies\": [\n    \"Address verification unavailable - document address not provided for cro"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 147,
+              "head": "```json\n{\n  \"next_step\": \"sanctions_screening\",\n  \"reasoning\": \"Document intake and identity verification are complete. Sanctions screening is mandatory for eve"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 432,
+              "head": "```json\n{\n  \"any_hits\": false,\n  \"highest_match_score\": 0.0,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"OFAC SDN List\",\n      \"observation\": \"No hits returne"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 154,
+              "head": "```json\n{\n  \"next_step\": \"risk_assessment\",\n  \"reasoning\": \"All mandatory steps completed successfully: document_intake (quality 0.94, no issues), identity_veri"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 520,
+              "head": "```json\n{\n  \"risk_tier\": \"low\",\n  \"edd_recommended\": false,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"Country Risk - FATF Compliance\",\n      \"observation\": "
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 156,
+              "head": "```json\n{\n  \"next_step\": \"final_decision\",\n  \"reasoning\": \"All four mandatory pipeline stages have been completed successfully. Document intake shows high quali"
+            }
+          ]
+        },
+        "llm_cost_usd": 0.018223
+      },
+      {
+        "id": "P3-12",
+        "title": "Foreign PEP (senior official) running a crypto exchange in Nigeria",
+        "category": "pep",
+        "status": "scored",
+        "checks": {
+          "decision": true,
+          "risk_tier": true,
+          "escalation": true,
+          "screening": true,
+          "conditions": null
+        },
+        "expected": {
+          "decision": "escalated",
+          "risk_tier": "high",
+          "was_escalated": true,
+          "sanctions_screening_required": true
+        },
+        "output": {
+          "decision": "escalated",
+          "risk_tier": "high",
+          "was_escalated": true,
+          "conditions": [
+            "PEP monitoring: senior_official",
+            "Enhanced Due Diligence required"
+          ],
+          "checklist": {
+            "document_intake": "completed",
+            "identity_verification": "completed",
+            "sanctions_screening": "completed",
+            "risk_assessment": "pending"
+          },
+          "route": [
+            "document_intake",
+            "identity_verification",
+            "sanctions_screening",
+            "human_review"
+          ],
+          "supervisor_reasoning": [
+            "document_intake: Pipeline initialization: all steps pending. Document intake must be the first step to validate submitted documents before any downstream processing. This is the mandatory entry point for all applicants.",
+            "identity_verification: Document intake is complete with acceptable quality (0.94). Despite minor extraction confidence and completeness issues noted, the documents passed intake validation. Identity verification must proceed next to cross-reference identity data and potentially resolve the incomplete passport address field. Sanctions screening is mandatory and will follow after identity verification is completed.",
+            "sanctions_screening: Sanctions screening is mandatory for every applicant and must never be skipped. Despite document quality issues and identity verification discrepancies, the identity_verification step is marked completed with confirmed=true (confidence 0.85). Sanctions screening must proceed before risk_assessment to ensure no OFAC/EU/UN list matches exist for this high-profile applicant (Minister title). Critical",
+            "human_review: Critical sanctions screening hit (0.72 match) detected for applicant with ministerial title requires immediate human investigation. Combined with document quality issues (passport confidence 0.867 below threshold, missing address field) and incomplete identity verification (address unavailable), this case presents elevated compliance risk that cannot proceed to automated risk assessment without hu"
+          ],
+          "sanctions": {
+            "any_hits": true,
+            "highest_match_score": 0.72
+          },
+          "identity_confirmed": true,
+          "is_pep": true,
+          "document_quality": 0.94,
+          "document_issues": [
+            "Passport extraction confidence below 0.90 threshold (0.867)",
+            "Passport missing address field - incomplete identity verification data",
+            "Business registration document lacks expiry date - cannot assess validity period"
+          ],
+          "risk_composite": null,
+          "reasoning": "Case was escalated during processing."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": {
+          "calls": 7,
+          "api_errors": 0,
+          "error_types": [],
+          "input_tokens": 3799,
+          "output_tokens": 2599,
+          "models": {
+            "claude-haiku-4-5-20251001": 7
+          },
+          "stop_reasons": {
+            "end_turn": 7
+          },
+          "replies": [
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 140,
+              "head": "```json\n{\n  \"next_step\": \"document_intake\",\n  \"reasoning\": \"Pipeline initialization: all steps pending. Document intake must be the first step to validate submi"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 648,
+              "head": "```json\n{\n  \"overall_document_quality\": 0.94,\n  \"issues_found\": [\n    \"Passport extraction confidence below 0.90 threshold (0.867)\",\n    \"Passport missing addre"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 201,
+              "head": "```json\n{\n  \"next_step\": \"identity_verification\",\n  \"reasoning\": \"Document intake is complete with acceptable quality (0.94). Despite minor extraction confidenc"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 560,
+              "head": "```json\n{\n  \"identity_confirmed\": true,\n  \"confidence\": 0.85,\n  \"discrepancies\": [\n    \"Address verification unavailable - document address not provided for cro"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 263,
+              "head": "```json\n{\n  \"next_step\": \"sanctions_screening\",\n  \"reasoning\": \"Sanctions screening is mandatory for every applicant and must never be skipped. Despite document"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 560,
+              "head": "```json\n{\n  \"any_hits\": true,\n  \"highest_match_score\": 0.72,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"OFAC SDN List\",\n      \"observation\": \"No matches foun"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 227,
+              "head": "```json\n{\n  \"next_step\": \"human_review\",\n  \"reasoning\": \"Critical sanctions screening hit (0.72 match) detected for applicant with ministerial title requires im"
+            }
+          ]
+        },
+        "llm_cost_usd": 0.016794
+      },
+      {
+        "id": "P3-13",
+        "title": "Domestic PEP with an otherwise low-risk personal account",
+        "category": "pep",
+        "status": "scored",
+        "checks": {
+          "decision": true,
+          "risk_tier": true,
+          "escalation": null,
+          "screening": true,
+          "conditions": true
+        },
+        "expected": {
+          "decision": "approved|escalated",
+          "risk_tier": "medium|high",
+          "was_escalated": null,
+          "sanctions_screening_required": true,
+          "edd_required": true,
+          "pep_monitoring_required": true
+        },
+        "output": {
+          "decision": "approved",
+          "risk_tier": "medium",
+          "was_escalated": false,
+          "conditions": [
+            "Annual review required",
+            "PEP monitoring: senior_official",
+            "Enhanced Due Diligence required"
+          ],
+          "checklist": {
+            "document_intake": "completed",
+            "identity_verification": "completed",
+            "sanctions_screening": "completed",
+            "risk_assessment": "completed"
+          },
+          "route": [
+            "document_intake",
+            "identity_verification",
+            "sanctions_screening",
+            "risk_assessment",
+            "final_decision"
+          ],
+          "supervisor_reasoning": [
+            "document_intake: Pipeline initialization: all steps pending. Document intake is the mandatory first step to validate submitted documents before any downstream processing can occur.",
+            "identity_verification: Document intake is completed with acceptable quality (0.94). Despite minor OCR variance and missing address field on passport, documents are sufficient to proceed. Identity verification must be completed before mandatory sanctions screening. The applicant's high-profile status (Senator) and moderate transaction volume (7000.0) warrant thorough verification.",
+            "sanctions_screening: Document intake and identity verification are completed. Sanctions screening is mandatory for every applicant and must be executed before risk assessment. The applicant's status as a US Senator warrants thorough OFAC/EU/UN list screening regardless of prior steps.",
+            "risk_assessment: All mandatory steps completed successfully. Document intake passed with high quality (0.94), identity verification confirmed with strong confidence (0.92), and sanctions screening cleared with no hits. Risk assessment is the final pending step before decision routing.",
+            "final_decision: All four mandatory pipeline stages have been completed: document_intake, identity_verification, sanctions_screening, and risk_assessment. Sanctions screening (mandatory for every applicant) returned no hits. The applicant has cleared identity verification with high confidence (0.92). Risk assessment assigned medium tier with EDD recommended, which is appropriate for the profile and does not requir"
+          ],
+          "sanctions": {
+            "any_hits": false,
+            "highest_match_score": 0.0
+          },
+          "identity_confirmed": true,
+          "is_pep": true,
+          "document_quality": 0.94,
+          "document_issues": [
+            "Passport extraction confidence (0.897) below utility bill (0.976) - minor variance in OCR quality",
+            "Passport missing extracted address field - limits address verification capability",
+            "Utility bill lacks expiry date - cannot assess document recency beyond issuance"
+          ],
+          "risk_composite": 0.276,
+          "reasoning": "Medium risk \u2014 approved with standard monitoring."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": {
+          "calls": 9,
+          "api_errors": 0,
+          "error_types": [],
+          "input_tokens": 4990,
+          "output_tokens": 3071,
+          "models": {
+            "claude-haiku-4-5-20251001": 9
+          },
+          "stop_reasons": {
+            "end_turn": 9
+          },
+          "replies": [
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 75,
+              "head": "```json\n{\n  \"next_step\": \"document_intake\",\n  \"reasoning\": \"Pipeline initialization: all steps pending. Document intake is the mandatory first step to validate "
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 685,
+              "head": "```json\n{\n  \"overall_document_quality\": 0.94,\n  \"issues_found\": [\n    \"Passport extraction confidence (0.897) below utility bill (0.976) - minor variance in OCR"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 166,
+              "head": "```json\n{\n  \"next_step\": \"identity_verification\",\n  \"reasoning\": \"Document intake is completed with acceptable quality (0.94). Despite minor OCR variance and mi"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 489,
+              "head": "```json\n{\n  \"identity_confirmed\": true,\n  \"confidence\": 0.92,\n  \"discrepancies\": [\n    \"Address verification unavailable - document address not provided for cro"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 220,
+              "head": "```json\n{\n  \"next_step\": \"sanctions_screening\",\n  \"reasoning\": \"Document intake and identity verification are completed. Sanctions screening is mandatory for ev"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 448,
+              "head": "```json\n{\n  \"any_hits\": false,\n  \"highest_match_score\": 0.0,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"OFAC SDN List Match\",\n      \"observation\": \"No hits r"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 180,
+              "head": "```json\n{\n  \"next_step\": \"risk_assessment\",\n  \"reasoning\": \"All mandatory steps completed successfully. Document intake passed with high quality (0.94), identit"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 569,
+              "head": "```json\n{\n  \"risk_tier\": \"medium\",\n  \"edd_recommended\": true,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"Country Risk Profile\",\n      \"observation\": \"US juri"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 239,
+              "head": "```json\n{\n  \"next_step\": \"final_decision\",\n  \"reasoning\": \"All four mandatory pipeline stages have been completed: document_intake, identity_verification, sanct"
+            }
+          ]
+        },
+        "llm_cost_usd": 0.020345000000000002
+      },
+      {
+        "id": "P3-14",
+        "title": "Brazilian property-management company, minor document variations",
+        "category": "risk-tiering",
+        "status": "scored",
+        "checks": {
+          "decision": true,
+          "risk_tier": false,
+          "escalation": null,
+          "screening": true,
+          "conditions": null
+        },
+        "expected": {
+          "decision": "approved",
+          "risk_tier": "medium|high",
+          "was_escalated": null,
+          "sanctions_screening_required": true
+        },
+        "output": {
+          "decision": "approved",
+          "risk_tier": "low",
+          "was_escalated": false,
+          "conditions": [],
+          "checklist": {
+            "document_intake": "completed",
+            "identity_verification": "completed",
+            "sanctions_screening": "completed",
+            "risk_assessment": "completed"
+          },
+          "route": [
+            "document_intake",
+            "identity_verification",
+            "sanctions_screening",
+            "risk_assessment",
+            "final_decision"
+          ],
+          "supervisor_reasoning": [
+            "document_intake: Pipeline is at initial state with all steps pending. Document intake must be the first step to validate submitted documents before any downstream processing can occur.",
+            "identity_verification: Document intake is completed with acceptable quality (0.94). Minor issues identified (name variation and utility bill dating) are standard and do not block progression. Identity verification must be completed next to resolve the name variation flag and establish baseline identity confidence before mandatory sanctions screening.",
+            "sanctions_screening: Document intake and identity verification are completed with acceptable results (quality 0.94, confidence 0.92). Sanctions screening is mandatory for every applicant and must be executed before risk assessment. Minor discrepancies (name abbreviation, address apartment number) are documented but do not warrant skipping mandatory screening steps.",
+            "risk_assessment: All mandatory preceding steps completed successfully. Document intake passed with minor acceptable variations (name abbreviation, utility bill dating). Identity verification confirmed with high confidence (0.92) and minor address discrepancy resolved. Sanctions screening returned no hits. Risk assessment is the final pending step before decision.",
+            "final_decision: All four mandatory pipeline stages have been completed successfully. Document intake passed with high quality (0.94) and minor acceptable discrepancies. Identity verification confirmed with strong confidence (0.92) and only minor address variation. Sanctions screening returned no hits. Risk assessment determined low tier with no EDD recommendation. All critical compliance checks are satisfied."
+          ],
+          "sanctions": {
+            "any_hits": false,
+            "highest_match_score": 0.0
+          },
+          "identity_confirmed": true,
+          "is_pep": false,
+          "document_quality": 0.94,
+          "document_issues": [
+            "Minor name variation between documents (Carlos Eduardo Silva vs Carlos E. Silva) - acceptable abbreviation but requires verification",
+            "Utility bill lacks expiry date - typical for utility documents but limits temporal validation"
+          ],
+          "risk_composite": 0.175,
+          "reasoning": "Low risk \u2014 standard onboarding."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": {
+          "calls": 9,
+          "api_errors": 0,
+          "error_types": [],
+          "input_tokens": 4973,
+          "output_tokens": 2865,
+          "models": {
+            "claude-haiku-4-5-20251001": 9
+          },
+          "stop_reasons": {
+            "end_turn": 9
+          },
+          "replies": [
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 78,
+              "head": "```json\n{\n  \"next_step\": \"document_intake\",\n  \"reasoning\": \"Pipeline is at initial state with all steps pending. Document intake must be the first step to valid"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 668,
+              "head": "```json\n{\n  \"overall_document_quality\": 0.94,\n  \"issues_found\": [\n    \"Minor name variation between documents (Carlos Eduardo Silva vs Carlos E. Silva) - accept"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 143,
+              "head": "```json\n{\n  \"next_step\": \"identity_verification\",\n  \"reasoning\": \"Document intake is completed with acceptable quality (0.94). Minor issues identified (name var"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 454,
+              "head": "```json\n{\n  \"identity_confirmed\": true,\n  \"confidence\": 0.92,\n  \"discrepancies\": [\n    \"Address partial match: document lacks apartment number (Apt 42) present "
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 172,
+              "head": "```json\n{\n  \"next_step\": \"sanctions_screening\",\n  \"reasoning\": \"Document intake and identity verification are completed with acceptable results (quality 0.94, c"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 389,
+              "head": "```json\n{\n  \"any_hits\": false,\n  \"highest_match_score\": 0.0,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"OFAC SDN List\",\n      \"observation\": \"No matches retu"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 177,
+              "head": "```json\n{\n  \"next_step\": \"risk_assessment\",\n  \"reasoning\": \"All mandatory preceding steps completed successfully. Document intake passed with minor acceptable v"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 599,
+              "head": "```json\n{\n  \"risk_tier\": \"low\",\n  \"edd_recommended\": false,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"Country Risk - Brazil FATF Membership\",\n      \"observa"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 185,
+              "head": "```json\n{\n  \"next_step\": \"final_decision\",\n  \"reasoning\": \"All four mandatory pipeline stages have been completed successfully. Document intake passed with high"
+            }
+          ]
+        },
+        "llm_cost_usd": 0.019298
+      },
+      {
+        "id": "P3-15",
+        "title": "Exact EU-list name, Russian national resident in the UK, volume just under the old skip threshold",
+        "category": "sanctions",
+        "status": "scored",
+        "checks": {
+          "decision": true,
+          "risk_tier": true,
+          "escalation": true,
+          "screening": true,
+          "conditions": null
+        },
+        "expected": {
+          "decision": "rejected|escalated",
+          "risk_tier": "high|prohibited",
+          "was_escalated": true,
+          "sanctions_screening_required": true
+        },
+        "output": {
+          "decision": "rejected",
+          "risk_tier": "prohibited",
+          "was_escalated": true,
+          "conditions": [
+            "PEP monitoring: close_associate",
+            "Enhanced Due Diligence required"
+          ],
+          "checklist": {
+            "document_intake": "completed",
+            "identity_verification": "completed",
+            "sanctions_screening": "completed",
+            "risk_assessment": "skipped"
+          },
+          "route": [
+            "document_intake",
+            "identity_verification",
+            "sanctions_screening",
+            "human_review"
+          ],
+          "supervisor_reasoning": [
+            "document_intake: Pipeline is at initial state with all steps pending. Document intake must be the first step to validate submitted documents before any downstream processing can occur.",
+            "identity_verification: Document intake is completed with high quality (0.96) and no issues. Identity verification must be performed next before sanctions screening. Following the mandatory sequential pipeline: document_intake \u2192 identity_verification \u2192 sanctions_screening \u2192 risk_assessment.",
+            "sanctions_screening: Sanctions screening is mandatory for every applicant and must be completed before risk assessment. Despite significant identity verification concerns (PEP flag, low confidence score of 0.45, address verification failures), sanctions screening cannot be skipped per policy. This step is critical given the applicant's Russian nationality and PEP-related discrepancies.",
+            "human_review: Critical compliance issues detected that mandate immediate human escalation. Sanctions screening returned a perfect match (1.0) indicating a confirmed hit on sanctions lists. Combined with unconfirmed identity (0.45 confidence), PEP association, and address verification failures, this applicant presents unacceptable risk and cannot proceed to automated risk assessment. Manual review required befor"
+          ],
+          "sanctions": {
+            "any_hits": true,
+            "highest_match_score": 1.0
+          },
+          "identity_confirmed": false,
+          "is_pep": true,
+          "document_quality": 0.96,
+          "document_issues": [],
+          "risk_composite": null,
+          "reasoning": "Strong sanctions match detected (score: 1.0)."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": {
+          "calls": 7,
+          "api_errors": 0,
+          "error_types": [],
+          "input_tokens": 3736,
+          "output_tokens": 2548,
+          "models": {
+            "claude-haiku-4-5-20251001": 7
+          },
+          "stop_reasons": {
+            "end_turn": 7
+          },
+          "replies": [
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 135,
+              "head": "```json\n{\n  \"next_step\": \"document_intake\",\n  \"reasoning\": \"Pipeline is at initial state with all steps pending. Document intake must be the first step to valid"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 638,
+              "head": "```json\n{\n  \"overall_document_quality\": 0.96,\n  \"issues_found\": [],\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"Passport Extraction Confidence\",\n      \"observ"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 159,
+              "head": "```json\n{\n  \"next_step\": \"identity_verification\",\n  \"reasoning\": \"Document intake is completed with high quality (0.96) and no issues. Identity verification mus"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 565,
+              "head": "```json\n{\n  \"identity_confirmed\": false,\n  \"confidence\": 0.45,\n  \"discrepancies\": [\n    \"PEP status detected: Viktor Petrov flagged as close associate of politi"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 244,
+              "head": "```json\n{\n  \"next_step\": \"sanctions_screening\",\n  \"reasoning\": \"Sanctions screening is mandatory for every applicant and must be completed before risk assessmen"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 519,
+              "head": "```json\n{\n  \"any_hits\": true,\n  \"highest_match_score\": 1.0,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"EU Consolidated List Match\",\n      \"observation\": \"Exa"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 288,
+              "head": "```json\n{\n  \"next_step\": \"human_review\",\n  \"reasoning\": \"Critical compliance issues detected that mandate immediate human escalation. Sanctions screening return"
+            }
+          ]
+        },
+        "llm_cost_usd": 0.016476
+      },
+      {
+        "id": "P3-16",
+        "title": "Common Arabic name with no list entry: false-positive control",
+        "category": "clean",
+        "status": "scored",
+        "checks": {
+          "decision": true,
+          "risk_tier": true,
+          "escalation": true,
+          "screening": true,
+          "conditions": true
+        },
+        "expected": {
+          "decision": "approved",
+          "risk_tier": "low",
+          "was_escalated": false,
+          "sanctions_screening_required": true,
+          "edd_required": false
+        },
+        "output": {
+          "decision": "approved",
+          "risk_tier": "low",
+          "was_escalated": false,
+          "conditions": [],
+          "checklist": {
+            "document_intake": "completed",
+            "identity_verification": "completed",
+            "sanctions_screening": "completed",
+            "risk_assessment": "completed"
+          },
+          "route": [
+            "document_intake",
+            "identity_verification",
+            "sanctions_screening",
+            "risk_assessment",
+            "final_decision"
+          ],
+          "supervisor_reasoning": [
+            "document_intake: Pipeline is at initial state with all steps pending. Document intake must be the first step to validate submitted documents before any downstream processing can occur.",
+            "identity_verification: Document intake is completed with high quality (0.96) and no issues. Identity verification is the next logical step in the pipeline sequence before mandatory sanctions screening.",
+            "sanctions_screening: Document intake and identity verification are completed. Sanctions screening is mandatory for every applicant and must be performed before risk assessment. No critical blockers prevent proceeding to sanctions screening.",
+            "risk_assessment: All mandatory steps completed: document_intake (quality 0.96, no issues), identity_verification (confirmed with 0.85 confidence), and sanctions_screening (no hits). Risk assessment is the final pending step before final_decision.",
+            "final_decision: All four mandatory pipeline stages have been completed successfully. Document intake shows high quality (0.96) with no issues. Identity verification confirmed with good confidence (0.85), though address verification was unavailable. Sanctions screening returned no hits (0.0 match score). Risk assessment determined low tier with no EDD recommendation. All critical compliance checks are done."
+          ],
+          "sanctions": {
+            "any_hits": false,
+            "highest_match_score": 0.0
+          },
+          "identity_confirmed": true,
+          "is_pep": false,
+          "document_quality": 0.96,
+          "document_issues": [],
+          "risk_composite": 0.1,
+          "reasoning": "Low risk \u2014 standard onboarding."
+        },
+        "error": null,
+        "fallbacks": {},
+        "llm": {
+          "calls": 9,
+          "api_errors": 0,
+          "error_types": [],
+          "input_tokens": 4709,
+          "output_tokens": 2750,
+          "models": {
+            "claude-haiku-4-5-20251001": 9
+          },
+          "stop_reasons": {
+            "end_turn": 9
+          },
+          "replies": [
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 78,
+              "head": "```json\n{\n  \"next_step\": \"document_intake\",\n  \"reasoning\": \"Pipeline is at initial state with all steps pending. Document intake must be the first step to valid"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 801,
+              "head": "```json\n{\n  \"overall_document_quality\": 0.96,\n  \"issues_found\": [],\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"Passport Classification Confidence\",\n      \"ob"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 82,
+              "head": "```json\n{\n  \"next_step\": \"identity_verification\",\n  \"reasoning\": \"Document intake is completed with high quality (0.96) and no issues. Identity verification is "
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 404,
+              "head": "```json\n{\n  \"identity_confirmed\": true,\n  \"confidence\": 0.85,\n  \"discrepancies\": [\n    \"Address verification unavailable - document address not provided for cro"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 141,
+              "head": "```json\n{\n  \"next_step\": \"sanctions_screening\",\n  \"reasoning\": \"Document intake and identity verification are completed. Sanctions screening is mandatory for ev"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 438,
+              "head": "```json\n{\n  \"any_hits\": false,\n  \"highest_match_score\": 0.0,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"OFAC SDN List Match\",\n      \"observation\": \"No hits r"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 158,
+              "head": "```json\n{\n  \"next_step\": \"risk_assessment\",\n  \"reasoning\": \"All mandatory steps completed: document_intake (quality 0.96, no issues), identity_verification (con"
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 494,
+              "head": "```json\n{\n  \"risk_tier\": \"low\",\n  \"edd_recommended\": false,\n  \"reasoning_chain\": [\n    {\n      \"signal\": \"Country Risk - FATF Compliance\",\n      \"observation\": "
+            },
+            {
+              "stop_reason": "end_turn",
+              "output_tokens": 154,
+              "head": "```json\n{\n  \"next_step\": \"final_decision\",\n  \"reasoning\": \"All four mandatory pipeline stages have been completed successfully. Document intake shows high quali"
+            }
+          ]
+        },
+        "llm_cost_usd": 0.018458999999999996
+      }
+    ]
+  },
+  "llm_totals": {
+    "calls": 166,
+    "api_errors": 0,
+    "input_tokens": 110853,
+    "output_tokens": 72321,
+    "cost_usd": 0.4725,
+    "models": {
+      "claude-haiku-4-5-20251001": 166
+    },
+    "stop_reasons": {
+      "end_turn": 166
+    }
+  }
+}

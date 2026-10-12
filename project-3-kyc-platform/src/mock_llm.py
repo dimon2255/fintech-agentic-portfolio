@@ -44,7 +44,7 @@ from .models import (
 
 
 # ============================================================
-# Low-risk country set for skip logic
+# Low-risk country set (formerly used to skip sanctions screening; unused)
 # ============================================================
 
 LOW_RISK_COUNTRIES = {"US", "GB", "DE", "FR", "JP", "AU", "CA", "SG"}
@@ -127,12 +127,8 @@ def mock_supervisor_route(state: KYCState) -> SupervisorDecision:
     if sanctions_result and sanctions_result.any_hits:
         risk_flags.append(f"Sanctions hits found (highest score: {sanctions_result.highest_match_score})")
 
-    # Skip logic: low-risk domestic individual can skip sanctions
-    should_skip_sanctions = (
-        application.country_of_residence in LOW_RISK_COUNTRIES
-        and application.business_type is None
-        and (application.expected_monthly_volume or 0) < 10_000
-    )
+    # Sanctions screening is never skipped (the low-risk skip was removed)
+    should_skip_sanctions = False  # screening is mandatory for every applicant
 
     # Find next pending step
     for step in step_order:

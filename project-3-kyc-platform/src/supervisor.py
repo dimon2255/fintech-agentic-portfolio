@@ -9,7 +9,9 @@ This is the key architectural advancement over Project 2's adjudicator:
 
 Routing logic:
     1. Default sequential flow: doc_intake -> identity -> sanctions -> risk -> final
-    2. Skip logic: low-risk domestic individuals skip sanctions screening
+    2. Mandatory sanctions screening: never skipped, and always run before
+       risk assessment, human review or the final decision (an earlier
+       escalation is deferred, then taken with its original reason)
     3. Escalation: document failures, identity failures, strong sanctions hits
     4. Auto-reject: PROHIBITED risk tier
 """
@@ -39,7 +41,7 @@ You orchestrate 4 specialist agents in sequence:
 
 After each agent completes, you decide the next step. Your options:
 - Route to the next pending agent
-- Skip an agent (e.g., sanctions for low-risk domestic individuals)
+- Sanctions screening is mandatory for every applicant and is never skipped
 - Escalate to human_review (if critical issues found)
 - Route to final_decision (when all steps done or auto-reject)
 
@@ -141,9 +143,42 @@ async def supervisor_node(state: KYCState) -> dict:
         except (json.JSONDecodeError, KeyError, Exception):
             decision = mock_supervisor_route(state)
 
+    # Mandatory sanctions screening guard: screening is never skipped and runs
+    # before risk assessment, human review and the final decision. An escalation
+    # requested before screening is deferred, then taken with its original reason.
+    _deferral_prefix = "Escalation deferred until sanctions screening completes: "
+    _cl = state.get("checklist") or ComplianceChecklist()
+    _deferred = [e for e in state.get("audit_trail", []) if e.action == "escalation_deferred"]
+    _skips = [s for s in decision.skipped_steps if not s.strip().startswith("sanctions_screening")]
+    _next = decision.next_step
+    _reason = decision.reasoning
+    _guard_entries = []
+    if _next in ("risk_assessment", "human_review", "final_decision") and _cl.sanctions_screening == "pending":
+        if _next == "human_review":
+            _guard_entries.append(AuditEntry(
+                timestamp=_now_iso(), step="supervisor", action="escalation_deferred",
+                details=f"{_deferral_prefix}{decision.reasoning}",
+                agent_name="supervisor",
+            ))
+        _next = "sanctions_screening"
+        _reason = f"{decision.reasoning} [Guard: sanctions screening is mandatory and runs first.]"
+    elif _deferred and _cl.sanctions_screening != "pending" and _next != "human_review":
+        _next = "human_review"
+        _reason = (
+            _deferred[0].details.removeprefix(_deferral_prefix)
+            + " [Guard: escalation deferred until sanctions screening completed.]"
+        )
+    if _next != decision.next_step or _skips != decision.skipped_steps:
+        decision = decision.model_copy(update={
+            "next_step": _next,
+            "skipped_steps": _skips,
+            "reasoning": _reason,
+        })
+
     # Update checklist for skipped steps
     checklist = state.get("checklist") or ComplianceChecklist()
     audit_trail = list(state.get("audit_trail", []))
+    audit_trail.extend(_guard_entries)
 
     for skip_note in decision.skipped_steps:
         step_name = skip_note.split(":")[0].strip()

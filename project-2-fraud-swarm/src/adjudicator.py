@@ -1,11 +1,13 @@
 """Adjudicator / Supervisor for the Fraud Detection Swarm.
 
 Receives all 3 specialist verdicts, detects agreement/disagreement,
-applies context-dependent weighting, and produces a synthesized
-final assessment with debate analysis.
+and produces the final assessment: the unweighted mean of the
+specialist risk scores, with low agreement turning an approval into
+a review, plus the debate analysis.
 
-The adjudicator doesn't just vote-count — it analyzes WHY agents
-disagree and weights expertise by transaction context.
+In LLM mode the adjudicator also analyzes why the agents disagree; that
+analysis and its agreement score are recorded, but the LLM's own final
+verdict is not used.
 """
 
 from __future__ import annotations
@@ -66,14 +68,14 @@ def _determine_final_verdict(
     debate: DebateAnalysis,
 ) -> tuple[RiskLevel, float, str, str]:
     """Synthesize final risk level, confidence, action, and summary from debate."""
-    # Weighted average of risk scores
+    # Unweighted mean of the specialist risk scores
     avg_score = sum(v.risk_score for v in verdicts) / len(verdicts)
     avg_confidence = sum(v.confidence for v in verdicts) / len(verdicts)
 
     # Apply debate confidence adjustment
     final_confidence = max(0.1, min(0.99, avg_confidence + debate.confidence_adjustment))
 
-    # Determine risk level from weighted score
+    # Determine risk level from the mean score
     if avg_score > 0.6:
         risk_level = RiskLevel.CRITICAL if avg_score > 0.8 else RiskLevel.HIGH
         action = "decline"
