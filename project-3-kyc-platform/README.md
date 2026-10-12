@@ -54,10 +54,10 @@ cp project-3-kyc-platform/.env.example project-3-kyc-platform/.env
 
 # Run CLI demo (5 application profiles)
 cd project-3-kyc-platform
-python -m src.main
+python -m src
 
 # Run Streamlit dashboard
-streamlit run project-3-kyc-platform/app.py
+streamlit run app.py
 ```
 
 No API key needed — runs with deterministic mock LLM by default.

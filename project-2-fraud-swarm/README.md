@@ -48,14 +48,14 @@ Transaction ──▶ [Gather Signals] ──▶ [Velocity Agent ] ──┐
 ## Quick Start
 
 ```bash
-# From repo root
-cd project-2-fraud-swarm
+# Install (from the repo root, where pyproject.toml lives)
 pip install -e ".[dev]"
 
-# Configure (copy and fill in API key, or run in mock mode)
-cp .env.example .env
+# Configure: mock mode needs no key; uncomment one in .env for LLM mode
+cp project-2-fraud-swarm/.env.example project-2-fraud-swarm/.env
 
 # Run the swarm (CLI)
+cd project-2-fraud-swarm
 python -m src.main
 
 # Run Streamlit demo
