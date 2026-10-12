@@ -200,6 +200,24 @@ def score_project(project: str, scenarios: list[dict], response: dict) -> list[S
     ]
 
 
+APPROVE = {"p1": ("recommended_action", "approve"), "p2": ("recommended_action", "approve"), "p3": ("decision", "approved")}
+
+
+def approval_outcomes(project: str, expected: dict, output: dict | None) -> tuple[bool | None, bool | None]:
+    """(legitimate case approved?, should-stop case approved?) for one scored run.
+
+    A legitimate case is one whose label requires approval and nothing else; a
+    should-stop case is one whose label does not accept approval. Each element
+    is None when the scenario is not of that kind.
+    """
+    key, value = APPROVE[project]
+    labels = alternatives(expected.get(key) or "")
+    approved = (output or {}).get(key) == value
+    legit = approved if labels == [value] else None
+    stop = approved if value not in labels else None
+    return legit, stop
+
+
 @dataclass
 class ProjectSummary:
     project: str
@@ -211,6 +229,8 @@ class ProjectSummary:
     skipped: int
     checks: dict[str, Ratio]
     all_checks: Ratio
+    legit_approved: Ratio = field(default_factory=Ratio)
+    wrongly_approved: Ratio = field(default_factory=Ratio)
 
     @property
     def headline(self) -> Ratio:
@@ -229,18 +249,26 @@ class ProjectSummary:
             "headline": self.headline.to_json(),
             "checks": {k: v.to_json() for k, v in self.checks.items()},
             "all_checks": self.all_checks.to_json(),
+            "legit_approved": self.legit_approved.to_json(),
+            "wrongly_approved": self.wrongly_approved.to_json(),
         }
 
 
 def summarize(project: str, scores: list[ScenarioScore]) -> ProjectSummary:
     checks = {name: Ratio() for name in CHECKS[project]}
     all_checks = Ratio()
+    legit, wrong = Ratio(), Ratio()
     for s in scores:
         if not s.scored:
             continue
         for name, ok in s.graded_checks().items():
             checks[name].add(ok)
         all_checks.add(s.all_pass())
+        is_legit, is_stop = approval_outcomes(project, s.expected, s.output)
+        if is_legit is not None:
+            legit.add(is_legit)
+        if is_stop is not None:
+            wrong.add(is_stop)
     count = lambda status: sum(1 for s in scores if s.status == status)  # noqa: E731
     return ProjectSummary(
         project=project,
@@ -252,6 +280,8 @@ def summarize(project: str, scores: list[ScenarioScore]) -> ProjectSummary:
         skipped=count("skipped"),
         checks=checks,
         all_checks=all_checks,
+        legit_approved=legit,
+        wrongly_approved=wrong,
     )
 
 

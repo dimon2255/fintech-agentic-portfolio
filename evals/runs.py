@@ -15,7 +15,7 @@ import json
 from pathlib import Path
 
 from . import PROJECTS
-from .score import CHECK_LABELS, CHECKS, Ratio
+from .score import CHECK_LABELS, CHECKS, Ratio, approval_outcomes
 
 RUN_PREFIX = "claude-run-"
 SUMMARY_STEM = "scorecard-claude"
@@ -73,6 +73,7 @@ def summarize_runs(runs: list[tuple[str, dict]]) -> dict:
         counts = {"errors": 0, "harness_errors": 0, "fallbacks": 0, "skipped": 0}
         verdicts: dict[str, list[str]] = {sid: [] for sid in ids}
         fallback_nodes: dict[str, int] = {}
+        legit, wrongly = Ratio(), Ratio()
         for _, doc in runs:
             run_ratio = Ratio()
             by_id = {s["id"]: s for s in doc["projects"][key]}
@@ -83,6 +84,11 @@ def summarize_runs(runs: list[tuple[str, dict]]) -> dict:
                 if v in ("correct", "wrong"):
                     run_ratio.add(v == "correct")
                     pooled.add(v == "correct")
+                    is_legit, is_stop = approval_outcomes(key, s.get("expected") or {}, s.get("output"))
+                    if is_legit is not None:
+                        legit.add(is_legit)
+                    if is_stop is not None:
+                        wrongly.add(is_stop)
                     for c, ok in s["checks"].items():
                         if ok is not None:
                             checks_pooled[c].add(bool(ok))
@@ -98,13 +104,17 @@ def summarize_runs(runs: list[tuple[str, dict]]) -> dict:
                     for node, k in (s.get("fallbacks") or {}).items():
                         fallback_nodes[node] = fallback_nodes.get(node, 0) + k
             per_run.append(run_ratio)
-        always = never = mixed = majority_correct = 0
+        always = never = mixed = unscorable = majority_correct = 0
         rows = []
         for sid in ids:
             vs = verdicts[sid]
             graded = [v for v in vs if v in ("correct", "wrong")]
             correct = sum(1 for v in graded if v == "correct")
-            if graded and correct == len(graded):
+            # Scenarios with no scorable run (every run errored, drifted or fell
+            # back) are their own bucket, never "never correct".
+            if not graded:
+                unscorable += 1
+            elif correct == len(graded):
                 always += 1
             elif correct == 0:
                 never += 1
@@ -119,20 +129,25 @@ def summarize_runs(runs: list[tuple[str, dict]]) -> dict:
                     "verdicts": vs,
                     "correct": correct,
                     "graded": len(graded),
-                    "stable": len(set(vs)) == 1,
+                    # Stability compares scored verdicts only; errors and
+                    # fallbacks are reported in their own columns.
+                    "stable": len(set(graded)) <= 1,
                 }
             )
-        pcts = [r.pct() for r in per_run if r.pct() is not None]
+        ranked = sorted((r for r in per_run if r.total), key=lambda r: r.pct())
         projects[key] = {
             "per_run": [r.to_json() for r in per_run],
             "pooled": pooled.to_json(),
-            "range": [min(pcts), max(pcts)] if pcts else None,
+            "range": [ranked[0].to_json(), ranked[-1].to_json()] if ranked else None,
             "majority_correct": majority_correct,
             "always": always,
             "never": never,
             "mixed": mixed,
+            "unscorable": unscorable,
             "scenarios": len(ids),
             "checks_pooled": {c: r.to_json() for c, r in checks_pooled.items()},
+            "legit_approved": legit.to_json(),
+            "wrongly_approved": wrongly.to_json(),
             "counts": counts,
             "fallback_nodes": fallback_nodes,
             "rows": rows,
@@ -210,12 +225,21 @@ def write_summary(directory: Path) -> tuple[Path, Path]:
             "",
             "| Measure | Result |",
             "|---|---|",
-            f"| Range across runs | {'n/a' if rng is None else f'{rng[0]:.0f}% to {rng[1]:.0f}%'} |",
+            f"| Range across runs | {'n/a' if rng is None else f'{_r(rng[0])} to {_r(rng[1])}'} |",
             f"| Correct in a majority of runs ({summary['majority_threshold']} or more of {n}) | {p['majority_correct']} of {p['scenarios']} |",
-            f"| Correct in every graded run | {p['always']} of {p['scenarios']} |",
-            f"| Never correct | {p['never']} of {p['scenarios']} |",
+            f"| Correct in every scored run | {p['always']} of {p['scenarios']} |",
+            f"| Never correct in a scored run | {p['never']} of {p['scenarios']} |",
             f"| Mixed verdicts | {p['mixed']} of {p['scenarios']} |",
+            f"| No scorable run (every run failed or fell back) | {p['unscorable']} of {p['scenarios']} |",
         ]
+        lines.append(
+            f"| Legitimate cases approved, pooled (label requires approval) | "
+            f"{p['legit_approved']['hits']} of {p['legit_approved']['total']} |"
+        )
+        lines.append(
+            f"| Should-stop cases approved, pooled (label does not accept approval) | "
+            f"{p['wrongly_approved']['hits']} of {p['wrongly_approved']['total']} |"
+        )
         if p["fallback_nodes"]:
             nodes = ", ".join(f"{k} ({v})" for k, v in sorted(p["fallback_nodes"].items()))
             lines.append(f"| Silent fallbacks by node (all runs) | {nodes} |")

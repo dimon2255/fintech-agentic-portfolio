@@ -41,6 +41,16 @@
         "hits": 10,
         "total": 11,
         "pct": 90.9090909090909
+      },
+      "legit_approved": {
+        "hits": 3,
+        "total": 3,
+        "pct": 100.0
+      },
+      "wrongly_approved": {
+        "hits": 1,
+        "total": 6,
+        "pct": 16.666666666666668
       }
     },
     "p2": {
@@ -88,6 +98,16 @@
         "hits": 7,
         "total": 10,
         "pct": 70.0
+      },
+      "legit_approved": {
+        "hits": 3,
+        "total": 3,
+        "pct": 100.0
+      },
+      "wrongly_approved": {
+        "hits": 1,
+        "total": 5,
+        "pct": 20.0
       }
     },
     "p3": {
@@ -135,6 +155,16 @@
         "hits": 2,
         "total": 14,
         "pct": 14.285714285714286
+      },
+      "legit_approved": {
+        "hits": 4,
+        "total": 4,
+        "pct": 100.0
+      },
+      "wrongly_approved": {
+        "hits": 7,
+        "total": 9,
+        "pct": 77.77777777777777
       }
     }
   },
@@ -955,6 +985,12 @@
             "risk_assessment",
             "final_decision"
           ],
+          "supervisor_reasoning": [
+            "document_intake: Proceeding to document intake.",
+            "identity_verification: Proceeding to identity verification.",
+            "risk_assessment: Proceeding to risk assessment.",
+            "final_decision: All compliance steps completed. Routing to final decision."
+          ],
           "sanctions": null,
           "identity_confirmed": true,
           "is_pep": false,
@@ -1004,6 +1040,13 @@
             "sanctions_screening",
             "risk_assessment",
             "final_decision"
+          ],
+          "supervisor_reasoning": [
+            "document_intake: Proceeding to document intake.",
+            "identity_verification: Proceeding to identity verification.",
+            "sanctions_screening: Proceeding to sanctions screening.",
+            "risk_assessment: Proceeding to risk assessment.",
+            "final_decision: All compliance steps completed. Routing to final decision."
           ],
           "sanctions": {
             "any_hits": false,
@@ -1059,6 +1102,12 @@
             "sanctions_screening",
             "human_review"
           ],
+          "supervisor_reasoning": [
+            "document_intake: Proceeding to document intake.",
+            "identity_verification: Proceeding to identity verification.",
+            "sanctions_screening: Proceeding to sanctions screening.",
+            "human_review: Strong sanctions match detected (score=1.0). Immediate escalation required."
+          ],
           "sanctions": {
             "any_hits": true,
             "highest_match_score": 1.0
@@ -1109,6 +1158,12 @@
             "identity_verification",
             "risk_assessment",
             "final_decision"
+          ],
+          "supervisor_reasoning": [
+            "document_intake: Proceeding to document intake.",
+            "identity_verification: Proceeding to identity verification.",
+            "risk_assessment: Proceeding to risk assessment.",
+            "final_decision: All compliance steps completed. Routing to final decision."
           ],
           "sanctions": null,
           "identity_confirmed": true,
@@ -1161,6 +1216,13 @@
             "risk_assessment",
             "final_decision"
           ],
+          "supervisor_reasoning": [
+            "document_intake: Proceeding to document intake.",
+            "identity_verification: Proceeding to identity verification.",
+            "sanctions_screening: Proceeding to sanctions screening.",
+            "risk_assessment: Proceeding to risk assessment.",
+            "final_decision: All compliance steps completed. Routing to final decision."
+          ],
           "sanctions": {
             "any_hits": true,
             "highest_match_score": 0.6
@@ -1211,6 +1273,12 @@
             "identity_verification",
             "risk_assessment",
             "final_decision"
+          ],
+          "supervisor_reasoning": [
+            "document_intake: Proceeding to document intake.",
+            "identity_verification: Proceeding to identity verification.",
+            "risk_assessment: Proceeding to risk assessment.",
+            "final_decision: All compliance steps completed. Routing to final decision."
           ],
           "sanctions": null,
           "identity_confirmed": true,
@@ -1263,6 +1331,12 @@
             "risk_assessment",
             "final_decision"
           ],
+          "supervisor_reasoning": [
+            "document_intake: Proceeding to document intake.",
+            "identity_verification: Proceeding to identity verification.",
+            "risk_assessment: Proceeding to risk assessment.",
+            "final_decision: All compliance steps completed. Routing to final decision."
+          ],
           "sanctions": null,
           "identity_confirmed": true,
           "is_pep": false,
@@ -1309,6 +1383,11 @@
             "document_intake",
             "identity_verification",
             "human_review"
+          ],
+          "supervisor_reasoning": [
+            "document_intake: Proceeding to document intake.",
+            "identity_verification: Proceeding to identity verification.",
+            "human_review: Identity verification failed. Applicant identity could not be confirmed."
           ],
           "sanctions": null,
           "identity_confirmed": false,
@@ -1358,6 +1437,12 @@
             "risk_assessment",
             "final_decision"
           ],
+          "supervisor_reasoning": [
+            "document_intake: Proceeding to document intake.",
+            "identity_verification: Proceeding to identity verification.",
+            "risk_assessment: Proceeding to risk assessment.",
+            "final_decision: All compliance steps completed. Routing to final decision."
+          ],
           "sanctions": null,
           "identity_confirmed": true,
           "is_pep": false,
@@ -1405,6 +1490,12 @@
             "identity_verification",
             "risk_assessment",
             "final_decision"
+          ],
+          "supervisor_reasoning": [
+            "document_intake: Proceeding to document intake.",
+            "identity_verification: Proceeding to identity verification.",
+            "risk_assessment: Proceeding to risk assessment.",
+            "final_decision: All compliance steps completed. Routing to final decision."
           ],
           "sanctions": null,
           "identity_confirmed": true,
@@ -1456,6 +1547,12 @@
             "identity_verification",
             "risk_assessment",
             "final_decision"
+          ],
+          "supervisor_reasoning": [
+            "document_intake: Proceeding to document intake.",
+            "identity_verification: Proceeding to identity verification.",
+            "risk_assessment: Proceeding to risk assessment.",
+            "final_decision: All compliance steps completed. Routing to final decision."
           ],
           "sanctions": null,
           "identity_confirmed": true,
@@ -1510,6 +1607,13 @@
             "sanctions_screening",
             "risk_assessment",
             "final_decision"
+          ],
+          "supervisor_reasoning": [
+            "document_intake: Proceeding to document intake.",
+            "identity_verification: Proceeding to identity verification.",
+            "sanctions_screening: Proceeding to sanctions screening.",
+            "risk_assessment: Proceeding to risk assessment.",
+            "final_decision: All compliance steps completed. Routing to final decision."
           ],
           "sanctions": {
             "any_hits": false,
@@ -1568,6 +1672,12 @@
             "risk_assessment",
             "final_decision"
           ],
+          "supervisor_reasoning": [
+            "document_intake: Proceeding to document intake.",
+            "identity_verification: Proceeding to identity verification.",
+            "risk_assessment: Proceeding to risk assessment.",
+            "final_decision: All compliance steps completed. Routing to final decision."
+          ],
           "sanctions": null,
           "identity_confirmed": true,
           "is_pep": true,
@@ -1616,6 +1726,13 @@
             "sanctions_screening",
             "risk_assessment",
             "final_decision"
+          ],
+          "supervisor_reasoning": [
+            "document_intake: Proceeding to document intake.",
+            "identity_verification: Proceeding to identity verification.",
+            "sanctions_screening: Proceeding to sanctions screening.",
+            "risk_assessment: Proceeding to risk assessment.",
+            "final_decision: All compliance steps completed. Routing to final decision."
           ],
           "sanctions": {
             "any_hits": false,

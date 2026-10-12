@@ -85,6 +85,18 @@ def test_p3_api_error_is_recorded_not_scored(tmp_path, monkeypatch):
     assert score_project("p3", scenarios, response)[0].status == "error"
 
 
+def test_write_baseline_refuses_to_record_a_regression(tmp_path):
+    from evals.__main__ import main
+
+    baseline = tmp_path / "baseline.json"
+    # P1-10 fails both checks today; pretend the baseline recorded a pass.
+    baseline.write_text(json.dumps({"P1-10": {"action": True, "risk_level": False}}), encoding="utf-8")
+    before = baseline.read_text(encoding="utf-8")
+    assert main(["--project", "p1", "--write-baseline", "--no-write", "--baseline", str(baseline)]) == 1
+    assert baseline.read_text(encoding="utf-8") == before
+    assert main(["--project", "p1", "--check", "--baseline", str(baseline)]) == 1
+
+
 def test_rules_tier_never_calls_an_llm():
     # The worker installs a guard that raises on any LLM call in the rules tier,
     # so a scored rules-tier run proves the agents stayed on their rules.
