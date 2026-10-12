@@ -1,0 +1,89 @@
+{
+  "id": "P2-02",
+  "title": "Loyal customer reorders from a saved cart in under thirty seconds",
+  "category": "false-positive-trap",
+  "narrative": "The same kind of long-standing customer reorders $54 of pet food they buy every month. They open the saved cart and pay with stored details: one or two pages, a 16 to 29 second checkout, a session of about a minute. Typing and mouse movement are human, at their usual time of day, on their usual phone.",
+  "inputs": {
+    "transaction": {
+      "transaction_id": "p2-02-txn",
+      "amount": 54.0,
+      "currency": "USD",
+      "merchant_category": "pet_supplies",
+      "customer_id": "cust_10455",
+      "customer_email": "sam.patel3@gmail.com",
+      "ip_address": "73.1.1.1",
+      "device_id": "dev_00002645",
+      "timestamp": "2026-10-10T18:42:00",
+      "card_last_four": "4821",
+      "billing_country": "US",
+      "shipping_country": "US"
+    }
+  },
+  "fixtures": {
+    "evidence": {
+      "velocity.transactions_last_hour": [
+        0,
+        1
+      ],
+      "velocity.transactions_last_24h": [
+        0,
+        3
+      ],
+      "velocity.amount_deviation_factor": [
+        0,
+        1.0
+      ],
+      "geo.is_vpn": false,
+      "geo.is_tor": false,
+      "geo.billing_geo_match": true,
+      "device.device_known": true,
+      "device.device_age_days": [
+        300,
+        365
+      ],
+      "device.multiple_accounts_on_device": false,
+      "device.os_fingerprint_changed": false,
+      "identity.email_age_days": [
+        730,
+        3650
+      ],
+      "identity.phone_verified": true,
+      "identity.address_verification_status": "match",
+      "identity.linked_accounts_count": [
+        1,
+        2
+      ],
+      "identity.previous_chargebacks": 0,
+      "identity.account_age_days": [
+        700,
+        1825
+      ],
+      "behavioral.session_duration_seconds": [
+        35,
+        90
+      ],
+      "behavioral.pages_visited": [
+        1,
+        2
+      ],
+      "behavioral.checkout_speed_seconds": [
+        16,
+        29
+      ],
+      "behavioral.typing_pattern_anomaly": false,
+      "behavioral.mouse_movement_anomaly": false,
+      "behavioral.time_of_day_unusual": false,
+      "behavioral.navigation_pattern": "direct_to_checkout"
+    }
+  },
+  "expected": {
+    "risk_level": "low",
+    "recommended_action": "approve",
+    "specialists": {
+      "velocity": "low",
+      "identity": "low",
+      "behavioral": "low|medium"
+    }
+  },
+  "rationale": "Fast direct checkout is expected from a returning customer with a saved cart and stored payment details, and nothing else is unusual. Approve. A behavioral analyst looking at the session alone might rate the speed as moderate, so low or medium is accepted for that specialist."
+}

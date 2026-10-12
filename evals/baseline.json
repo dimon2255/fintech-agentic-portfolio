@@ -1,0 +1,193 @@
+{
+  "P1-01": {
+    "action": true,
+    "risk_level": true
+  },
+  "P1-02": {
+    "action": true,
+    "risk_level": true
+  },
+  "P1-03": {
+    "action": true,
+    "risk_level": true
+  },
+  "P1-04": {
+    "action": true,
+    "risk_level": true
+  },
+  "P1-05": {
+    "action": true,
+    "risk_level": true
+  },
+  "P1-06": {
+    "action": true,
+    "risk_level": true
+  },
+  "P1-07": {
+    "action": true,
+    "risk_level": true
+  },
+  "P1-08": {
+    "action": true,
+    "risk_level": true
+  },
+  "P1-09": {
+    "action": true,
+    "risk_level": true
+  },
+  "P1-10": {
+    "action": false,
+    "risk_level": false
+  },
+  "P1-11": {
+    "action": true,
+    "risk_level": true
+  },
+  "P2-01": {
+    "action": true,
+    "risk_level": true,
+    "specialist_behavioral": true,
+    "specialist_identity": true,
+    "specialist_velocity": true
+  },
+  "P2-02": {
+    "action": true,
+    "risk_level": true,
+    "specialist_behavioral": true,
+    "specialist_identity": true,
+    "specialist_velocity": true
+  },
+  "P2-03": {
+    "action": true,
+    "risk_level": true,
+    "specialist_behavioral": true,
+    "specialist_identity": true,
+    "specialist_velocity": true
+  },
+  "P2-04": {
+    "action": false,
+    "risk_level": false,
+    "specialist_behavioral": true,
+    "specialist_identity": true
+  },
+  "P2-05": {
+    "action": true,
+    "risk_level": true,
+    "specialist_behavioral": true,
+    "specialist_identity": true,
+    "specialist_velocity": true
+  },
+  "P2-06": {
+    "action": true,
+    "risk_level": true,
+    "specialist_behavioral": true,
+    "specialist_identity": true,
+    "specialist_velocity": true
+  },
+  "P2-07": {
+    "action": false,
+    "risk_level": false,
+    "specialist_behavioral": true,
+    "specialist_identity": false,
+    "specialist_velocity": true
+  },
+  "P2-08": {
+    "action": true,
+    "risk_level": true,
+    "specialist_behavioral": true,
+    "specialist_identity": true,
+    "specialist_velocity": true
+  },
+  "P2-09": {
+    "action": true,
+    "risk_level": true,
+    "specialist_behavioral": true,
+    "specialist_identity": true,
+    "specialist_velocity": true
+  },
+  "P2-10": {
+    "action": true,
+    "risk_level": true,
+    "specialist_behavioral": true,
+    "specialist_identity": false,
+    "specialist_velocity": true
+  },
+  "P3-01": {
+    "conditions": true,
+    "decision": true,
+    "escalation": true,
+    "risk_tier": true,
+    "screening": false
+  },
+  "P3-02": {
+    "conditions": true,
+    "decision": true,
+    "escalation": true,
+    "risk_tier": true,
+    "screening": true
+  },
+  "P3-03": {
+    "decision": true,
+    "escalation": true,
+    "risk_tier": true,
+    "screening": true
+  },
+  "P3-04": {
+    "decision": false,
+    "escalation": false,
+    "risk_tier": false,
+    "screening": false
+  },
+  "P3-05": {
+    "decision": false,
+    "escalation": false,
+    "risk_tier": true,
+    "screening": true
+  },
+  "P3-06": {
+    "decision": false,
+    "screening": false
+  },
+  "P3-07": {
+    "decision": false,
+    "screening": false
+  },
+  "P3-08": {
+    "decision": true,
+    "escalation": true,
+    "screening": false
+  },
+  "P3-09": {
+    "decision": false,
+    "escalation": false,
+    "screening": false
+  },
+  "P3-10": {
+    "decision": false,
+    "escalation": false,
+    "screening": false
+  },
+  "P3-11": {
+    "decision": true,
+    "escalation": true,
+    "risk_tier": false,
+    "screening": false
+  },
+  "P3-12": {
+    "decision": false,
+    "escalation": false,
+    "risk_tier": true,
+    "screening": true
+  },
+  "P3-13": {
+    "conditions": true,
+    "decision": true,
+    "risk_tier": true,
+    "screening": false
+  },
+  "P3-14": {
+    "decision": true,
+    "risk_tier": false,
+    "screening": true
+  }
+}

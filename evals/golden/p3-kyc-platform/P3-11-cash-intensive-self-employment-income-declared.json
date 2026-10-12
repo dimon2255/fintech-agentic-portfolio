@@ -1,0 +1,64 @@
+{
+  "id": "P3-11",
+  "title": "Cash-intensive self-employment income declared just under $10,000 a month",
+  "category": "risk-tiering",
+  "narrative": "A US resident applies for a personal account for the income from his food truck: about $9,800 a month, mostly cash deposits. Documents and identity are in order and there are no list or PEP matches.",
+  "inputs": {
+    "application": {
+      "application_id": "P3-11-app",
+      "applicant_name": "Marcus Hill",
+      "date_of_birth": "1983-10-27",
+      "nationality": "US",
+      "country_of_residence": "US",
+      "address": "77 Ridge Street, Newark, NJ 07104",
+      "email": "marcus.hill@gmail.com",
+      "phone": "+1-973-555-0105",
+      "business_type": null,
+      "industry": null,
+      "expected_monthly_volume": 9800.0,
+      "source_of_funds": "Self-employment income from a food truck business, mostly cash deposits",
+      "documents_submitted": [
+        {
+          "document_type": "passport",
+          "document_number": "P881000000",
+          "issuing_country": "US",
+          "expiry_date": "2029-02-28",
+          "holder_name": "Marcus Hill",
+          "holder_dob": "1983-10-27",
+          "holder_address": null
+        },
+        {
+          "document_type": "utility_bill",
+          "document_number": "PSEG-2026-00001",
+          "issuing_country": "US",
+          "expiry_date": null,
+          "holder_name": "Marcus Hill",
+          "holder_dob": null,
+          "holder_address": "77 Ridge Street, Newark, NJ 07104"
+        }
+      ],
+      "submitted_at": "2026-10-05T10:00:00"
+    }
+  },
+  "fixtures": {
+    "evidence": {
+      "documents.0.format_valid": true,
+      "documents.0.security_features_present": true,
+      "documents.0.tampering_detected": false,
+      "documents.0.is_correct_type": true,
+      "documents.1.format_valid": true,
+      "documents.1.security_features_present": true,
+      "documents.1.tampering_detected": false,
+      "documents.1.is_correct_type": true,
+      "identity.is_pep": false
+    }
+  },
+  "expected": {
+    "decision": "approved",
+    "risk_tier": "medium|high",
+    "was_escalated": false,
+    "sanctions_screening_required": true,
+    "edd_required": null
+  },
+  "rationale": "Cash-intensive business income just under the $10,000 currency-transaction-report threshold is a recognized money-laundering risk factor that calls for a higher risk rating and transaction monitoring for structuring. It is not by itself a reason to refuse: approve at medium or high risk."
+}

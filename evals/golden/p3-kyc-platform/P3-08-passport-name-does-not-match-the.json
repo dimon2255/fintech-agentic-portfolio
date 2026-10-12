@@ -1,0 +1,62 @@
+{
+  "id": "P3-08",
+  "title": "Passport name does not match the application name",
+  "category": "identity",
+  "narrative": "A UK resident applies as James Robert Thompson: salary income, $6,000 a month. His passport, the primary identity document, is in the name Jamie Robertson-Thompson with the same date of birth; a bank statement is in the application name. The difference may be a legitimate name change, but nothing in the application explains it. (Demo profile 4 from data_generator.py with the expiry removed, so the name mismatch is tested on its own.)",
+  "inputs": {
+    "application": {
+      "application_id": "P3-08-app",
+      "applicant_name": "James Robert Thompson",
+      "date_of_birth": "1990-01-30",
+      "nationality": "GB",
+      "country_of_residence": "GB",
+      "address": "17 Baker Street, London, W1U 3BN",
+      "email": "j.thompson@company.co.uk",
+      "phone": "+44-20-7946-0958",
+      "business_type": null,
+      "industry": null,
+      "expected_monthly_volume": 6000.0,
+      "source_of_funds": "Employment salary",
+      "documents_submitted": [
+        {
+          "document_type": "passport",
+          "document_number": "GB-5900001",
+          "issuing_country": "GB",
+          "expiry_date": "2031-04-30",
+          "holder_name": "Jamie Robertson-Thompson",
+          "holder_dob": "1990-01-30",
+          "holder_address": null
+        },
+        {
+          "document_type": "bank_statement",
+          "document_number": "HSBC-2026-00000",
+          "issuing_country": "GB",
+          "expiry_date": null,
+          "holder_name": "James Robert Thompson",
+          "holder_dob": null,
+          "holder_address": "17 Baker Street, London, W1U 3BN"
+        }
+      ],
+      "submitted_at": "2026-10-05T10:00:00"
+    }
+  },
+  "fixtures": {
+    "evidence": {
+      "documents.0.format_valid": true,
+      "documents.0.security_features_present": true,
+      "documents.0.tampering_detected": false,
+      "documents.0.is_correct_type": true,
+      "documents.1.format_valid": true,
+      "documents.1.security_features_present": true,
+      "documents.1.tampering_detected": false,
+      "documents.1.is_correct_type": true
+    }
+  },
+  "expected": {
+    "decision": "escalated",
+    "risk_tier": null,
+    "was_escalated": true,
+    "sanctions_screening_required": true
+  },
+  "rationale": "Identity is not verified until a human resolves the name discrepancy, for example with a deed poll or marriage certificate. Hold for review. Screening is still required, and should cover both names."
+}

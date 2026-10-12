@@ -1,0 +1,45 @@
+{
+  "id": "P1-09",
+  "title": "Device farm: unrecognized device shared across accounts with a spoofed fingerprint",
+  "category": "fraud",
+  "narrative": "A $129.99 electronics order from a domestic IP without VPN. The amount is normal, but the device has never been seen on this account, is linked to other customer accounts, and its OS fingerprint has changed since it was last seen.",
+  "inputs": {
+    "transaction": {
+      "transaction_id": "p1-09-txn",
+      "amount": 129.99,
+      "currency": "USD",
+      "merchant_category": "electronics",
+      "customer_id": "cust_10000",
+      "customer_email": "p1-09.customer@example.com",
+      "ip_address": "73.1.1.1",
+      "device_id": "dev_00001122",
+      "timestamp": "2026-10-10T18:42:00",
+      "card_last_four": "4821",
+      "billing_country": "US",
+      "shipping_country": "US"
+    }
+  },
+  "fixtures": {
+    "evidence": {
+      "velocity.transactions_last_hour": [
+        0,
+        2
+      ],
+      "velocity.amount_deviation_factor": [
+        0,
+        1.0
+      ],
+      "geo.is_vpn": false,
+      "geo.is_tor": false,
+      "geo.billing_geo_match": true,
+      "device.device_known": false,
+      "device.multiple_accounts_on_device": true,
+      "device.os_fingerprint_changed": true
+    }
+  },
+  "expected": {
+    "risk_level": "medium|high",
+    "recommended_action": "review|decline"
+  },
+  "rationale": "One device serving several accounts while manipulating its fingerprint indicates an organized operation even when the amount is ordinary. It must not be approved automatically; review or decline are both sound."
+}

@@ -1,0 +1,64 @@
+{
+  "id": "P3-02",
+  "title": "Low-risk UK software company with a clean director",
+  "category": "clean",
+  "narrative": "The director of a UK software company (LLC, technology sector) opens a business account expecting about $40,000 a month of subscription revenue. His UK passport matches the application and the company registration is in order. No list or PEP matches.",
+  "inputs": {
+    "application": {
+      "application_id": "P3-02-app",
+      "applicant_name": "Oliver Bennett",
+      "date_of_birth": "1984-02-11",
+      "nationality": "GB",
+      "country_of_residence": "GB",
+      "address": "48 Chiltern Street, London, W1U 7QF",
+      "email": "oliver@bennett-software.co.uk",
+      "phone": "+44-20-7946-0412",
+      "business_type": "LLC",
+      "industry": "technology",
+      "expected_monthly_volume": 40000.0,
+      "source_of_funds": "Software subscription revenue",
+      "documents_submitted": [
+        {
+          "document_type": "passport",
+          "document_number": "GB-5500000",
+          "issuing_country": "GB",
+          "expiry_date": "2032-03-01",
+          "holder_name": "Oliver Bennett",
+          "holder_dob": "1984-02-11",
+          "holder_address": null
+        },
+        {
+          "document_type": "business_registration",
+          "document_number": "CH-091200000",
+          "issuing_country": "GB",
+          "expiry_date": null,
+          "holder_name": "Oliver Bennett",
+          "holder_dob": null,
+          "holder_address": "48 Chiltern Street, London, W1U 7QF"
+        }
+      ],
+      "submitted_at": "2026-10-05T10:00:00"
+    }
+  },
+  "fixtures": {
+    "evidence": {
+      "documents.0.format_valid": true,
+      "documents.0.security_features_present": true,
+      "documents.0.tampering_detected": false,
+      "documents.0.is_correct_type": true,
+      "documents.1.format_valid": true,
+      "documents.1.security_features_present": true,
+      "documents.1.tampering_detected": false,
+      "documents.1.is_correct_type": true,
+      "identity.is_pep": false
+    }
+  },
+  "expected": {
+    "decision": "approved",
+    "risk_tier": "low",
+    "was_escalated": false,
+    "sanctions_screening_required": true,
+    "edd_required": false
+  },
+  "rationale": "Low-risk jurisdiction, low-risk sector, proportionate volume, verified director. Approve at low risk after screening. Included to measure false positives on the screened path."
+}

@@ -1,0 +1,41 @@
+{
+  "id": "P1-06",
+  "title": "Every signal at its worst: Tor, burst velocity, spoofed shared device, $3,500 in gift cards",
+  "category": "fraud",
+  "narrative": "A $3,500 gift-card purchase, the seventh or eighth transaction on the card in an hour, from a Tor exit node behind a VPN in a different country from the billing address, on an unrecognized device that is shared across accounts and whose OS fingerprint has changed.",
+  "inputs": {
+    "transaction": {
+      "transaction_id": "p1-06-txn",
+      "amount": 3500.0,
+      "currency": "USD",
+      "merchant_category": "gift_cards",
+      "customer_id": "cust_10000",
+      "customer_email": "p1-06.customer@example.com",
+      "ip_address": "73.1.1.104",
+      "device_id": "dev_00001122",
+      "timestamp": "2026-10-10T18:42:00",
+      "card_last_four": "4821",
+      "billing_country": "US",
+      "shipping_country": "US"
+    }
+  },
+  "fixtures": {
+    "evidence": {
+      "velocity.transactions_last_hour": [
+        7,
+        8
+      ],
+      "geo.is_vpn": true,
+      "geo.is_tor": true,
+      "geo.billing_geo_match": false,
+      "device.device_known": false,
+      "device.multiple_accounts_on_device": true,
+      "device.os_fingerprint_changed": true
+    }
+  },
+  "expected": {
+    "risk_level": "high|critical",
+    "recommended_action": "decline"
+  },
+  "rationale": "All three independent dimensions are at their worst, on the merchant category most used to cash out stolen cards. Decline. Critical is the natural severity; high is accepted because no analyst would act differently."
+}
