@@ -56,6 +56,16 @@ def test_summary_counts_and_flags(tmp_path):
     assert json.loads(js.read_text(encoding="utf-8"))["runs"] == ["claude-run-1", "claude-run-2", "claude-run-3"]
 
 
+def test_budget_skipped_runs_are_visible(tmp_path):
+    runs = [_run([_scenario("P3-01"), _scenario("P3-02", status="skipped")])]
+    (tmp_path / "claude-run-1.json").write_text(json.dumps(runs[0]), encoding="utf-8")
+    md, _ = write_summary(tmp_path)
+    text = md.read_text(encoding="utf-8")
+    # One scored run out of two scenarios: the skipped one is shown, not hidden.
+    assert "| claude-run-1 | 100% (1 of 1) | 0 | 0 | 1 |" in text
+    assert "Skipped (budget cap reached)" in text
+
+
 def test_scenario_that_never_scored_is_not_never_correct():
     runs = [
         _run([_scenario("P3-01"), _scenario("P3-05", status="fallback", fallbacks={"supervisor": 1})]),

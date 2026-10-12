@@ -97,6 +97,15 @@ def test_write_baseline_refuses_to_record_a_regression(tmp_path):
     assert main(["--project", "p1", "--check", "--baseline", str(baseline)]) == 1
 
 
+def test_check_fails_closed_on_an_empty_baseline(tmp_path, capsys):
+    from evals.__main__ import main
+
+    baseline = tmp_path / "baseline.json"
+    baseline.write_text("{}", encoding="utf-8")
+    assert main(["--project", "p1", "--check", "--baseline", str(baseline)]) == 1
+    assert "--write-baseline" in capsys.readouterr().err
+
+
 def test_rules_tier_never_calls_an_llm():
     # The worker installs a guard that raises on any LLM call in the rules tier,
     # so a scored rules-tier run proves the agents stayed on their rules.

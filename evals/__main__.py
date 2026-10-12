@@ -21,7 +21,7 @@ from . import BASELINE_PATH, DEFAULT_LLM_MODEL, DOCS_EVALS_DIR, PRICING_PER_MTOK
 from .report import write_scorecard
 from .runner import run_projects
 from .scenario import load_project
-from .score import baseline_entry, compare, score_project, summarize
+from .score import baseline_entry, compare, missing_from_baseline, score_project, summarize
 
 # Share of the LLM-tier budget each project may spend, by its expected number of
 # LLM calls (P1 one per scenario, P2 four, P3 about ten).
@@ -151,12 +151,16 @@ def main(argv: list[str] | None = None) -> int:
         scoped = {sid: v for sid, v in baseline.items() if sid.split("-")[0].lower() in keys}
         regressions, improvements = compare(scoped, flat)
         unscored = [f"{s.id}: {s.status}: {s.error or ''}".rstrip() for s in flat if not s.scored]
+        unrecorded = missing_from_baseline(scoped, flat)
         for line in improvements:
             print(f"IMPROVED   {line}")
         for line in regressions:
             print(f"REGRESSED  {line}")
         for line in unscored:
             print(f"NOT SCORED {line}")
+        if args.check and unrecorded:
+            for sid in unrecorded:
+                print(f"NO BASELINE {sid}")
         if args.write_baseline:
             if unscored:
                 print("refusing to write a baseline from a run with unscored scenarios", file=sys.stderr)
@@ -175,12 +179,18 @@ def main(argv: list[str] | None = None) -> int:
                 versions=versions, product_label=_product_label(args.product_root),
             )
             print(f"wrote {md} and {js}")
-        if args.check and (regressions or unscored):
+        if args.check and (regressions or unscored or unrecorded):
             print(
                 f"gate failed: {len(regressions)} check(s) regressed against {args.baseline}, "
-                f"{len(unscored)} scenario(s) not scored",
+                f"{len(unscored)} scenario(s) not scored, {len(unrecorded)} scenario(s) with no baseline entry",
                 file=sys.stderr,
             )
+            if unrecorded:
+                print(
+                    "scenarios without a baseline entry are not gated; record them with "
+                    "`python -m evals --write-baseline` and commit evals/baseline.json",
+                    file=sys.stderr,
+                )
             return 1
         if args.check:
             print(f"gate passed: no regressions against {args.baseline.name}")

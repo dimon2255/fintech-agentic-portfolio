@@ -20,6 +20,14 @@ are path segments, e.g. ``documents.0.tampering_detected``):
     true / false / "text"     exact match
     [low, high]               numeric range, inclusive
     {"in": [a, b, ...]}       membership
+
+Constraints use each tool field exactly as the tool defines it. One field is
+easy to misread: ``velocity.amount_deviation_factor`` (P1, P2) is
+``|amount - avg| / (0.3 * avg)``, a deviation measured in units of 30 percent
+of the customer's 30-day average, not a multiple of the average. A factor of
+1.0 means the amount is within 30 percent of the average; [1.5, 3.0] means 45
+to 90 percent above or below it (1.45 to 1.9 times the average when above).
+Narratives must describe the ratio the tool actually returns.
 """
 
 from __future__ import annotations

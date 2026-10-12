@@ -17,12 +17,14 @@ Each run replays the same scenarios with the same tool evidence; only the LLM re
 
 Headline: recommended action correct.
 
-| Run | Correct | Run failures | Silent fallbacks |
-|---|---|---|---|
-| claude-run-1 | 82% (9 of 11) | 0 | 0 |
-| claude-run-2 | 82% (9 of 11) | 0 | 0 |
-| claude-run-3 | 82% (9 of 11) | 0 | 0 |
-| **All runs pooled** | **82% (27 of 33)** | 0 | 0 |
+| Run | Correct | Run failures | Silent fallbacks | Skipped (budget cap reached) |
+|---|---|---|---|---|
+| claude-run-1 | 82% (9 of 11) | 0 | 0 | 0 |
+| claude-run-2 | 82% (9 of 11) | 0 | 0 | 0 |
+| claude-run-3 | 82% (9 of 11) | 0 | 0 | 0 |
+| **All runs pooled** | **82% (27 of 33)** | 0 | 0 | 0 |
+
+Correct counts only scored runs, out of 11 scenarios per run; failed, fallback and skipped runs are listed in their own columns and are not in the denominator.
 
 | Measure | Result |
 |---|---|
@@ -60,12 +62,14 @@ Every check, pooled over graded runs:
 
 Headline: recommended action correct.
 
-| Run | Correct | Run failures | Silent fallbacks |
-|---|---|---|---|
-| claude-run-1 | 80% (8 of 10) | 0 | 0 |
-| claude-run-2 | 80% (8 of 10) | 0 | 0 |
-| claude-run-3 | 80% (8 of 10) | 0 | 0 |
-| **All runs pooled** | **80% (24 of 30)** | 0 | 0 |
+| Run | Correct | Run failures | Silent fallbacks | Skipped (budget cap reached) |
+|---|---|---|---|---|
+| claude-run-1 | 80% (8 of 10) | 0 | 0 | 0 |
+| claude-run-2 | 80% (8 of 10) | 0 | 0 | 0 |
+| claude-run-3 | 80% (8 of 10) | 0 | 0 | 0 |
+| **All runs pooled** | **80% (24 of 30)** | 0 | 0 | 0 |
+
+Correct counts only scored runs, out of 10 scenarios per run; failed, fallback and skipped runs are listed in their own columns and are not in the denominator.
 
 | Measure | Result |
 |---|---|
@@ -105,12 +109,14 @@ Every check, pooled over graded runs:
 
 Headline: compliance decision correct.
 
-| Run | Correct | Run failures | Silent fallbacks |
-|---|---|---|---|
-| claude-run-1 | 86% (12 of 14) | 0 | 0 |
-| claude-run-2 | 86% (12 of 14) | 0 | 0 |
-| claude-run-3 | 86% (12 of 14) | 0 | 0 |
-| **All runs pooled** | **86% (36 of 42)** | 0 | 0 |
+| Run | Correct | Run failures | Silent fallbacks | Skipped (budget cap reached) |
+|---|---|---|---|---|
+| claude-run-1 | 86% (12 of 14) | 0 | 0 | 0 |
+| claude-run-2 | 86% (12 of 14) | 0 | 0 | 0 |
+| claude-run-3 | 86% (12 of 14) | 0 | 0 | 0 |
+| **All runs pooled** | **86% (36 of 42)** | 0 | 0 | 0 |
+
+Correct counts only scored runs, out of 14 scenarios per run; failed, fallback and skipped runs are listed in their own columns and are not in the denominator.
 
 | Measure | Result |
 |---|---|

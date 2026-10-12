@@ -209,17 +209,25 @@ def write_summary(directory: Path) -> tuple[Path, Path]:
     for key, p in summary["projects"].items():
         proj = PROJECTS[key]
         lines += [f"## {key.upper()}: {proj.name}", "", f"Headline: {proj.headline_label.lower()}.", ""]
-        lines += ["| Run | Correct | Run failures | Silent fallbacks |", "|---|---|---|---|"]
+        lines += [
+            "| Run | Correct | Run failures | Silent fallbacks | Skipped (budget cap reached) |",
+            "|---|---|---|---|---|",
+        ]
         for name, r in zip(names, p["per_run"]):
             run_rows = [row["verdicts"][names.index(name)] for row in p["rows"]]
             lines.append(
                 f"| {name} | {_r(r)} | {sum(v in ('error', 'harness_error') for v in run_rows)} "
-                f"| {sum(v == 'fallback' for v in run_rows)} |"
+                f"| {sum(v == 'fallback' for v in run_rows)} | {sum(v == 'skipped' for v in run_rows)} |"
             )
         lines.append(
             f"| **All runs pooled** | **{_r(p['pooled'])}** | {p['counts']['errors'] + p['counts']['harness_errors']} "
-            f"| {p['counts']['fallbacks']} |"
+            f"| {p['counts']['fallbacks']} | {p['counts']['skipped']} |"
         )
+        lines += [
+            "",
+            f"Correct counts only scored runs, out of {p['scenarios']} scenarios per run; failed, fallback and skipped "
+            "runs are listed in their own columns and are not in the denominator.",
+        ]
         rng = p["range"]
         lines += [
             "",

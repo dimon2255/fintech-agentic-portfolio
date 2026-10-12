@@ -185,6 +185,13 @@ def score_scenario(project: str, scenario: dict, result: dict, tier: str = "rule
     if status != "ok" or score.output is None:
         score.status = status if status != "ok" else "error"
         return score
+    # A failed LLM call invalidates the run even if the pipeline did not crash
+    # (today every project lets the exception propagate; this does not rely on it).
+    failed_calls = int(((result.get("llm") or {}).get("api_errors") or 0)) if tier == "llm" else 0
+    if failed_calls:
+        score.status = "error"
+        score.error = score.error or f"{failed_calls} LLM call(s) failed"
+        return score
     score.checks = GRADERS[project](scenario["expected"], score.output)
     if tier == "llm" and score.fallbacks:
         score.status = "fallback"
@@ -294,12 +301,21 @@ def baseline_entry(score: ScenarioScore) -> dict[str, bool]:
     return {k: bool(v) for k, v in sorted(score.graded_checks().items())}
 
 
+def _project_of(scenario_id: str) -> str:
+    return scenario_id.split("-")[0].lower()
+
+
 def compare(baseline: dict, scores: list[ScenarioScore]) -> tuple[list[str], list[str]]:
     """Return (regressions, improvements) against the recorded baseline.
 
-    A check recorded as passing that now fails, is no longer graded, or whose
-    scenario did not produce a scorable run is a regression. A check that now
-    passes but is recorded as failing (or is new) is an improvement.
+    A check recorded as passing that now fails, or whose scenario did not
+    produce a scorable run, is a regression. A check that is no longer graded
+    is a regression unless the scenario's decision check passed: then the
+    output took an alternative its label explicitly accepts (for example P3-13
+    escalated under ``approved|escalated``), which can make a conditional check
+    such as P3 ``conditions`` inapplicable. A check that now passes but is
+    recorded as failing (or is new) is an improvement. Scenarios with no
+    baseline entry at all are reported by ``missing_from_baseline``.
     """
     regressions, improvements = [], []
     seen = set()
@@ -312,10 +328,15 @@ def compare(baseline: dict, scores: list[ScenarioScore]) -> tuple[list[str], lis
                     regressions.append(f"{s.id}: {check} regressed (pass -> {s.status}: {s.error or ''})".rstrip())
             continue
         graded = s.graded_checks()
+        project = _project_of(s.id)
+        decision_ok = project in PROJECTS and graded.get(PROJECTS[project].headline) is True
         for check, passed in sorted(recorded.items()):
-            if passed and not graded.get(check, False):
-                now = "not graded" if check not in graded else "fail"
-                regressions.append(f"{s.id}: {check} regressed (pass -> {now})")
+            if not passed or graded.get(check, False):
+                continue
+            if check not in graded and decision_ok:
+                continue  # not applicable under an accepted alternative decision
+            now = "not graded" if check not in graded else "fail"
+            regressions.append(f"{s.id}: {check} regressed (pass -> {now})")
         for check, ok in sorted(graded.items()):
             if ok and not recorded.get(check, False):
                 improvements.append(f"{s.id}: {check} now passes")
@@ -323,3 +344,8 @@ def compare(baseline: dict, scores: list[ScenarioScore]) -> tuple[list[str], lis
         if any(baseline[sid].values()):
             regressions.append(f"{sid}: scenario missing from this run")
     return regressions, improvements
+
+
+def missing_from_baseline(baseline: dict, scores: list[ScenarioScore]) -> list[str]:
+    """Scenario ids that ran but have no baseline entry (the gate fails closed on these)."""
+    return sorted(s.id for s in scores if s.id not in baseline)
