@@ -5,7 +5,7 @@ transactions designed to cause specialist agents to disagree, making
 the debate pattern visible and testable.
 
 Transaction types:
-- Normal: everyday low-risk purchases
+- Normal: everyday low-risk purchases (amount < $250)
 - Suspicious: multiple fraud indicators present
 - Edge case: high-value but potentially legitimate
 - Disagreement trigger: clean on some dimensions, dirty on others

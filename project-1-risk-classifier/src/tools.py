@@ -26,7 +26,8 @@ from .models import (
 )
 
 # --- Simulated latency to mimic real API calls ---
-SIMULATED_LATENCY_SECONDS = 0.3
+# Reduced from 0.3s to 0.2s for snappier demo experience
+SIMULATED_LATENCY_SECONDS = 0.2
 
 
 async def check_velocity(transaction: Transaction) -> VelocityResult:
@@ -49,7 +50,7 @@ async def check_velocity(transaction: Transaction) -> VelocityResult:
     txn_last_24h = rng.randint(txn_last_hour, 25)
     avg_amount = rng.uniform(50.0, 500.0)
     deviation = abs(transaction.amount - avg_amount) / max(avg_amount * 0.3, 1.0)
-    rapid_succession = txn_last_hour > 4
+    rapid_succession = txn_last_hour >= 4
 
     # Calculate risk: high velocity + high deviation = risky
     risk = min(1.0, (txn_last_hour / 10) * 0.4 + min(deviation / 5, 1.0) * 0.6)
