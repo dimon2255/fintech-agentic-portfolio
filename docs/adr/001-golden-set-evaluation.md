@@ -69,8 +69,10 @@ scored against what a competent fraud or compliance analyst would decide.
    wrappers call through unchanged.
 6. **Rules tier is the CI gate.** With both API keys empty the pipeline is deterministic (three runs produced
    byte-identical scorecards). `evals/baseline.json` records which checks pass per scenario, and
-   `.github/workflows/evals.yml` fails if any recorded pass regresses or any scenario fails to run. New passes are
-   allowed and locked in with `--write-baseline`. In this tier the harness also makes any LLM call raise, which
+   `.github/workflows/evals.yml` fails if any recorded pass regresses, any scenario fails to run, or any scenario
+   has no baseline entry. A check that becomes inapplicable because the output took an alternative its label
+   accepts (for example P3 conditions after an accepted escalation) is not a regression. New passes are allowed and
+   locked in with `--write-baseline`, which refuses to record regressions. In this tier the harness also makes any LLM call raise, which
    proves the gate never reaches the network and needs no secrets.
 7. **LLM tier is opt-in, real Claude, three runs.** `python -m evals --tier llm` runs every agent node on
    `claude-haiku-4-5-20251001` through the projects' own LangChain code, with the key taken from the process

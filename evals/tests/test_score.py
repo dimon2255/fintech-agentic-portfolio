@@ -3,7 +3,9 @@
 from evals.score import (
     EDD_CONDITION,
     ScenarioScore,
+    baseline_entry,
     compare,
+    missing_from_baseline,
     grade_p1,
     grade_p2,
     grade_p3,
@@ -90,8 +92,39 @@ def test_llm_fallback_excluded_from_accuracy():
     assert score_scenario("p1", SCENARIO, result, tier="rules").status == "scored"
 
 
+def test_llm_api_error_is_never_scored_even_without_a_crash():
+    # A failed call that the pipeline swallowed and still produced an output.
+    result = {
+        "status": "ok",
+        "output": {"risk_level": "low", "recommended_action": "approve"},
+        "llm": {"calls": 2, "api_errors": 1},
+    }
+    s = score_scenario("p1", SCENARIO, result, tier="llm")
+    assert s.status == "error" and s.checks == {}
+    assert "1 LLM call(s) failed" in s.error
+    assert summarize("p1", [s]).headline.total == 0 and summarize("p1", [s]).errors == 1
+
+
 def _scored(sid, **checks):
     return ScenarioScore(id=sid, title="t", category="c", status="scored", checks=checks)
+
+
+def test_check_not_applicable_under_an_accepted_alternative_is_not_a_regression():
+    baseline = {"P3-13": {"decision": True, "conditions": True}}
+    # Escalated under "approved|escalated": decision passes, conditions not graded.
+    regressions, _ = compare(baseline, [_scored("P3-13", decision=True, conditions=None)])
+    assert regressions == []
+    # If the decision itself is wrong, both the decision and the lost check regress.
+    regressions, _ = compare(baseline, [_scored("P3-13", decision=False, conditions=None)])
+    assert regressions == ["P3-13: conditions regressed (pass -> not graded)", "P3-13: decision regressed (pass -> fail)"]
+    # --write-baseline records only graded checks, so it can record the new state.
+    assert baseline_entry(_scored("P3-13", decision=True, conditions=None)) == {"decision": True}
+
+
+def test_missing_baseline_entries_are_reported():
+    scores = [_scored("P1-01", action=True), _scored("P1-02", action=False)]
+    assert missing_from_baseline({}, scores) == ["P1-01", "P1-02"]
+    assert missing_from_baseline({"P1-01": {"action": True}}, scores) == ["P1-02"]
 
 
 def test_ratchet_detects_regressions_and_improvements():

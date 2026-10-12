@@ -11,7 +11,7 @@ import json
 from evals import BASELINE_PATH, PROJECTS
 from evals.runner import run_projects
 from evals.scenario import load_project
-from evals.score import compare, score_project, summarize
+from evals.score import compare, missing_from_baseline, score_project, summarize
 
 
 def test_golden_set_does_not_regress():
@@ -28,6 +28,11 @@ def test_golden_set_does_not_regress():
     assert not unscored, "scenarios did not produce a scorable run:\n  " + "\n  ".join(unscored)
 
     baseline = json.loads(BASELINE_PATH.read_text(encoding="utf-8"))
+    unrecorded = missing_from_baseline(baseline, scores)
+    assert not unrecorded, (
+        "scenarios have no evals/baseline.json entry and would not be gated; run "
+        "`python -m evals --write-baseline`:\n  " + "\n  ".join(unrecorded)
+    )
     regressions, improvements = compare(baseline, scores)
     for line in improvements:
         print(f"IMPROVED  {line}")

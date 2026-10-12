@@ -84,8 +84,9 @@ given. Paths are relative to each project directory.
   (line 50), the applicant is an individual and expected volume is under $10,000 a month. Nationality is not
   considered. The supervisor prompt in `src/supervisor.py:42` offers the same skip to the LLM.
 - **Why it matters.** Sanctions screening is a list check that applies to every customer; a risk-based approach
-  varies the depth of due diligence, not whether a customer is screened. The README presents the skip as a 20
-  percent cost saving; the screening it skips is a simulated lookup against six names.
+  varies the depth of due diligence, not whether a customer is screened. The README presents the skip as a cost
+  saving (its own unmeasured estimate is about a fifth of the cost); the screening it skips is a simulated lookup
+  against six names.
 
 ### 2. KYC rules approve potential sanctions matches without review
 
@@ -130,7 +131,7 @@ given. Paths are relative to each project directory.
 - **Why it matters.** P3-04 and P3-12 count as correct escalations, but the reviewer receives a document-quality
   case. If they clear the invented issues, nothing in the case tells them the applicant matches a sanctions list.
   P3-03 is scored as a miss: an exact match should be rejected and reported, not left pending as a document query.
-  The 86 percent decision accuracy therefore overstates how safely the LLM mode would operate.
+  The 86 percent (12 of 14) decision accuracy therefore overstates how safely the LLM mode would operate.
 
 ### 5. A foreign PEP is approved automatically (rules)
 
@@ -259,6 +260,11 @@ one new scenario so the fix is not fitted to this set.
   made of zeros), which the model reasonably read as red flags. The scenarios were tightened to their narratives,
   no label changed, and all three runs were repeated; the superseded run is not reported. In the same pass P2-10
   was pinned to two chargebacks because "two or three" straddled the specialist's threshold.
+- **Two narratives were corrected after the reported runs.** P1-11 and P2-08 described the amount as two to three
+  times and about twice the customer's average; the tools actually return about 1.6 times (the tool's
+  `amount_deviation_factor` is measured in units of 30 percent of the average, not as a multiple). Both narratives
+  now say about one and a half times the 30-day average. Inputs, evidence and labels are unchanged, so the runs
+  still apply.
 - **Overfitting risk.** Tuning the rules against these scenarios inflates the numbers. Each fix should be justified
   by its narrative and add a new scenario; a held-out set becomes meaningful past about 30 scenarios per project.
 
@@ -303,5 +309,7 @@ was not recorded and is at most $0.76. Total: at most $2.36, within the $5 cap.
 Scoring in brief. A label `a|b` accepts either; null is not graded. P3 conditions are graded only when the pipeline
 approved. A run that crashed, failed an API call, timed out or whose evidence drifted is not scored and counts as
 a regression in the gate; in the LLM tier a run in which any node silently fell back to the rules is also not
-scored and is counted separately. The headline per project is the decision: P1 and P2 recommended action, P3
+scored and is counted separately. The gate also fails closed when a scenario has no baseline entry. A check that
+becomes inapplicable because the output took an alternative its label accepts (P3 conditions after an accepted
+escalation) is not a regression. The headline per project is the decision: P1 and P2 recommended action, P3
 compliance decision.

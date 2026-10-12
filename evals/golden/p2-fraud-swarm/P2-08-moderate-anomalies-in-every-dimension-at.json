@@ -2,7 +2,7 @@
   "id": "P2-08",
   "title": "Moderate anomalies in every dimension at once",
   "category": "boundary",
-  "narrative": "A $380 home-goods order, about twice the customer's usual spend, the third or fourth purchase in an hour. The email is at a lesser-known provider and one to three months old, the phone is unverified and the address only partially matches. The session is at an unusual hour for this customer and clicks through 16 to 20 pages in under two minutes.",
+  "narrative": "A $380 home-goods order, about one and a half times the customer's 30-day average, the third or fourth purchase in an hour. The email is at a lesser-known provider and one to three months old, the phone is unverified and the address only partially matches. The session is at an unusual hour for this customer and clicks through 16 to 20 pages in under two minutes.",
   "inputs": {
     "transaction": {
       "transaction_id": "p2-08-txn",
