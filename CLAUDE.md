@@ -24,7 +24,7 @@ python -m src.main                    # from project-1-risk-classifier/
 # Run Project 2 swarm
 python -m src.main                    # from project-2-fraud-swarm/
 # Run Project 3 KYC platform
-python -m src.main                    # from project-3-kyc-platform/
+python -m src                         # from project-3-kyc-platform/
 
 # Streamlit demos
 streamlit run project-1-risk-classifier/app.py

@@ -51,15 +51,18 @@ Transaction ──▶ [Gather Signals] ──▶ [Assess Risk] ──▶ RiskAss
 ## Quick Start
 
 ```bash
-# Clone and install
-cd project-1-risk-classifier
+# Install (from the repo root, where pyproject.toml lives)
 pip install -e ".[dev]"
 
-# Configure (copy and fill in your API key)
-cp .env.example .env
+# Configure: mock mode needs no key; uncomment one in .env for LLM mode
+cp project-1-risk-classifier/.env.example project-1-risk-classifier/.env
 
 # Run the classifier
+cd project-1-risk-classifier
 python -m src.main
+
+# Run Streamlit demo
+streamlit run app.py
 ```
 
 ## Tech Stack
