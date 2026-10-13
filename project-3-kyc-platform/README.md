@@ -117,4 +117,4 @@ See [docs/business-case.md](docs/business-case.md) for TCO model and ROI project
 - **Language:** Python 3.11+ with async/await
 - **Data Models:** Pydantic v2 (strict validation)
 - **Dashboard:** Streamlit
-- **LLM:** Anthropic Claude or OpenAI GPT via the `DEFAULT_MODEL` env var (only Claude has been evaluated)
+- **LLM:** Anthropic Claude or OpenAI GPT via the `DEFAULT_MODEL` env var. The default is Claude Haiku 5.5 (`claude-haiku-5-5`) since 2026-10-13, at a list price of $0.10 per million input tokens and $0.50 per million output tokens; its cost and accuracy are not yet measured. Only Claude Haiku 4.5 has been evaluated, and every measured figure in this README comes from it.

@@ -9,9 +9,14 @@
 | Output tokens | 2,728 (mean) |
 | **Cost per transaction** | **$0.0176** |
 
-*Measured with Claude Haiku 4.5 (`claude-haiku-4-5-20251001`, the default model) over the 10 golden-set transactions
-in [`docs/evals/claude-run-4.json`](../../docs/evals/claude-run-4.json), at list price ($1 per million input tokens,
-$5 per million output tokens).*
+*Measured with Claude Haiku 4.5 (`claude-haiku-4-5-20251001`, the default model until 2026-10-13) over the 10
+golden-set transactions in [`docs/evals/claude-run-4.json`](../../docs/evals/claude-run-4.json), at list price ($1 per
+million input tokens, $5 per million output tokens).*
+
+The default model is now Claude Haiku 5.5 (`claude-haiku-5-5`). Its list price is $0.10 per million input tokens and
+$0.50 per million output tokens for prompts up to 100,000 tokens, but its cost per transaction has not been measured.
+Haiku 5.5 thinks before it answers by default, and thinking adds output tokens, so the Haiku 4.5 token counts do not
+carry over. Every cost figure on this page is a Haiku 4.5 measurement or a projection from one.
 
 The adjudicator's prompt includes all three specialist verdicts as input context; the split of cost between the four
 calls is not measured.
@@ -48,7 +53,7 @@ The cost multiplier is above 3x (for 3 agents) because the adjudicator's call ad
 
 4. **Caching**: Cache specialist verdicts for repeat patterns (same customer, similar amount, same device). TTL: 30 minutes. Expected cache hit rate: 25-35%.
 
-5. **Model tiering**: Keep a small model (the default Claude Haiku 4.5) for the specialists (narrow focus, simpler reasoning) and use a larger model for the adjudicator. Targets the highest reasoning quality where it matters most.
+5. **Model tiering**: Keep a small model (the default, Claude Haiku 5.5 since 2026-10-13) for the specialists (narrow focus, simpler reasoning) and use a larger model for the adjudicator. Targets the highest reasoning quality where it matters most.
 
 ## Comparison with Traditional Approaches
 

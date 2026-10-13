@@ -30,6 +30,7 @@ from .models import (
     Transaction,
     ToolResults,
 )
+from .llm import build_chat_model, message_text
 from .mock_llm import mock_assess
 from .tools import run_all_checks
 
@@ -145,20 +146,14 @@ async def assess_risk(state: AgentState) -> dict:
         )
     else:
         # Real LLM mode — full reasoning via API
-        from langchain_openai import ChatOpenAI
-        from langchain_anthropic import ChatAnthropic
-
-        model_name = os.getenv("DEFAULT_MODEL", "claude-haiku-4-5-20251001")
-        if "claude" in model_name:
-            llm = ChatAnthropic(model=model_name, temperature=0)
-        else:
-            llm = ChatOpenAI(model=model_name, temperature=0)
+        model_name = os.getenv("DEFAULT_MODEL", "claude-haiku-5-5")
+        llm = build_chat_model(model_name)
 
         messages = [SystemMessage(content=SYSTEM_PROMPT)] + state["messages"]
         response = await llm.ainvoke(messages)
 
         try:
-            content = response.content
+            content = message_text(response)
             if "```json" in content:
                 content = content.split("```json")[1].split("```")[0]
             elif "```" in content:
@@ -181,7 +176,7 @@ async def assess_risk(state: AgentState) -> dict:
                 confidence=0.5,
                 reasoning_chain=[],
                 recommended_action="review",
-                summary=f"Agent produced unstructured response. Manual review needed. Raw: {response.content[:500]}",
+                summary=f"Agent produced unstructured response. Manual review needed. Raw: {message_text(response)[:500]}",
                 tool_results=ToolResults(
                     velocity=tool_results["velocity"],
                     geo=tool_results["geo"],

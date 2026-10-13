@@ -22,7 +22,8 @@ decisions are right. It replays 38 hand-labeled cases through the projects' prod
 for Project 1, 10 for Project 2, 16 onboarding applications for Project 3) and compares each decision with what a
 fraud or compliance analyst would decide. Labels and their rationale are written before the pipeline runs on a case.
 Each project is measured in its deterministic rules mode, which is a CI gate, and with Claude Haiku 4.5 in every
-agent node.
+agent node. The projects' default model moved to `claude-haiku-5-5` on 2026-10-13; the recorded Claude run 4 below
+was made on Claude Haiku 4.5 (`claude-haiku-4-5-20251001`), and Haiku 5.5 has not yet been measured on the golden set.
 
 The first measurement, on 2026-10-11, found that the KYC platform skipped sanctions screening for most applicants and
 approved an exact UN sanctions-list name. Screening is now mandatory and enforced in code, and three cases were added
@@ -54,7 +55,7 @@ proposes fixes. Per-scenario detail: [rules scorecard](docs/evals/scorecard.md) 
 pip install -r evals/requirements.txt
 python -m evals                    # run the golden set (rules), write docs/evals/scorecard.md
 python -m evals --check            # CI gate: fails if any passing check regresses or a scenario fails to run
-python -m evals --tier llm --file-stem claude-run-5   # Claude in every agent node (needs ANTHROPIC_API_KEY)
+python -m evals --tier llm --out-dir docs/evals-haiku-5-5 --file-stem claude-run-1   # Claude in every agent node (needs ANTHROPIC_API_KEY); one folder per model
 ```
 
 How it scores:

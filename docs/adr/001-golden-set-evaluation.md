@@ -1,6 +1,6 @@
 # ADR-001: Golden-Set Evaluation of Decision Quality
 
-**Status:** Accepted (2026-10-11)
+**Status:** Accepted (2026-10-11); amended 2026-10-13 (default model, see the end)
 
 **Scope:** all three projects. This is the first repository-level ADR; each project keeps its own ADRs in
 `project-*/docs/adr/`. The evaluation lives at the root because it spans all three projects and compares them
@@ -104,3 +104,14 @@ scored against what a competent fraud or compliance analyst would decide.
 - **Coupling to the simulators.** If a change to a simulated source alters the raw evidence (for example the
   draw order in a tool), affected scenarios report evidence drift, and their IDs must be searched again with
   `python -m evals.find_inputs`. The labels do not change.
+
+## Amendment (2026-10-13): default model
+
+The projects' default model, and so the LLM tier's default, moved from `claude-haiku-4-5-20251001` to
+`claude-haiku-5-5`. Where this ADR names Haiku 4.5 it describes the runs recorded on 2026-10-11 and 2026-10-12, which
+remain the LLM-tier baseline. Decision 7 is amended as follows. Haiku 5.5 rejects a non-default temperature, so Claude
+models are now called with no temperature, `effort="low"` and `max_tokens=8192` (each project's `src/llm.py`), and the
+stability seen at temperature 0 must be measured again rather than assumed. Haiku 5.5 also thinks by default, so a
+reply can arrive as thinking and text blocks; the projects parse only the text, which keeps a thinking block from being
+counted as an unparseable reply and a silent fallback. Runs of a new model are written to their own folder with
+`--out-dir`, because `--summarize-runs` refuses to pool runs of different models.

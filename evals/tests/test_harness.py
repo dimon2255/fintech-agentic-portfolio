@@ -4,12 +4,16 @@ These run the real project code in worker subprocesses. The LLM-tier tests
 replace only the network call (ChatAnthropic.ainvoke) with canned replies, to
 prove that silent fallbacks, API errors and token usage are detected and
 recorded. They need the projects' dependencies installed but no API key.
+The last tests load each project's src/llm.py by file path (the projects all
+use the package name ``src``, so they cannot be imported together).
 """
 
+import importlib.util
 import json
 
 import pytest
 
+from evals import PRICING_PER_MTOK, PROJECTS, REPO_ROOT
 from evals.runner import run_worker
 from evals.scenario import load_project
 from evals.score import score_project
@@ -112,3 +116,67 @@ def test_rules_tier_never_calls_an_llm():
     response = run_worker("p3", _first("p3"), tier="rules")
     assert all(response["env_check"].values())
     assert response["results"][0]["status"] == "ok"
+
+
+# Claude Haiku 5.5 (default since 2026-10-13): new prices, thinking blocks in replies.
+
+THINKING_BLOCK = {"type": "thinking", "thinking": "Low velocity, home country, known device.", "signature": "sig"}
+
+
+def test_haiku_5_5_price():
+    from evals.worker import cost_usd
+
+    assert PRICING_PER_MTOK["claude-haiku-5-5"] == (0.10, 0.50)
+    assert PRICING_PER_MTOK["claude-sonnet-5-5"] == (2.00, 10.00)
+    assert cost_usd("claude-haiku-5-5", 1_000_000, 1_000_000) == pytest.approx(0.60)
+    assert cost_usd("claude-haiku-4-5-20251001", 1_000_000, 1_000_000) == pytest.approx(6.00)
+
+
+def test_p1_reply_with_leading_thinking_block_is_parsed_not_a_fallback(tmp_path, monkeypatch):
+    _llm_env(monkeypatch)
+    scenarios = _first("p1")
+    content = [THINKING_BLOCK, {"type": "text", "text": VALID_P1_REPLY}]
+    response = run_worker("p1", scenarios, tier="llm", model="claude-haiku-5-5",
+                          stub_llm=_stub(tmp_path, [{"content": content, "input_tokens": 800, "output_tokens": 300}]))
+    result = response["results"][0]
+    assert result["status"] == "ok" and result["fallbacks"] == {}
+    assert result["output"]["recommended_action"] == "approve"
+    assert result["llm"]["replies"][0]["head"].startswith('{"risk_level"')
+    assert result["llm_cost_usd"] == pytest.approx(800 / 1e6 * 0.10 + 300 / 1e6 * 0.50)
+    assert score_project("p1", scenarios, response)[0].status == "scored"
+
+
+def _project_llm_module(key):
+    path = REPO_ROOT / PROJECTS[key].directory / "src" / "llm.py"
+    spec = importlib.util.spec_from_file_location(f"llm_{key}", path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+@pytest.mark.parametrize("key", sorted(PROJECTS))
+def test_message_text(key):
+    from langchain_core.messages import AIMessage
+
+    message_text = _project_llm_module(key).message_text
+    assert message_text(AIMessage(content='{"a": 1}')) == '{"a": 1}'
+    thinking_first = AIMessage(content=[THINKING_BLOCK, {"type": "text", "text": '{"a": 1}'}])
+    assert message_text(thinking_first) == '{"a": 1}'
+    assert message_text(AIMessage(content=["plain ", {"type": "text", "text": "text"}])) == "plain text"
+    assert message_text(AIMessage(content="")) == ""
+    assert message_text(AIMessage(content=[])) == ""
+    assert message_text(AIMessage(content=[THINKING_BLOCK])) == ""
+
+
+@pytest.mark.parametrize("key", sorted(PROJECTS))
+def test_build_chat_model_sends_no_temperature_to_claude(key, monkeypatch):
+    from langchain_core.messages import HumanMessage
+
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-ant-test-not-a-real-key")
+    monkeypatch.setenv("OPENAI_API_KEY", "sk-test-not-a-real-key")
+    build_chat_model = _project_llm_module(key).build_chat_model
+    payload = build_chat_model("claude-haiku-5-5")._get_request_payload([HumanMessage(content="hi")])
+    assert "temperature" not in payload
+    assert payload["max_tokens"] == 8192 and payload["output_config"] == {"effort": "low"}
+    openai_model = build_chat_model("gpt-4o")
+    assert type(openai_model).__name__ == "ChatOpenAI" and openai_model.temperature == 0
