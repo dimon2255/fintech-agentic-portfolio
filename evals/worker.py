@@ -94,6 +94,22 @@ def _new_llm_stats() -> dict:
     }
 
 
+def _reply_text(content) -> str:
+    """Text of a reply for the recorded head. With thinking on (Claude Haiku 5.5) content is a list of
+    blocks; only text blocks are kept. Defined here rather than imported from the project's src/llm.py so
+    the harness still loads checkouts that predate that module (--product-root). Those checkouts send
+    temperature=0, which Haiku 5.5 rejects, so run them with --model claude-haiku-4-5-20251001."""
+    if isinstance(content, str):
+        return content
+    parts = []
+    for block in content or []:
+        if isinstance(block, str):
+            parts.append(block)
+        elif isinstance(block, dict) and block.get("type") == "text":
+            parts.append(block.get("text") or "")
+    return "".join(parts)
+
+
 class StubLLM:
     """Canned replies for harness unit tests (no network). Never used for results."""
 
@@ -157,7 +173,7 @@ def install_llm_guards(tier: str, stub: StubLLM | None) -> None:
         meta = getattr(response, "response_metadata", None) or {}
         stats["models"][str(meta.get("model") or meta.get("model_name") or "unknown")] += 1
         stats["stop_reasons"][str(meta.get("stop_reason") or "unknown")] += 1
-        content = response.content if isinstance(response.content, str) else json.dumps(response.content)
+        content = _reply_text(response.content)
         stats["replies"].append(
             {
                 "stop_reason": meta.get("stop_reason"),

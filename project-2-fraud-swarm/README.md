@@ -88,7 +88,7 @@ streamlit run app.py
 
 ## Trade-offs
 
-- **Cost**: 4 LLM invocations per transaction (3 specialists + 1 adjudicator) vs Project 1's 1. Measured with Claude Haiku 4.5: $0.0176 per transaction vs Project 1's $0.0040, about 4.4x. At scale, this premium is offset by fewer false positives reaching human review. See [costs.md](docs/costs.md).
+- **Cost**: 4 LLM invocations per transaction (3 specialists + 1 adjudicator) vs Project 1's 1. Measured with Claude Haiku 4.5: $0.0176 per transaction vs Project 1's $0.0040, about 4.4x. At scale, this premium is offset by fewer false positives reaching human review. The default model moved to Claude Haiku 5.5 (`claude-haiku-5-5`) on 2026-10-13; its list price is $0.10 per million input tokens and $0.50 per million output tokens, and its cost per transaction is not yet measured. See [costs.md](docs/costs.md).
 - **Latency**: Specialists run in parallel, but the adjudicator adds a sequential step. Total ~2-4s vs P1's ~1-2s. Still suited for secondary review, not inline authorization.
 - **Complexity**: More moving parts means more failure modes. Each specialist has independent mock fallback to degrade gracefully. The state isolation pattern prevents merge conflicts but adds 12 state fields vs P1's 4.
 

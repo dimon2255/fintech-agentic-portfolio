@@ -9,9 +9,15 @@
 | Output tokens | 637 (mean) |
 | **Cost per transaction** | **$0.0040** |
 
-*Measured with Claude Haiku 4.5 (`claude-haiku-4-5-20251001`, the default model) over the 12 golden-set transactions
-in [`docs/evals/claude-run-4.json`](../../docs/evals/claude-run-4.json), at list price ($1 per million input tokens,
-$5 per million output tokens). The split between system prompt, transaction data and tool results is not measured.*
+*Measured with Claude Haiku 4.5 (`claude-haiku-4-5-20251001`, the default model until 2026-10-13) over the 12
+golden-set transactions in [`docs/evals/claude-run-4.json`](../../docs/evals/claude-run-4.json), at list price ($1 per
+million input tokens, $5 per million output tokens). The split between system prompt, transaction data and tool results
+is not measured.*
+
+The default model is now Claude Haiku 5.5 (`claude-haiku-5-5`). Its list price is $0.10 per million input tokens and
+$0.50 per million output tokens for prompts up to 100,000 tokens, but its cost per transaction has not been measured.
+Haiku 5.5 thinks before it answers by default, and thinking adds output tokens, so the Haiku 4.5 token counts do not
+carry over. Every cost figure on this page is a Haiku 4.5 measurement or a projection from one.
 
 ## Scaling Projections
 
@@ -28,7 +34,7 @@ $5 per million output tokens). The split between system prompt, transaction data
 
 2. **Caching**: Repeat customers on known devices with typical amounts can reuse cached assessments (TTL: 1 hour). Expected cache hit rate: 30-40%.
 
-3. **Model selection**: Claude Haiku 4.5 is the default for cost efficiency. For complex edge cases only, a larger model could be used for deeper reasoning at a higher cost per transaction.
+3. **Model selection**: A small Claude Haiku model is the default for cost efficiency (Haiku 5.5 since 2026-10-13, Haiku 4.5 before). For complex edge cases only, a larger model could be used for deeper reasoning at a higher cost per transaction.
 
 4. **Batch processing**: For non-real-time use cases (compliance review, daily audit), batch transactions to reduce per-request overhead.
 

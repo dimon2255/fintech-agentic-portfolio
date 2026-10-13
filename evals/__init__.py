@@ -20,12 +20,18 @@ BASELINE_PATH = EVALS_DIR / "baseline.json"
 DOCS_EVALS_DIR = REPO_ROOT / "docs" / "evals"
 
 # Model the LLM tier runs by default: the projects' own DEFAULT_MODEL default.
-DEFAULT_LLM_MODEL = "claude-haiku-4-5-20251001"
+# Changed from claude-haiku-4-5-20251001 on 2026-10-13; the recorded runs used Haiku 4.5.
+DEFAULT_LLM_MODEL = "claude-haiku-5-5"
 
-# USD per million tokens for the models the LLM tier may run. Source: the
-# claude-api skill's model table (cached 2026-10-06): Haiku 4.5 is $1 input,
-# $5 output. Used only to estimate cost from response usage tokens.
+# USD per million tokens for the models the LLM tier may run. Used only to
+# estimate cost from response usage tokens. Sources: the claude-api skill's model
+# table (cached 2026-10-06) for Haiku 4.5, $1 input and $5 output; the Anthropic
+# migration guide (checked 2026-10-13) for Haiku 5.5, $0.10 and $0.50, and
+# Sonnet 5.5, $2 and $10, for prompts up to 100K tokens. The golden-set prompts
+# are far below that limit. Haiku 4.5 rows stay so the recorded runs still price.
 PRICING_PER_MTOK = {
+    "claude-haiku-5-5": (0.10, 0.50),
+    "claude-sonnet-5-5": (2.00, 10.00),
     "claude-haiku-4-5-20251001": (1.00, 5.00),
     "claude-haiku-4-5": (1.00, 5.00),
 }

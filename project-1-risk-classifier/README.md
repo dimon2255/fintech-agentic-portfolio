@@ -87,7 +87,7 @@ streamlit run app.py
 ## Trade-offs
 
 - **LLM latency vs rule engines**: This agent takes ~1-2s per transaction (LLM inference). Production fraud systems need <200ms. This design is better suited for secondary review or batch analysis, not inline payment authorization.
-- **Cost**: Each assessment costs about $0.004 in API tokens with Claude Haiku 4.5 (measured: 845 input and 637 output tokens on average). At 1M transactions/day, that's about $120K/month in LLM costs alone. See [costs.md](docs/costs.md) for detailed analysis.
+- **Cost**: Each assessment costs about $0.004 in API tokens with Claude Haiku 4.5 (measured: 845 input and 637 output tokens on average). At 1M transactions/day, that's about $120K/month in LLM costs alone. The default model moved to Claude Haiku 5.5 (`claude-haiku-5-5`) on 2026-10-13; its list price is $0.10 per million input tokens and $0.50 per million output tokens, and its cost per assessment is not yet measured. See [costs.md](docs/costs.md) for detailed analysis.
 - **Determinism**: LLM reasoning can vary between runs. The Pydantic output schema constrains the structure, but reasoning narratives may differ.
 
 ## What I'd Do Differently

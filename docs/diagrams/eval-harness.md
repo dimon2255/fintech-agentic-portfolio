@@ -23,7 +23,7 @@ flowchart LR
         tools["Simulated tools (tools.py)<br/>hash-seeded observations<br/>and risk scoring"]
         latency["SIMULATED_LATENCY_SECONDS = 0"]
         rules["Rules mode: mock_llm.py"]
-        llm["LLM mode: ChatAnthropic<br/>claude-haiku-4-5-20251001"]
+        llm["LLM mode: ChatAnthropic via src/llm.py<br/>default claude-haiku-5-5 since 2026-10-13<br/>(runs 1 to 4: claude-haiku-4-5-20251001)"]
         rec["LLM call recorder<br/>(tokens, model, errors)<br/>rules tier: any call raises"]
         fb["Fallback counters<br/>wrap mock_* fallbacks;<br/>P1 fallback summary marker"]
     end

@@ -18,6 +18,7 @@ from ..models import (
     KYCState,
 )
 from ..tools import run_identity_tools
+from ..llm import build_chat_model, message_text
 from ..mock_llm import mock_identity_verify
 
 
@@ -69,15 +70,10 @@ async def identity_verification_node(state: KYCState) -> dict:
     if not _has_api_key():
         result = mock_identity_verify(name_res, addr_res, dob_res, pep_res)
     else:
-        from langchain_anthropic import ChatAnthropic
-        from langchain_openai import ChatOpenAI
         from langchain_core.messages import HumanMessage, SystemMessage
 
-        model_name = os.getenv("DEFAULT_MODEL", "claude-haiku-4-5-20251001")
-        if "claude" in model_name:
-            llm = ChatAnthropic(model=model_name, temperature=0)
-        else:
-            llm = ChatOpenAI(model=model_name, temperature=0)
+        model_name = os.getenv("DEFAULT_MODEL", "claude-haiku-5-5")
+        llm = build_chat_model(model_name)
 
         tool_data = {
             "name_match": name_res.model_dump(),
@@ -94,7 +90,7 @@ async def identity_verification_node(state: KYCState) -> dict:
         response = await llm.ainvoke(messages)
 
         try:
-            content = response.content
+            content = message_text(response)
             if "```json" in content:
                 content = content.split("```json")[1].split("```")[0]
             elif "```" in content:
