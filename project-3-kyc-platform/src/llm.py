@@ -8,7 +8,7 @@ Claude Haiku 5.5 (the default since 2026-10-13) rejects a non-default
 thinking counts toward ``max_tokens``; ``effort="low"`` keeps the thinking
 short, and ``max_tokens`` is set explicitly because langchain-anthropic 1.4.0
 does not know this model and would otherwise fall back to 4096. Models older
-than the 4.6 family reject the effort setting; set ``CLAUDE_EFFORT`` to an
+than the 4.6 family reject the effort setting; set ``DEFAULT_MODEL_EFFORT`` to an
 empty string to send none. With thinking on, a reply's ``content`` is a list of
 blocks (thinking, then text) rather than a string, so callers read replies
 through ``message_text``.
@@ -20,7 +20,7 @@ import os
 
 ANTHROPIC_MAX_TOKENS = 8192
 DEFAULT_ANTHROPIC_EFFORT = "low"
-ANTHROPIC_EFFORT_ENV_VAR = "CLAUDE_EFFORT"
+ANTHROPIC_EFFORT_ENV_VAR = "DEFAULT_MODEL_EFFORT"
 
 
 def build_chat_model(model_name: str):

@@ -174,7 +174,7 @@ def test_build_chat_model_sends_no_temperature_to_claude(key, monkeypatch):
 
     monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-ant-test-not-a-real-key")
     monkeypatch.setenv("OPENAI_API_KEY", "sk-test-not-a-real-key")
-    monkeypatch.delenv("CLAUDE_EFFORT", raising=False)
+    monkeypatch.delenv("DEFAULT_MODEL_EFFORT", raising=False)
     build_chat_model = _project_llm_module(key).build_chat_model
     payload = build_chat_model("claude-haiku-5-5")._get_request_payload([HumanMessage(content="hi")])
     assert "temperature" not in payload
@@ -185,14 +185,14 @@ def test_build_chat_model_sends_no_temperature_to_claude(key, monkeypatch):
 
 @pytest.mark.parametrize("key", sorted(PROJECTS))
 def test_claude_effort_env_var_overrides_and_empty_sends_none(key, monkeypatch):
-    """Models older than the 4.6 family reject effort, so an empty CLAUDE_EFFORT must omit it."""
+    """Models older than the 4.6 family reject effort, so an empty DEFAULT_MODEL_EFFORT must omit it."""
     from langchain_core.messages import HumanMessage
 
     monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-ant-test-not-a-real-key")
     build_chat_model = _project_llm_module(key).build_chat_model
-    monkeypatch.setenv("CLAUDE_EFFORT", "medium")
+    monkeypatch.setenv("DEFAULT_MODEL_EFFORT", "medium")
     payload = build_chat_model("claude-haiku-5-5")._get_request_payload([HumanMessage(content="hi")])
     assert payload["output_config"] == {"effort": "medium"}
-    monkeypatch.setenv("CLAUDE_EFFORT", "")
+    monkeypatch.setenv("DEFAULT_MODEL_EFFORT", "")
     payload = build_chat_model("claude-haiku-4-5-20251001")._get_request_payload([HumanMessage(content="hi")])
     assert "output_config" not in payload and "temperature" not in payload
